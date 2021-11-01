@@ -1,5 +1,5 @@
 import { Flex, Button, Center, Box } from "@chakra-ui/react";
-import LogoWithTitle from "./LogoWithTitle";
+import LogoWithTitle from "../LogoWithTitle";
 
 const Header = () => {
   return (

@@ -1,4 +1,4 @@
-import Header from "../header";
+import Header from "./Header";
 import HomeVideo from "./HomeVideo";
 import Tiles from "./Tiles";
 

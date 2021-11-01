@@ -20,9 +20,7 @@ function Tiles() {
 function TileParent(props: any) {
   return (
     <Box bg="brand.yellow" height="400px">
-      <Center height="100%" vert>
-        {props.children}
-      </Center>
+      <Center height="100%">{props.children}</Center>
     </Box>
   );
 }
