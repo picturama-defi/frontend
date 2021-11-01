@@ -1,6 +1,10 @@
+const pink = "#EA3EF7";
+const yellow = "#FAFF00";
+
 const colors = {
   brand: {
-    pink: "#EA3EF7",
+    pink,
+    yellow,
   },
 };
 
@@ -9,12 +13,22 @@ const components = {
     variants: {
       brand: {
         bg: "black",
-        color: "#FAFF00",
+        color: yellow,
         fontSize: "10px",
         borderRadius: "20px",
         _hover: {
-          bg: "#FAFF00",
+          bg: yellow,
           color: "black",
+        },
+      },
+      brand2: {
+        bg: "black",
+        color: yellow,
+        fontSize: "10px",
+        borderRadius: "20px",
+        _hover: {
+          bg: pink,
+          color: "white",
         },
       },
     },
