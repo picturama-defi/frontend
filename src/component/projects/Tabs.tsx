@@ -1,27 +1,55 @@
-import { HStack, Box, Center } from "@chakra-ui/layout";
+import { Flex, Box, Center } from "@chakra-ui/layout";
 
 function Tabs(props: any) {
-  const { tabs } = props;
+  const { tabs, onSelect, selectedTab } = props;
+
+  const handleTabClick = (selectedTab: string) => () => {
+    onSelect(selectedTab);
+  };
+
+  const tabClass = (tab: string) => selectedTab === tab;
 
   return (
     <>
-      <Box borderTop="1px solid black" background="brand.yellow" width="100%">
-        <HStack width="100%">
+      <style>{style}</style>
+      <Box
+        borderBottom="1px solid black"
+        borderTop="1px solid black"
+        background="brand.yellow"
+        width="100%"
+      >
+        <Flex flexDirection="row" justifyContent="space-around">
           {tabs.map((tab: string) => (
             <Box
+              width="100%"
               cursor="pointer"
-              p="5"
-              width={`${100 / tabs.length}%`}
-              bg="brand.yellow"
               key={tab}
+              className="tab"
+              onClick={handleTabClick(tab)}
+              m="0"
+              fontWeight="bold"
             >
-              <Center>{tab}</Center>
+              <Center p="5">{tab}</Center>
+              {tabClass(tab) ? (
+                <Box width="100%" height="5px" bg="black"></Box>
+              ) : null}
             </Box>
           ))}
-        </HStack>
+        </Flex>
       </Box>
     </>
   );
 }
+
+const style = `
+    .tab {
+        background-color:brand.yellow;
+    }
+
+    .tab:hover {
+        background-color:#EA3EF7;
+        color:white;
+    }
+`;
 
 export default Tabs;
