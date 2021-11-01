@@ -1,9 +1,11 @@
-import Header from "./Header";
+import Header from "../header";
+import HomeVideo from "./HomeVideo";
 
 const Home: React.FC = () => {
   return (
     <>
       <Header />
+      <HomeVideo />
     </>
   );
 };

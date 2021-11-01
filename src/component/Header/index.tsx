@@ -3,27 +3,41 @@ import LogoWithTitle from "./LogoWithTitle";
 
 const Header = () => {
   return (
-    <Box pb="10" bg="brand.pink">
-      <Flex
-        pl="5"
-        pt="5"
-        pr="5"
-        bg="brand.pink"
-        w="100%"
-        justifyContent="space-between"
-      >
-        <LogoWithTitle />
+    <>
+      <style>{style}</style>
+      <Box pb="10" bg="brand.pink">
+        <Flex
+          pl="5"
+          pt="5"
+          pr="5"
+          bg="brand.pink"
+          w="100%"
+          justifyContent="space-between"
+        >
+          <LogoWithTitle />
+          <Center>
+            <Button variant="brand">LAUNCH APP</Button>
+          </Center>
+        </Flex>
         <Center>
-          <Button variant="brand">LAUNCH APP</Button>
+          <Box
+            className="mission-statement"
+            fontWeight="bold"
+            textAlign="center"
+            width="60%"
+          >
+            STATEMENT ABOUT WHAT IS THE MISSION OF THIS SITE
+          </Box>
         </Center>
-      </Flex>
-      <Center>
-        <Box fontWeight="bold" textAlign="center" width="50%" fontSize="40">
-          STATEMENT ABOUT WHAT IS THE MISSION OF THIS SITE
-        </Box>
-      </Center>
-    </Box>
+      </Box>
+    </>
   );
 };
+
+const style = `
+  .mission-statement {
+    font-size: 3vw;
+  }
+`;
 
 export default Header;
