@@ -21,13 +21,15 @@ function ProjectsList(props: any) {
   const { descriptionBoxHeight } = props;
 
   return (
-    <Box bg="brand.yellow" mt={descriptionBoxHeight + "px"}>
-      <Box p="20">
-        {projects.map((project) => (
-          <Project details={project} key={project.title} />
-        ))}
+    <>
+      <Box bg="brand.yellow" mt={descriptionBoxHeight + "px"}>
+        <Box p="20">
+          {projects.map((project) => (
+            <Project details={project} key={project.title} />
+          ))}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }
 
@@ -37,7 +39,13 @@ function Project(props: any) {
   } = props;
 
   return (
-    <Box mt="5" border="2px solid black">
+    <Box
+      cursor="pointer"
+      bg="brand.yellow"
+      _hover={{ bg: "brand.pink" }}
+      mt="5"
+      border="2px solid black"
+    >
       <Flex flexDirection="row" p="5">
         <Box pr="5" width="50%" color="black">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -49,9 +57,6 @@ function Project(props: any) {
             {title}
           </Heading>
           <Text mt="2">{description}</Text>
-          <Text position="absolute" bottom="0">
-            View project details
-          </Text>
         </Box>
       </Flex>
     </Box>
