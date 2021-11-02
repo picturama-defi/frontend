@@ -20,6 +20,7 @@ function Projects() {
       <Tabs selectedTab={selectedTab} onSelect={handleTabSelect} tabs={tabs} />
       <FeaturedProjectsTitle />
       <HighlightVideo />
+      <Box height="1000px" background="yellow"></Box>
     </>
   );
 }
