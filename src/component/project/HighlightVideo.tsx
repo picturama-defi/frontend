@@ -68,6 +68,7 @@ const Description = (props: any) => {
               backgroundColor="black"
               textAlign="center"
               width={details?.title.length * 20}
+              p="2"
             >
               {details?.title.toUpperCase()}
             </Box>
