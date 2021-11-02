@@ -1,9 +1,18 @@
 import { Box, Center, VStack, Button } from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
+import { useEffect, useState } from "react";
 
 const HighlightVideo = (props: any) => {
-  const videoLink = "https://player.vimeo.com/video/391331514?h=947ea22e11";
   const details = props.details;
+
+  const [descriptionBoxHeight, setDescriptionBoxHeight] = useState(0);
+
+  useEffect(() => {
+    const descriptionBoxHeight = document.getElementsByClassName(
+      "description-container"
+    )[0].clientHeight;
+    setDescriptionBoxHeight(descriptionBoxHeight);
+  }, []);
 
   return (
     <>
@@ -18,7 +27,10 @@ const HighlightVideo = (props: any) => {
         <Box className="description">
           <Description details={details} />
         </Box>
-        <Box height="200px" background="black"></Box>
+        <Box
+          height={`${descriptionBoxHeight * (3 / 4)}px`}
+          background="black"
+        ></Box>
       </Box>
     </>
   );
@@ -38,7 +50,7 @@ const Description = (props: any) => {
         <Center height="100%">
           <BsFillPlayFill size="5vw" color="yellow" />
         </Center>
-        <Center>
+        <Center className="description-container">
           <VStack>
             <Box
               position="relative"
@@ -48,14 +60,14 @@ const Description = (props: any) => {
               fontSize="15px"
               p="2"
             >
-              {`${details.percentageFunded} funded`}
+              {`${details.percentageFunded}% funded`}
             </Box>
             <Box
               position="relative"
               top="10px"
               backgroundColor="black"
               textAlign="center"
-              width="450px"
+              width={details?.title.length * 20}
             >
               {details?.title.toUpperCase()}
             </Box>
