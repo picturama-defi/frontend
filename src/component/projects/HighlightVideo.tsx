@@ -1,4 +1,4 @@
-import { Box, Center, Flex } from "@chakra-ui/react";
+import { Box, Center, VStack, Button } from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
 
 const HighlightVideo = () => {
@@ -15,15 +15,15 @@ const HighlightVideo = () => {
           height="100%"
         ></iframe>
         <Box className="description">
-          <VideoDescription />
+          <Description />
         </Box>
+        <Box height="200px" background="black"></Box>
       </Box>
-      <Box height="300px" background="black"></Box>
     </>
   );
 };
 
-const VideoDescription = () => {
+const Description = () => {
   return (
     <>
       <Box
@@ -35,6 +35,42 @@ const VideoDescription = () => {
       >
         <Center height="100%">
           <BsFillPlayFill size="5vw" color="yellow" />
+        </Center>
+        <Center>
+          <VStack>
+            <Box
+              position="relative"
+              top="10px"
+              backgroundColor="black"
+              textAlign="center"
+              fontSize="15px"
+              p="2"
+            >
+              75% funded
+            </Box>
+            <Box
+              position="relative"
+              top="10px"
+              backgroundColor="black"
+              textAlign="center"
+              width="450px"
+            >
+              BLESSED ARE THE MEEKS
+            </Box>
+            <Box
+              position="relative"
+              top="10px"
+              backgroundColor="black"
+              textAlign="center"
+              fontSize="15px"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna.
+            </Box>
+            <Button position="relative" top="20px" variant="brand3">
+              VIEW PROJECT DETAILS
+            </Button>
+          </VStack>
         </Center>
       </Box>
     </>
