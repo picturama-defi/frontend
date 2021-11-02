@@ -1,21 +1,22 @@
 import { Box, Center, VStack, Button } from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
 
-const HighlightVideo = () => {
+const HighlightVideo = (props: any) => {
   const videoLink = "https://player.vimeo.com/video/391331514?h=947ea22e11";
+  const details = props.details;
 
   return (
     <>
       <style>{style}</style>
       <Box className="video-container" width="100%">
         <iframe
-          src={`${videoLink}&title=0&byline=0&portrait=0&controls=0`}
+          src={`${details.link}&title=0&byline=0&portrait=0&controls=0`}
           allow="autoplay; fullscreen; picture-in-picture"
           width="100%"
           height="100%"
         ></iframe>
         <Box className="description">
-          <Description />
+          <Description details={details} />
         </Box>
         <Box height="200px" background="black"></Box>
       </Box>
@@ -23,7 +24,8 @@ const HighlightVideo = () => {
   );
 };
 
-const Description = () => {
+const Description = (props: any) => {
+  const { details } = props;
   return (
     <>
       <Box
@@ -46,7 +48,7 @@ const Description = () => {
               fontSize="15px"
               p="2"
             >
-              75% funded
+              {`${details.percentageFunded} funded`}
             </Box>
             <Box
               position="relative"
@@ -55,7 +57,7 @@ const Description = () => {
               textAlign="center"
               width="450px"
             >
-              BLESSED ARE THE MEEKS
+              {details?.title.toUpperCase()}
             </Box>
             <Box
               position="relative"
@@ -64,8 +66,7 @@ const Description = () => {
               textAlign="center"
               fontSize="15px"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna.
+              {details?.description}
             </Box>
             <Button position="relative" top="20px" variant="brand3">
               VIEW PROJECT DETAILS
