@@ -31,6 +31,16 @@ const components = {
           color: "white",
         },
       },
+      brand3: {
+        bg: "yellow",
+        color: "black",
+        fontSize: "10px",
+        borderRadius: "20px",
+        _hover: {
+          bg: pink,
+          color: "white",
+        },
+      },
     },
   },
 };
