@@ -1,18 +1,8 @@
 import { Box, Center, VStack, Button } from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
 
 const HighlightVideo = (props: any) => {
-  const details = props.details;
-
-  const [descriptionBoxHeight, setDescriptionBoxHeight] = useState(0);
-
-  useEffect(() => {
-    const descriptionBoxHeight = document.getElementsByClassName(
-      "description-container"
-    )[0].clientHeight;
-    setDescriptionBoxHeight(descriptionBoxHeight);
-  }, []);
+  const { details, descriptionBoxHeight } = props;
 
   return (
     <>
@@ -27,10 +17,7 @@ const HighlightVideo = (props: any) => {
         <Box className="description">
           <Description details={details} />
         </Box>
-        <Box
-          height={`${descriptionBoxHeight * (3 / 4)}px`}
-          background="black"
-        ></Box>
+        <Box height={`${descriptionBoxHeight}px`} background="black"></Box>
       </Box>
     </>
   );
