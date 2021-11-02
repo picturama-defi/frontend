@@ -38,7 +38,6 @@ const HighlightVideo = (props: any) => {
 
 const Description = (props: any) => {
   const { details } = props;
-
   return (
     <>
       <Box
