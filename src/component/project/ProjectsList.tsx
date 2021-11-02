@@ -38,7 +38,7 @@ function Project(props: any) {
 
   return (
     <Box mt="5" border="2px solid black">
-      <Flex minHeight="250px" flexDirection="row" p="5">
+      <Flex flexDirection="row" p="5">
         <Box pr="5" width="50%" color="black">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img width="100%" src={`images/${imageUrl}`} alt={title}></img>
