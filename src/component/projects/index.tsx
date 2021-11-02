@@ -1,7 +1,8 @@
 import Header from "./Header";
 import Tabs from "./Tabs";
 import { useState } from "react";
-import { Box } from "@chakra-ui/layout";
+import { Box, Center } from "@chakra-ui/layout";
+import HighlightVideo from "./HighlightVideo";
 
 function Projects() {
   const tabs = ["All Projects", "Invested Projects"];
@@ -17,9 +18,18 @@ function Projects() {
     <>
       <Header />
       <Tabs selectedTab={selectedTab} onSelect={handleTabSelect} tabs={tabs} />
-      <Box height="200px" bg="yellow"></Box>
+      <FeaturedProjectsTitle />
+      <HighlightVideo />
     </>
   );
 }
+
+const FeaturedProjectsTitle = () => {
+  return (
+    <Box height="50px" bg="brand.pink">
+      <Center height="100%">Featured Projects</Center>
+    </Box>
+  );
+};
 
 export default Projects;

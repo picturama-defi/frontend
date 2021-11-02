@@ -9,6 +9,27 @@ function Tabs(props: any) {
 
   const tabClass = (tab: string) => selectedTab === tab;
 
+  const Tab = (props: any) => {
+    const { tab } = props;
+
+    return (
+      <Box
+        width="100%"
+        cursor="pointer"
+        key={tab}
+        className="tab"
+        onClick={handleTabClick(tab)}
+        m="0"
+        fontWeight="bold"
+      >
+        <Center p="5">{tab}</Center>
+        {tabClass(tab) ? (
+          <Box className="bottom-highlight" width="100%" height="5px"></Box>
+        ) : null}
+      </Box>
+    );
+  };
+
   return (
     <>
       <style>{style}</style>
@@ -20,20 +41,7 @@ function Tabs(props: any) {
       >
         <Flex flexDirection="row" justifyContent="space-around">
           {tabs.map((tab: string) => (
-            <Box
-              width="100%"
-              cursor="pointer"
-              key={tab}
-              className="tab"
-              onClick={handleTabClick(tab)}
-              m="0"
-              fontWeight="bold"
-            >
-              <Center p="5">{tab}</Center>
-              {tabClass(tab) ? (
-                <Box width="100%" height="5px" bg="black"></Box>
-              ) : null}
-            </Box>
+            <Tab tab={tab} key={tab} />
           ))}
         </Flex>
       </Box>
@@ -47,8 +55,12 @@ const style = `
     }
 
     .tab:hover {
-        background-color:#EA3EF7;
-        color:white;
+        background-color:white;
+        color:black;
+    }
+
+    .bottom-highlight {
+        background-color:black;
     }
 `;
 
