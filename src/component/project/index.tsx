@@ -1,12 +1,14 @@
 import Header from "./Header";
 import Tabs from "./Tabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Center } from "@chakra-ui/layout";
 import HighlightVideo from "./HighlightVideo";
+import ProjectsList from "./ProjectsList";
 
 function Projects() {
   const tabs = ["All Projects", "Invested Projects"];
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
+  const [descriptionBoxHeight, setDescriptionBoxHeight] = useState(0);
 
   const handleTabSelect = (tabToChangeTo: string) => {
     setSelectedTab(tabToChangeTo);
@@ -20,13 +22,23 @@ function Projects() {
     link: "https://player.vimeo.com/video/391331514?h=947ea22e11",
   };
 
+  useEffect(() => {
+    const descriptionBoxHeight = document.getElementsByClassName(
+      "description-container"
+    )[0].clientHeight;
+    setDescriptionBoxHeight(descriptionBoxHeight * (3 / 4));
+  }, []);
+
   return (
     <>
       <Header />
       <Tabs selectedTab={selectedTab} onSelect={handleTabSelect} tabs={tabs} />
       <FeaturedProjectsTitle />
-      <HighlightVideo details={highlightedProject} />
-      <Box height="1000px" backgroundColor="yellow"></Box>
+      <HighlightVideo
+        descriptionBoxHeight={descriptionBoxHeight}
+        details={highlightedProject}
+      />
+      <ProjectsList descriptionBoxHeight={descriptionBoxHeight} />
     </>
   );
 }
