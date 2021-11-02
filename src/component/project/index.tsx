@@ -12,14 +12,20 @@ function Projects() {
     setSelectedTab(tabToChangeTo);
   };
 
-  console.log(selectedTab);
+  const highlightedProject = {
+    percentageFunded: 75,
+    title: "Blessed are the meeks",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+    link: "https://player.vimeo.com/video/391331514?h=947ea22e11",
+  };
 
   return (
     <>
       <Header />
       <Tabs selectedTab={selectedTab} onSelect={handleTabSelect} tabs={tabs} />
       <FeaturedProjectsTitle />
-      <HighlightVideo />
+      <HighlightVideo details={highlightedProject} />
       <Box height="1000px" backgroundColor="yellow"></Box>
     </>
   );

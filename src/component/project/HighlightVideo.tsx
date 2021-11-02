@@ -1,29 +1,44 @@
 import { Box, Center, VStack, Button } from "@chakra-ui/react";
 import { BsFillPlayFill } from "react-icons/bs";
+import { useEffect, useState } from "react";
 
-const HighlightVideo = () => {
-  const videoLink = "https://player.vimeo.com/video/391331514?h=947ea22e11";
+const HighlightVideo = (props: any) => {
+  const details = props.details;
+
+  const [descriptionBoxHeight, setDescriptionBoxHeight] = useState(0);
+
+  useEffect(() => {
+    const descriptionBoxHeight = document.getElementsByClassName(
+      "description-container"
+    )[0].clientHeight;
+    setDescriptionBoxHeight(descriptionBoxHeight);
+  }, []);
 
   return (
     <>
       <style>{style}</style>
       <Box className="video-container" width="100%">
         <iframe
-          src={`${videoLink}&title=0&byline=0&portrait=0&controls=0`}
+          src={`${details.link}&title=0&byline=0&portrait=0&controls=0`}
           allow="autoplay; fullscreen; picture-in-picture"
           width="100%"
           height="100%"
         ></iframe>
         <Box className="description">
-          <Description />
+          <Description details={details} />
         </Box>
-        <Box height="200px" background="black"></Box>
+        <Box
+          height={`${descriptionBoxHeight * (3 / 4)}px`}
+          background="black"
+        ></Box>
       </Box>
     </>
   );
 };
 
-const Description = () => {
+const Description = (props: any) => {
+  const { details } = props;
+
   return (
     <>
       <Box
@@ -36,7 +51,7 @@ const Description = () => {
         <Center height="100%">
           <BsFillPlayFill size="5vw" color="yellow" />
         </Center>
-        <Center>
+        <Center className="description-container">
           <VStack>
             <Box
               position="relative"
@@ -46,16 +61,16 @@ const Description = () => {
               fontSize="15px"
               p="2"
             >
-              75% funded
+              {`${details.percentageFunded}% funded`}
             </Box>
             <Box
               position="relative"
               top="10px"
               backgroundColor="black"
               textAlign="center"
-              width="450px"
+              width={details?.title.length * 20}
             >
-              BLESSED ARE THE MEEKS
+              {details?.title.toUpperCase()}
             </Box>
             <Box
               position="relative"
@@ -64,8 +79,7 @@ const Description = () => {
               textAlign="center"
               fontSize="15px"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna.
+              {details?.description}
             </Box>
             <Button position="relative" top="20px" variant="brand3">
               VIEW PROJECT DETAILS

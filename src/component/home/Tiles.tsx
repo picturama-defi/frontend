@@ -64,7 +64,7 @@ const Tile3 = () => {
         >
           SOMETHING TO SUPPORT THE ARGUMENT
         </Text>
-        <Button variant="brand2">Launch discord</Button>
+        <Button variant="brand2">LAUNCH DISCORD</Button>
       </VStack>
     </>
   );
