@@ -1,8 +1,8 @@
 import { Box, Center, VStack, Button } from "@chakra-ui/react";
-import { BsFillPlayFill } from "react-icons/bs";
+import PlayButton from "../PlayButton";
 
 const HighlightVideo = (props: any) => {
-  const { details, descriptionBoxHeight } = props;
+  const { details, descriptionBoxHeight, showDescription } = props;
 
   return (
     <>
@@ -15,7 +15,7 @@ const HighlightVideo = (props: any) => {
           height="100%"
         ></iframe>
         <Box className="description">
-          <Description details={details} />
+          <VideoOverlay showDescription={showDescription} details={details} />
         </Box>
         <Box height={`${descriptionBoxHeight}px`} background="black"></Box>
       </Box>
@@ -23,50 +23,50 @@ const HighlightVideo = (props: any) => {
   );
 };
 
-const Description = (props: any) => {
-  const { details } = props;
+const VideoOverlay = (props: any) => {
+  const { details, showDescription } = props;
   return (
     <>
       <Box width="8vw" height="8vw">
-        <Center borderRadius="100%" className="play-button" height="100%">
-          <BsFillPlayFill size="5vw" />
-        </Center>
-        <Center className="description-container">
-          <VStack>
-            <Box
-              position="relative"
-              top="10px"
-              backgroundColor="black"
-              textAlign="center"
-              fontSize="15px"
-              p="2"
-            >
-              {`${details.percentageFunded}% funded`}
-            </Box>
-            <Box
-              position="relative"
-              top="10px"
-              backgroundColor="black"
-              textAlign="center"
-              width={details?.title.length * 20}
-              p="2"
-            >
-              {details?.title.toUpperCase()}
-            </Box>
-            <Box
-              position="relative"
-              top="10px"
-              backgroundColor="black"
-              textAlign="center"
-              fontSize="15px"
-            >
-              {details?.description}
-            </Box>
-            <Button position="relative" top="20px" variant="brand3">
-              VIEW PROJECT DETAILS
-            </Button>
-          </VStack>
-        </Center>
+        <PlayButton />
+        {showDescription ? (
+          <Center className="description-container">
+            <VStack>
+              <Box
+                position="relative"
+                top="10px"
+                backgroundColor="black"
+                textAlign="center"
+                fontSize="15px"
+                p="2"
+              >
+                {`${details.percentageFunded}% funded`}
+              </Box>
+              <Box
+                position="relative"
+                top="10px"
+                backgroundColor="black"
+                textAlign="center"
+                width={details?.title.length * 20}
+                p="2"
+              >
+                {details?.title.toUpperCase()}
+              </Box>
+              <Box
+                position="relative"
+                top="10px"
+                backgroundColor="black"
+                textAlign="center"
+                fontSize="15px"
+              >
+                {details?.description}
+              </Box>
+              <Button position="relative" top="20px" variant="brand3">
+                VIEW PROJECT DETAILS
+              </Button>
+            </VStack>
+          </Center>
+        ) : null}
       </Box>
     </>
   );
@@ -85,13 +85,6 @@ const style = `
       color:yellow;
       font-size:50px;
       transform: translate(-50%, -50%);
-    }
-
-    .play-button {
-      border: 2px solid yellow;
-      color: yellow;
-      cursor: pointer;
-      background-color: black;
     }
 
     .play-button:hover {

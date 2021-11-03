@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Box, Center } from "@chakra-ui/layout";
 import HighlightVideo from "./HighlightVideo";
 import ProjectsList from "./ProjectsList";
+import { highlightedProject } from "../../hardCodedData";
 
 function Projects() {
   const tabs = ["All Projects", "Invested Projects"];
@@ -14,19 +15,13 @@ function Projects() {
     setSelectedTab(tabToChangeTo);
   };
 
-  const highlightedProject = {
-    percentageFunded: 75,
-    title: "Blessed are the meeks",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
-    link: "https://player.vimeo.com/video/391331514?h=947ea22e11",
-  };
-
   useEffect(() => {
-    const descriptionBoxHeight = document.getElementsByClassName(
-      "description-container"
-    )[0].clientHeight;
-    setDescriptionBoxHeight(descriptionBoxHeight * (3 / 4));
+    if (document.getElementsByClassName("description-container").length > 0) {
+      const descriptionBoxHeight = document.getElementsByClassName(
+        "description-container"
+      )[0].clientHeight;
+      setDescriptionBoxHeight(descriptionBoxHeight * (3 / 4));
+    }
   }, []);
 
   return (
@@ -35,6 +30,7 @@ function Projects() {
       <Tabs selectedTab={selectedTab} onSelect={handleTabSelect} tabs={tabs} />
       <FeaturedProjectsTitle />
       <HighlightVideo
+        showDescription={true}
         descriptionBoxHeight={descriptionBoxHeight}
         details={highlightedProject}
       />
