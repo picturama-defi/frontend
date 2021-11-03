@@ -2,7 +2,7 @@ import Header from "./Header";
 import Tabs from "./Tabs";
 import { useState, useEffect } from "react";
 import { Box, Center } from "@chakra-ui/layout";
-import HighlightVideo from "./HighlightVideo";
+import VideoContainer from "./VideoContainer";
 import ProjectsList from "./ProjectsList";
 import { highlightedProject } from "../../hardCodedData";
 
@@ -29,7 +29,7 @@ function Projects() {
       <Header />
       <Tabs selectedTab={selectedTab} onSelect={handleTabSelect} tabs={tabs} />
       <FeaturedProjectsTitle />
-      <HighlightVideo
+      <VideoContainer
         showDescription={true}
         descriptionBoxHeight={descriptionBoxHeight}
         details={highlightedProject}

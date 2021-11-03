@@ -1,7 +1,7 @@
 import { Box, Center, VStack, Button } from "@chakra-ui/react";
 import PlayButton from "../PlayButton";
 
-const HighlightVideo = (props: any) => {
+const VideoContainer = (props: any) => {
   const { details, descriptionBoxHeight, showDescription } = props;
 
   return (
@@ -95,4 +95,4 @@ const style = `
     }
 `;
 
-export default HighlightVideo;
+export default VideoContainer;
