@@ -7,7 +7,7 @@ import {
   Heading,
   VStack,
 } from "@chakra-ui/react";
-import LogoWithTitle from "../LogoWithTitle";
+import LogoWithTitle from "../common/LogoWithTitle";
 
 const Header = () => {
   return (

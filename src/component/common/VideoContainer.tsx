@@ -1,5 +1,5 @@
 import { Box, Center, VStack, Button } from "@chakra-ui/react";
-import PlayButton from "../PlayButton";
+import PlayButton from "./PlayButton";
 
 const VideoContainer = (props: any) => {
   const { details, descriptionBoxHeight, showDescription } = props;

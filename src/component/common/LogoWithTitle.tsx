@@ -1,6 +1,6 @@
 import { HStack, Box } from "@chakra-ui/react";
 import Image from "next/image";
-import LogoImage from "../../public/logo.svg";
+import LogoImage from "../../../public/logo.svg";
 
 const LogoWithTitle = () => {
   return (

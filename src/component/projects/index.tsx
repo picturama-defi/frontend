@@ -2,7 +2,7 @@ import Header from "./Header";
 import Tabs from "./Tabs";
 import { useState, useEffect } from "react";
 import { Box, Center } from "@chakra-ui/layout";
-import VideoContainer from "./VideoContainer";
+import VideoContainer from "../common/VideoContainer";
 import ProjectsList from "./ProjectsList";
 import { highlightedProject } from "../../hardCodedData";
 
