@@ -9,7 +9,9 @@ import {
 } from "@chakra-ui/react";
 import LogoWithTitle from "../common/LogoWithTitle";
 
-const Header = () => {
+const Header = (props: any) => {
+  const { details } = props;
+
   return (
     <>
       <style>{style}</style>
@@ -32,8 +34,8 @@ const Header = () => {
         </Flex>
         <Center>
           <VStack>
-            <Text fontWeight="bold">Project</Text>
-            <Heading size="2xl">Blessed are the Meek</Heading>
+            <Text fontWeight="bold">PROJECT</Text>
+            <Heading size="2xl">{details?.title.toUpperCase()}</Heading>
           </VStack>
         </Center>
       </Box>
