@@ -5,7 +5,8 @@ function StakingDetails() {
     <Box bg="brand.yellow" padding="10%" pt="10">
       <Flex borderTop="5px solid black" borderBottom="5px solid black">
         <Box p="5" flex="1">
-          Hello
+          {/* eslint-disable-next-line @next/next/no-img-element*/}
+          <img alt="preview" src="images/preview.png"></img>
         </Box>
         <Box flex="5">
           <Flex pt="5" pb="5">
