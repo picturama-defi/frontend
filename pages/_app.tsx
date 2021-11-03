@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { extendedTheme } from "../src/theme";
-import Layout from "../src/component/Layout";
+import Layout from "../src/component/common/Layout";
 
 const theme = extendTheme(extendedTheme);
 

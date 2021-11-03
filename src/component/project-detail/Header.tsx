@@ -1,7 +1,17 @@
-import { Flex, Button, Center, Box } from "@chakra-ui/react";
+import {
+  Flex,
+  Button,
+  Center,
+  Box,
+  Text,
+  Heading,
+  VStack,
+} from "@chakra-ui/react";
 import LogoWithTitle from "../common/LogoWithTitle";
 
-const Header = () => {
+const Header = (props: any) => {
+  const { details } = props;
+
   return (
     <>
       <style>{style}</style>
@@ -16,18 +26,17 @@ const Header = () => {
         >
           <LogoWithTitle />
           <Center>
-            <Button variant="brand">LAUNCH APP</Button>
+            <Button variant="brand">CONNECT WALLET</Button>
+            <Button ml="2" variant="brand">
+              MENU
+            </Button>
           </Center>
         </Flex>
         <Center>
-          <Box
-            className="mission-statement"
-            fontWeight="bold"
-            textAlign="center"
-            width="60%"
-          >
-            STATEMENT ABOUT WHAT IS THE MISSION OF THIS SITE
-          </Box>
+          <VStack>
+            <Text fontWeight="bold">PROJECT</Text>
+            <Heading size="2xl">{details?.title.toUpperCase()}</Heading>
+          </VStack>
         </Center>
       </Box>
     </>

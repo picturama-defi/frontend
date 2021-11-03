@@ -1,21 +1,5 @@
 import { Box, Text, Heading, Flex } from "@chakra-ui/layout";
-
-const projects = [
-  {
-    title: "I$$Y AND THE LOST TORCH",
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna.`,
-    percentageFunded: 45,
-    imageUrl: "lost_torch.png",
-  },
-  {
-    title: "BLOOD SHAMAN",
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna.`,
-    percentageFunded: 25,
-    imageUrl: "blood_shaman.png",
-  },
-];
+import { projectsList } from "../../hardCodedData";
 
 function ProjectsList(props: any) {
   const { descriptionBoxHeight } = props;
@@ -24,7 +8,7 @@ function ProjectsList(props: any) {
     <>
       <Box bg="brand.yellow" mt={descriptionBoxHeight + "px"}>
         <Box p="20">
-          {projects.map((project) => (
+          {projectsList.map((project) => (
             <Project details={project} key={project.title} />
           ))}
         </Box>
