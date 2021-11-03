@@ -55,7 +55,7 @@ const style = `
     }
 
     .tab:hover {
-        background-color:#FFFF99;
+        background-color:#EA3EF7;
         color:black;
     }
 
