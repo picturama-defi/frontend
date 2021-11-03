@@ -1,14 +1,14 @@
 import Header from "./Header";
 import VideoContainer from "../common/VideoContainer";
 import { highlightedProject } from "../../hardCodedData";
-import Ticker from "./Ticker";
+import MoveText from "./MoveText";
 
-function ProjectDetail() {
+function ProjectDetail(props: any) {
   return (
     <>
       <Header />
       <VideoContainer showDescription={false} details={highlightedProject} />
-      <Ticker />
+      <MoveText text={`${highlightedProject.percentageFunded}% funded`} />
     </>
   );
 }
