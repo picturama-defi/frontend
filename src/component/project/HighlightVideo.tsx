@@ -27,15 +27,9 @@ const Description = (props: any) => {
   const { details } = props;
   return (
     <>
-      <Box
-        backgroundColor="black"
-        width="8vw"
-        height="8vw"
-        borderRadius="100%"
-        border="2px solid yellow"
-      >
-        <Center height="100%">
-          <BsFillPlayFill size="5vw" color="yellow" />
+      <Box width="8vw" height="8vw">
+        <Center borderRadius="100%" className="play-button" height="100%">
+          <BsFillPlayFill size="5vw" />
         </Center>
         <Center className="description-container">
           <VStack>
@@ -91,6 +85,20 @@ const style = `
       color:yellow;
       font-size:50px;
       transform: translate(-50%, -50%);
+    }
+
+    .play-button {
+      border: 2px solid yellow;
+      color: yellow;
+      cursor: pointer;
+      background-color: black;
+    }
+
+    .play-button:hover {
+      border: 2px solid black;
+      color: black;
+      cursor: pointer;
+      background-color: #EA3EF7;
     }
 `;
 

@@ -28,7 +28,7 @@ const components = {
         borderRadius: "20px",
         _hover: {
           bg: pink,
-          color: "white",
+          color: "black",
         },
       },
       brand3: {
@@ -38,7 +38,7 @@ const components = {
         borderRadius: "20px",
         _hover: {
           bg: pink,
-          color: "white",
+          color: "black",
         },
       },
     },
