@@ -1,14 +1,13 @@
 import { HStack, Box } from "@chakra-ui/react";
-import Image from "next/image";
-import LogoImage from "../../../public/logo.svg";
 
 const LogoWithTitle = () => {
   return (
     <>
       <HStack>
-        <Image
+        {/*eslint-disable-next-line @next/next/no-img-element*/}
+        <img
           alt="Logo of picturama that is a yellow smiling face"
-          src={LogoImage}
+          src={"logo.svg"}
           width="50px"
           height="50px"
         />
