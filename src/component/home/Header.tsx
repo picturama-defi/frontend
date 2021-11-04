@@ -1,4 +1,4 @@
-import { Flex, Button, Center, Box } from "@chakra-ui/react";
+import { Flex, Button, Center, Box,  Heading } from "@chakra-ui/react";
 import LogoWithTitle from "../common/LogoWithTitle";
 
 const Header = () => {
@@ -22,11 +22,14 @@ const Header = () => {
         <Center>
           <Box
             className="mission-statement"
+            fontFamily="fonts.heading"
             fontWeight="bold"
             textAlign="center"
             width="60%"
           >
-            STATEMENT ABOUT WHAT IS THE MISSION OF THIS SITE
+             
+                STATEMENT ABOUT WHAT IS THE MISSION OF THIS SITE
+           
           </Box>
         </Center>
       </Box>
