@@ -1,4 +1,4 @@
-import { Flex, Button, Center, Box,  Heading } from "@chakra-ui/react";
+import { Flex, Button, Center, Box, Heading } from "@chakra-ui/react";
 import LogoWithTitle from "../common/LogoWithTitle";
 
 const Header = () => {
@@ -27,9 +27,7 @@ const Header = () => {
             textAlign="center"
             width="60%"
           >
-             
-                STATEMENT ABOUT WHAT IS THE MISSION OF THIS SITE
-           
+            FINANCING INDEPENDENT CINEMA
           </Box>
         </Center>
       </Box>

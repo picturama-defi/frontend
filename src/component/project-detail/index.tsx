@@ -2,7 +2,8 @@ import Header from "./Header";
 import VideoContainer from "../common/VideoContainer";
 import { highlightedProject } from "../../hardCodedData";
 import MoveText from "./MoveText";
-import StakingDetails from "./StakingDetails";
+import StakingInfo from "./StakingInfo";
+import Description from "./Description";
 
 function ProjectDetail(props: any) {
   return (
@@ -10,7 +11,8 @@ function ProjectDetail(props: any) {
       <Header details={highlightedProject} />
       <VideoContainer showDescription={false} details={highlightedProject} />
       <MoveText text={`${highlightedProject.percentageFunded}% funded`} />
-      <StakingDetails />
+      <StakingInfo />
+      <Description details={highlightedProject} />
     </>
   );
 }
