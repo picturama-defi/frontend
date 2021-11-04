@@ -5,7 +5,7 @@ import StakingDetails from "./StakingDetails";
 function StakingInfo() {
   return (
     <>
-      <Box bg="brand.yellow" padding="10%" pt="10">
+      <Box bg="brand.yellow" padding="8%" pt="10">
         <StakingDetails />
         <StakingButtons />
       </Box>

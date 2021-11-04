@@ -12,7 +12,7 @@ function ProjectDetail(props: any) {
       <VideoContainer showDescription={false} details={highlightedProject} />
       <MoveText text={`${highlightedProject.percentageFunded}% funded`} />
       <StakingInfo />
-      <Description details={highlightedProject} />
+      <Description />
     </>
   );
 }
