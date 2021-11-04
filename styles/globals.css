@@ -5,12 +5,23 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  cursor: url('../public/RAMA_cursor.png'), auto !important; 
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  cursor: url('../public/RAMA_cursor.png'), pointer !important;
 }
+/* To check */
+button {
+cursor: url('../public/RAMA_cursor.png'), auto !important; 
+}
+
+button:hover{
+  cursor: url('../public/RAMA_cursor.png'), pointer !important;
+
+}
+
 
 * {
   box-sizing: border-box;

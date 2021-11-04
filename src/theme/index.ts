@@ -1,3 +1,5 @@
+import { extendTheme } from "@chakra-ui/react";
+
 const pink = "#EA3EF7";
 const yellow = "#FAFF00";
 
@@ -8,6 +10,12 @@ const colors = {
   },
 };
 
+const fonts = {
+  fonts: {
+    heading: "Monda",
+    body: "Inter",
+  },
+}
 const components = {
   Button: {
     variants: {
@@ -45,4 +53,4 @@ const components = {
   },
 };
 
-export const extendedTheme = { colors, components };
+export const extendedTheme = extendTheme({ colors, components, fonts });
