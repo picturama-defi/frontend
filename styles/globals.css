@@ -10,7 +10,7 @@ body {
 a {
   text-decoration: none;
 }
-/* To check */
+
 * {
   cursor: url('../public/RAMA_cursor.png'), auto !important; 
 }

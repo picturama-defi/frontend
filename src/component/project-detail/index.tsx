@@ -4,6 +4,7 @@ import { highlightedProject } from "../../hardCodedData";
 import MoveText from "./MoveText";
 import StakingInfo from "./StakingInfo";
 import Description from "./Description";
+import Team from "./Team";
 
 function ProjectDetail(props: any) {
   return (
@@ -13,6 +14,7 @@ function ProjectDetail(props: any) {
       <MoveText text={`${highlightedProject.percentageFunded}% funded`} />
       <StakingInfo />
       <Description />
+      <Team />
     </>
   );
 }
