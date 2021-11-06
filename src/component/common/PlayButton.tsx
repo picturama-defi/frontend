@@ -1,11 +1,14 @@
 import { BsFillPlayFill } from "react-icons/bs";
 import { Center } from "@chakra-ui/react";
 
-function PlayButton() {
+function PlayButton(props: any) {
+  const { onClick } = props;
+
   return (
     <>
       <style>{style}</style>
       <Center
+        onClick={onClick}
         width="8vw"
         height="8vw"
         borderRadius="100%"

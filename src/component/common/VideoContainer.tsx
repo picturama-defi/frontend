@@ -1,5 +1,7 @@
 import { Box, Center, VStack, Button } from "@chakra-ui/react";
 import PlayButton from "./PlayButton";
+import VideoModal from "./VideoModal";
+import { useState } from "react";
 
 const VideoContainer = (props: any) => {
   const { details, descriptionBoxHeight, showDescription } = props;
@@ -23,12 +25,46 @@ const VideoContainer = (props: any) => {
   );
 };
 
-const VideoOverlay = (props: any) => {
-  const { details, showDescription } = props;
+const ProjectDetailVideo = () => {
   return (
     <>
+      <style>{style}</style>
+      <Box className="video-container" width="100%">
+        <a>
+          <iframe
+            src="https://player.vimeo.com/video/391331514?h=947ea22e11&title=0&byline=0&portrait=0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            width="100%"
+            height="100%"
+          ></iframe>
+        </a>
+      </Box>
+    </>
+  );
+};
+
+const VideoOverlay = (props: any) => {
+  const { details, showDescription } = props;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onPlayClick = () => {
+    setIsOpen(true);
+  };
+
+  const onModalClose = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <VideoModal
+        onClose={onModalClose}
+        isOpen={isOpen}
+        modalBody={<ProjectDetailVideo />}
+      />
       <Box width="8vw" height="8vw">
-        <PlayButton />
+        <PlayButton onClick={onPlayClick} />
         {showDescription ? (
           <Center className="description-container">
             <VStack>
