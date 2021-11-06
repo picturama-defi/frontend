@@ -15,7 +15,7 @@ const VideoModal = (props: any) => {
 
   return (
     <Box padding={4}>
-      <Modal size="6xl" isOpen={isOpen} onClose={onClose}>
+      <Modal isCentered size="6xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader></ModalHeader>
