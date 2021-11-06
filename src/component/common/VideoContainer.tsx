@@ -1,6 +1,7 @@
 import { Box, Center, VStack, Button } from "@chakra-ui/react";
 import PlayButton from "./PlayButton";
 import VideoModal from "./VideoModal";
+import { useState } from "react";
 
 const VideoContainer = (props: any) => {
   const { details, descriptionBoxHeight, showDescription } = props;
@@ -44,13 +45,26 @@ const ProjectDetailVideo = () => {
 
 const VideoOverlay = (props: any) => {
   const { details, showDescription } = props;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onPlayClick = () => {
+    setIsOpen(true);
+  };
+
+  const onModalClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
+      <VideoModal
+        onClose={onModalClose}
+        isOpen={isOpen}
+        modalBody={<ProjectDetailVideo />}
+      />
       <Box width="8vw" height="8vw">
-        <VideoModal
-          playButton={<PlayButton />}
-          modalBody={<ProjectDetailVideo />}
-        />
+        <PlayButton onClick={onPlayClick} />
         {showDescription ? (
           <Center className="description-container">
             <VStack>
