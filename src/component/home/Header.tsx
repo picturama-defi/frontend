@@ -1,7 +1,14 @@
 import { Flex, Button, Center, Box, Heading } from "@chakra-ui/react";
 import LogoWithTitle from "../common/LogoWithTitle";
+import { useRouter } from "next/dist/client/router";
 
 const Header = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/projects");
+  };
+
   return (
     <>
       <style>{style}</style>
@@ -16,7 +23,9 @@ const Header = () => {
         >
           <LogoWithTitle />
           <Center>
-            <Button variant="brand">LAUNCH APP</Button>
+            <Button onClick={handleClick} variant="brand">
+              LAUNCH APP
+            </Button>
           </Center>
         </Flex>
         <Center>
