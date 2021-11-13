@@ -1,4 +1,5 @@
 import { Flex, Button, Center, Box } from "@chakra-ui/react";
+import ConnectWallet from "../common/ConnectWallet";
 import LogoWithTitle from "../common/LogoWithTitle";
 
 const Header = () => {
@@ -16,7 +17,7 @@ const Header = () => {
         >
           <LogoWithTitle />
           <Center>
-            <Button variant="brand2">CONNECT WALLET</Button>
+            <ConnectWallet />
             <Button ml="2" variant="brand2">
               MENU
             </Button>
