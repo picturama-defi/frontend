@@ -17,7 +17,7 @@ const Header = () => {
         >
           <LogoWithTitle />
           <Center>
-            <ConnectWallet />
+            <ConnectWallet variant="brand2" />
             <Button ml="2" variant="brand2">
               MENU
             </Button>

@@ -1,6 +1,5 @@
 import { Button, Text, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import ethers from "ethers";
 
 declare global {
   interface Window {
@@ -8,8 +7,9 @@ declare global {
   }
 }
 
-const ConnectWallet = () => {
+const ConnectWallet = (props: any) => {
   const [selectedAddress, setSelectedAddress] = useState("");
+  const { variant } = props;
 
   useEffect(() => {
     window.ethereum.on("accountsChanged", (res: any) => {
@@ -38,16 +38,21 @@ const ConnectWallet = () => {
 
   return !selectedAddress ? (
     <>
-      <Button variant="brand2" onClick={handleClick}>
+      <Button variant={variant} onClick={handleClick}>
         Connect Wallet
       </Button>
     </>
   ) : (
     <>
       <Flex position="relative" top="14px" flexDirection="column">
-        <Button variant="brand2">Disconnect</Button>
-        <Text marginTop="10px" marginLeft="15px" fontSize="12">
-          {selectedAddress.split("").slice(0, 5).join("") + "..."}
+        <Button variant="black">CONNECTED</Button>
+        <Text
+          fontWeight="bold"
+          marginTop="10px"
+          marginLeft="15px"
+          fontSize="12"
+        >
+          {selectedAddress.split("").slice(0, 6).join("") + "..."}
         </Text>
       </Flex>
     </>

@@ -7,6 +7,7 @@ import {
   Heading,
   VStack,
 } from "@chakra-ui/react";
+import ConnectWallet from "../common/ConnectWallet";
 import LogoWithTitle from "../common/LogoWithTitle";
 
 const Header = (props: any) => {
@@ -26,7 +27,7 @@ const Header = (props: any) => {
         >
           <LogoWithTitle />
           <Center>
-            <Button variant="brand">CONNECT WALLET</Button>
+            <ConnectWallet variant="brand" />
             <Button ml="2" variant="brand">
               MENU
             </Button>

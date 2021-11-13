@@ -15,7 +15,7 @@ const fonts = {
     heading: "Monda",
     body: "Inter",
   },
-}
+};
 const components = {
   Button: {
     variants: {
@@ -48,6 +48,12 @@ const components = {
           bg: pink,
           color: "black",
         },
+      },
+      black: {
+        bg: "black",
+        color: "brand.yellow",
+        fontSize: "10px",
+        borderRadius: "20px",
       },
     },
   },
