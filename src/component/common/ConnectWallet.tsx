@@ -19,7 +19,7 @@ const ConnectWallet = (props: any) => {
   }, []);
 
   const handleClick = () => {
-    if (window.ethereum) {
+    if (window?.ethereum) {
       connect();
     } else {
       alert("Install metamask");
