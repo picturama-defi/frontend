@@ -1,60 +1,73 @@
 import React, {useState, useRef, useEffect} from 'react';
-import { Input, Stack } from "@chakra-ui/react";
+import { Input, Stack, Textarea } from "@chakra-ui/react";
 import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-const { CKEditor } = require('@ckeditor/ckeditor5-react');
 import Header from "./Header";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 
-import {
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-  } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray, FormProvider, useFormContext } from "react-hook-form";
+import ProjectForm from './ProjectForm';
+import MembersFormv2 from './MemberFormv2';
+
 
 const UploadForm = () => {
-    const [files, setFiles, ] = useState({});
- 
-    const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
+   const [formStep, setFormStep] = useState(() => 0);
+    // const [teamDetails, setTeamDetails] = useState(() => [{ name: "", role : "", place: "", about: "", linkedIn: ""}]);
+    const [teamDetails, setTeamDetails] = useState<any>([]);
+    // const { register, unregister, handleSubmit, watch, formState: { errors, isValid }, setValue,  } = useForm({mode: "all"});
+    const methods = useForm({mode: "all",  defaultValues: {
+        team: [{ name: "", role: "" }]
+      }});
+    // const {fields, } = useFieldArray()
 
-    useEffect(() => {
-        register('input')
-      });
+    // useEffect(() => {
+    //     register('input')
+    //   });
+
+      const renderButton = () => {
+
+    }
+    
+    const nextStep = () => {
+        setFormStep((prevStep: number) => prevStep + 1)
+    }
+
+    const prevStep = () => {
+        setFormStep((prevStep: number) => prevStep - 1)
+    }
 
     const onSubmit = (data: any) => console.log(data);
+    
   const fileInputField = useRef(null);
     return (
         <Flex borderTop="5px solid black" borderBottom="5px solid black">
-             <Box p="5" flex="1">
-             <Header />
-                <form onSubmit={handleSubmit(onSubmit)}>
+             <Box  p="5" flex="1">
+             <FormProvider {...methods} > 
+                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                    <Header />
+                    <Stack bg="brand.yellow" spacing={3} padding="10">
+                        {formStep===0 && <ProjectForm />}
+                        {formStep===1 && <MembersFormv2 />}
 
-                <Stack spacing={3}>
-                    <FormControl id="title">
-                        <FormLabel>Project Title</FormLabel>
-                        <Input   {...register("projectTitle", { required: true })} placeholder="Project Title" />
-                    </FormControl>
-                    <FormControl id="title">
-                        <FormLabel>Project Title</FormLabel>
-                            <CKEditor
-                                    editor={ClassicEditor}
-                                    onChange={(event: any, editor: any) => {
-                                        const data = editor.getData();
-                                        setValue('input', data)
-                                    }}
-                                    />
-                    </FormControl>
-                    <FormControl id="image">
-                        <FormLabel>Thumbnail</FormLabel>
-                        <Input type="file"  {...register("projectThumbnail", { required: true })} placeholder="Project Thumbnail" />
-                    </FormControl>
-                        {errors.exampleRequired && <span>This field is required</span>}
-                        
-                        <input type="submit" />
-                        </Stack>
+                            
+                            <Stack direction="row" spacing={4} align="center">
+                                <Button colorScheme="teal" variant="outline" onClick={prevStep} display={formStep>0?"block":"none"}>
+                                    Back
+                                </Button>
+                                <Button colorScheme="teal" disabled={!methods.formState.isValid} variant="solid" display={formStep<2?"block":"none"} onClick={nextStep}>
+                                    Next
+                                </Button>
+                                <Button type="submit" colorScheme="teal" disabled={!methods.formState.isValid} variant="solid" display={formStep===2?"block":"none"} onClick={() => {}}>
+                                    Submit
+                                </Button>
+                                
+                            </Stack>
+                    </Stack>
                 </form>
+                </FormProvider>
+                <pre>
+                    {JSON.stringify(methods.watch(), null, 2)}
+                </pre>
                 {/* <form>
                     <label>{"label"}</label>
                     <p>Drag and drop your files anywhere or</p>
