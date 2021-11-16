@@ -25,7 +25,7 @@ import {
 
 
 const ProjectForm = () => {
-    const { register, unregister, handleSubmit, watch, formState: { errors, isValid }, setValue,  } = useFormContext();
+    const { register, unregister, handleSubmit, watch, formState: { errors, isValid }, setValue, getValues } = useFormContext();
     return (
         <div>
             
@@ -41,6 +41,7 @@ const ProjectForm = () => {
                                    
                                     {...register("projectDescription", { required: true })}
                                     editor={ClassicEditor}
+                                    data={getValues("projectDescription")}
                                     onChange={(event: any, editor: any) => {
                                         const data = editor.getData();
                                         setValue('projectDescription', data)

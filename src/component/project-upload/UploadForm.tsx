@@ -8,6 +8,7 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useForm, useFieldArray, FormProvider, useFormContext } from "react-hook-form";
 import ProjectForm from './ProjectForm';
 import MembersFormv2 from './MemberFormv2';
+import Preview from './Preview';
 
 interface teamMemberPicsProps{
     [key : number] : any
@@ -39,7 +40,29 @@ const UploadForm = () => {
         setFormStep((prevStep: number) => prevStep - 1)
     }
 
-    const onSubmit = (data: any) => console.log(data);
+    const onSubmit = (data: any) => {
+       
+        console.log(data);
+        let teamB64 : any = [];
+        for(let i = 0; i< data.team.length; i++){
+            let reader = new FileReader();
+            let file =data.team[i].photo[0];
+            console.log("Item photo: ", data.team[i].photo[0])
+            reader.onloadend = () => {
+               
+           teamB64.push({...data.team[i], photo: reader.result})
+             
+        
+        }
+           
+             reader.readAsDataURL(file);
+        }
+          
+           
+           
+        
+        console.log("Form submit: ",{...data, team: teamB64 });
+    };
     
   const fileInputField = useRef(null);
     return (
@@ -51,6 +74,7 @@ const UploadForm = () => {
                     <Stack bg="brand.yellow" spacing={3} padding="10">
                         {formStep===0 && <ProjectForm />}
                         {formStep===1 && <MembersFormv2 teamMemberPics={teamMemberPics} setTeamMemberPics={setTeamMemberPics}/>}
+                        {formStep>=2 && <Preview/>}
 
                             
                             <Stack direction="row" spacing={4} align="center">

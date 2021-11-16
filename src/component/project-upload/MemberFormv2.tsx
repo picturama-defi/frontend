@@ -25,11 +25,9 @@ import {
   
   import { CloseButton } from "@chakra-ui/react"
 
-  import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
+  import { useFieldArray, useFormContext, useWatch, Controller } from "react-hook-form";
 
-  interface teamMemberPicsProps{
-      [key : number] : any
-  }
+
 const MembersFormv2 = ({teamMemberPics, setTeamMemberPics}: any) => {
 
     const { register, unregister, handleSubmit, watch, formState: { errors, isValid }, setValue, control  } = useFormContext();
@@ -38,7 +36,6 @@ const MembersFormv2 = ({teamMemberPics, setTeamMemberPics}: any) => {
         name: "team", // unique name for your Field Array
       });
   
-    //   const [teamMemberPics, setTeamMemberPics] = useState<teamMemberPicsProps>({});
 
     const addTeamMember = () => {
         console.log("Adding team member")
@@ -56,6 +53,7 @@ const MembersFormv2 = ({teamMemberPics, setTeamMemberPics}: any) => {
             setTeamMemberPics(rest)
             remove(index)}
     }
+
     const checkAnyErrors = () => {
         return fields.some((item: any, index: number) => {
             if(Object.keys(errors).length>0)
@@ -72,35 +70,30 @@ const MembersFormv2 = ({teamMemberPics, setTeamMemberPics}: any) => {
         reader.onloadend = () => {
           var image: any = new Image();
            image.src = reader.result
-           setTeamMemberPics((prevPics: any) => ({...prevPics,[picIndex]:  image.src}))
-        //   console.log(reader.result);
+           
           let extension = file.type;
           if (!(extension == 'image/jpg' || extension == 'image/jpeg')){
             alert('Only JPG/JPEG format is allowed');
-            return;
+            setValue(`team[${picIndex}].photo`, '');
+            return false;
           }
         
-        //   image.onload = () => {
-        //     if(image.width>1480 || image.width<1240 || image.height>2640 || image.height<2320) {
-        //       alert('Maximum size allowed is 480*640 pixels.\nMinimum size allowed is 240*320 pixels')
-         
-        //       return
-        //     }
-        //     if(file.size>150*1024 || file.size<2*1024) {
-        //       alert('Maximum file size allowed is 150kB\nMinimum file size allowed is 2KB')
-      
-        //       return
-        //     }
-        // }
+          image.onload = () => {
+            // if(image.width>1720 || image.width<240 || image.height>1940 || image.height<320) {
+            //   alert('Maximum size allowed is 480*640 pixels.\nMinimum size allowed is 240*320 pixels')
+            //   setValue(`team[${picIndex}].photo`, '');
+            //   return false;
+            // }
+            // if(file.size>151*1024 || file.size<2*1024) {
+            //   alert('Maximum file size allowed is 150kB\nMinimum file size allowed is 2KB')
+            //   setValue(`team[${picIndex}].photo`, '');
+            //   return false;
+            // }
+            // setValue(`team[${picIndex}].photo`, JSON.stringify(reader.result))
+            setTeamMemberPics((prevPics: any) => ({...prevPics,[picIndex]:  image.src}))
+        }
     }
-        //     that.setState({
-        //       file: file,
-        //       imagePreviewUrl: reader.result
-        //     },()=>{
-        //       that.props.changeImage(that.state.imagePreviewUrl, that.state.file)
-        //     });
-        //   }
-        // }
+       
          reader.readAsDataURL(file);
       }
     return (
@@ -126,10 +119,27 @@ const MembersFormv2 = ({teamMemberPics, setTeamMemberPics}: any) => {
                                                                    
                                                                    {teamMemberPics[index] && <img src={teamMemberPics[index]} alt={`Team member ${index} image`} />}
                                                                     {console.log("Team member array is: ", teamMemberPics)}
+                                                                   
                                                                     <FormControl id={`team[${index}].photo`}>
                                                                         <FormLabel>Upload team member Picture</FormLabel>
-                                                                        <Input type="file" {...register(`team[${index}].photo`, { required: true })} placeholder={`Team Member ${index} photo`} onChange={(e: any) => (handleImageChange(e, index))}  />
-                                                                
+                                                                                {/* <Controller
+                                                                                    control={control}
+                                                                                    name="test"
+                                                                                    render={({
+                                                                                        field: { onChange, onBlur, value, name, ref },
+                                                                                        fieldState: { invalid, isTouched, isDirty, error },
+                                                                                        formState,
+                                                                                    }) => (
+                                                                                        <Input 
+                                                                                        type="file" 
+                                                                                        value={teamMemberPics[index]}
+                                                                                        placeholder={`Team Member ${index} photo`}
+                                                                                         onChange={(e: any) => (onChange(handleImageChange(e, index)))}  />
+                                                                                         
+                                                                                    )}
+                                                                            /> */}
+                                                                           <Input type="file" {...register(`team[${index}].photo`, { required: true })} placeholder={`Team Member ${index} photo`} onChange={(e: any) => (handleImageChange(e, index))}  />
+                                                                 
                                                                                     {errors[`team[${index}].photo`] && <span>This field is required</span>}
                                                                         
                                                                     </FormControl>
