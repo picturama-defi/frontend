@@ -9,11 +9,14 @@ import { useForm, useFieldArray, FormProvider, useFormContext } from "react-hook
 import ProjectForm from './ProjectForm';
 import MembersFormv2 from './MemberFormv2';
 
+interface teamMemberPicsProps{
+    [key : number] : any
+}
 
 const UploadForm = () => {
    const [formStep, setFormStep] = useState(() => 0);
     // const [teamDetails, setTeamDetails] = useState(() => [{ name: "", role : "", place: "", about: "", linkedIn: ""}]);
-    const [teamDetails, setTeamDetails] = useState<any>([]);
+    const [teamMemberPics, setTeamMemberPics] = useState<teamMemberPicsProps>({});
     // const { register, unregister, handleSubmit, watch, formState: { errors, isValid }, setValue,  } = useForm({mode: "all"});
     const methods = useForm({mode: "all",  defaultValues: {
         team: [{ name: "", role: "" }]
@@ -47,7 +50,7 @@ const UploadForm = () => {
                     <Header />
                     <Stack bg="brand.yellow" spacing={3} padding="10">
                         {formStep===0 && <ProjectForm />}
-                        {formStep===1 && <MembersFormv2 />}
+                        {formStep===1 && <MembersFormv2 teamMemberPics={teamMemberPics} setTeamMemberPics={setTeamMemberPics}/>}
 
                             
                             <Stack direction="row" spacing={4} align="center">
