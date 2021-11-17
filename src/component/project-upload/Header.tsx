@@ -2,6 +2,7 @@ import { Flex, Button, Center, Box, Heading } from "@chakra-ui/react";
 import LogoWithTitle from "../common/LogoWithTitle";
 import { useRouter } from "next/dist/client/router";
 
+import ConnectWallet from "../common/ConnectWallet";
 const Header = () => {
   const router = useRouter();
 
@@ -34,6 +35,7 @@ const Header = () => {
           >
             UPLOAD PROJECT
           </Box>
+          <ConnectWallet variant="brand" />
         </Center>
       </Box>
     </>

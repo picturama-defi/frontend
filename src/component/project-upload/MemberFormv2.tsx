@@ -112,12 +112,12 @@ const MembersFormv2 = ({teamMemberPics, setTeamMemberPics}: any) => {
                                 
                                                                     <FormControl id={`team[${index}].name`}>
                                                                         <FormLabel>Team member Name</FormLabel>
-                                                                        <Input   {...register(`team[${index}].name`, { required: true })} placeholder={`Team Member ${index} name`} />
+                                                                        <Input   {...register(`team[${index}].name`, { required: true })} placeholder={`Team Member name`} />
                                                                                                     
                                                                         {errors[`team[${index}].name`]?.type === 'required' && <span>This field is required</span>}
                                                                     </FormControl>
                                                                    
-                                                                   {teamMemberPics[index] && <img src={teamMemberPics[index]} alt={`Team member ${index} image`} />}
+                                                                   {teamMemberPics[index] && <img src={teamMemberPics[index]} alt={`Team member image`} />}
                                                                     {console.log("Team member array is: ", teamMemberPics)}
                                                                    
                                                                     <FormControl id={`team[${index}].photo`}>
@@ -138,32 +138,32 @@ const MembersFormv2 = ({teamMemberPics, setTeamMemberPics}: any) => {
                                                                                          
                                                                                     )}
                                                                             /> */}
-                                                                           <Input type="file" {...register(`team[${index}].photo`, { required: true })} placeholder={`Team Member ${index} photo`} onChange={(e: any) => (handleImageChange(e, index))}  />
+                                                                           <Input type="file" {...register(`team[${index}].photo`, { required: true })} placeholder={`Team Member photo`} onChange={(e: any) => (handleImageChange(e, index))}  />
                                                                  
                                                                                     {errors[`team[${index}].photo`] && <span>This field is required</span>}
                                                                         
                                                                     </FormControl>
                                                                     <FormControl id={`team[${index}].role`}>
                                                                         <FormLabel>What's their role in the project?</FormLabel>
-                                                                        <Input   {...register(`team[${index}].role`, { required: true })} placeholder={`Team Member ${index} role`} />
+                                                                        <Input   {...register(`team[${index}].role`, { required: true })} placeholder={`Team Member role`} />
                                                                         {errors[`team[${index}].name`] && <span>This field is required</span>}
                                                                     </FormControl>
                                                                     <FormControl id={`team[${index}].linkedIn`}>
                                                                         <FormLabel>LinkedIn / Twitter handle</FormLabel>
                                                                         <InputGroup size="sm">
                                                                             <InputLeftAddon children="https://" />
-                                                                            <Input  type="url" {...register(`team[${index}].linkedIn`, { required: true })} placeholder={`Team Member ${index} LinkedIn`} />
+                                                                            <Input  type="url" {...register(`team[${index}].linkedIn`, { required: true })} placeholder={`Team Member LinkedIn`} />
                                                                         </InputGroup>
                                                                         {errors[`team[${index}].linkedIn`] && <span>This field is required</span>}    
                                                                     </FormControl>
                                                                     <FormControl id={`team[${index}].place`}>
                                                                         <FormLabel>Where are they from</FormLabel>
-                                                                        <Input   {...register(`team[${index}].place`, { required: true })} placeholder={`Team Member ${index} place`} />
+                                                                        <Input   {...register(`team[${index}].place`, { required: true })} placeholder={`Team Member place`} />
                                                                         {errors[`team[${index}].place`] && <span>This field is required</span>}
                                                                     </FormControl>
                                                                     <FormControl id={`team[${index}].about`}>
                                                                         <FormLabel>Tell us more about them</FormLabel>
-                                                                        <Textarea {...register(`team[${index}].about`, { required: true })} placeholder={`Team Member ${index} about`}/>
+                                                                        <Textarea {...register(`team[${index}].about`, { required: true })} placeholder={`Team Member about`}/>
                                                                         {errors[`team[${index}].about`] && <span>This field is required</span>}
                                                                     </FormControl>
                                                                 </Box>
@@ -177,9 +177,7 @@ const MembersFormv2 = ({teamMemberPics, setTeamMemberPics}: any) => {
                                      <Button colorScheme="teal" variant="outline" onClick={() => (checkAnyErrors()?alert("Finish data of other team members"):addTeamMember())}>
                                                           Add Team member
                                     </Button>
-                                    <Button colorScheme="teal" variant="outline" onClick={() => {console.log(checkAnyErrors(), errors )}}>
-                                                          Check
-                                    </Button>
+                                   
                     </FormControl>
         </div>
     )

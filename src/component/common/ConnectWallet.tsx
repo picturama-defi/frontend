@@ -1,5 +1,6 @@
 import { Button, Text, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import{ useAppContext} from '../../context/AppContext';
 
 declare global {
   interface Window {
@@ -8,8 +9,8 @@ declare global {
 }
 
 const ConnectWallet = (props: any) => {
-  const [selectedAddress, setSelectedAddress] = useState("");
   const { variant } = props;
+  const [selectedAddress, setSelectedAddress]: any = useAppContext();
 
   useEffect(() => {
     window.ethereum.on("accountsChanged", (res: any) => {

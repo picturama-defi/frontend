@@ -5,16 +5,18 @@ import { extendedTheme } from "../src/theme";
 import Layout from "../src/component/common/Layout";
 import "@fontsource/inter/400.css";
 import "@fontsource/monda/700.css";
-
+import AppWrapper from "../src/context/AppContext";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider theme={extendedTheme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ChakraProvider>
+    <AppWrapper>
+      <ChakraProvider theme={extendedTheme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
+    </AppWrapper>
   );
 }
 

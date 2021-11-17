@@ -14,11 +14,11 @@ const Preview = () => {
     return (
         <div>
             Preview
-            {getValues("projectTitle")}
+            {getValues("title")}
             {/* {getValues("projectScript")} */}
-            {getValues("projectDemoReel")}
-            {getValues("projectTargetFund")}
-            {parse(getValues("projectDescription"))}
+            {getValues("demoReelLink")}
+            {getValues("targetFund")}
+            {parse(getValues("description"))}
         </div>
     )
 }
