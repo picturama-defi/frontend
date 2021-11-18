@@ -22,3 +22,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.ck-editor__editable_inline {
+  max-height: 50vh !important;
+  min-height: 30vh !important;
+}
