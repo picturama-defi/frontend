@@ -1,53 +1,22 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/no-children-prop */
-import React, { useState, useRef, useEffect } from "react";
-import {
-  Input,
-  Stack,
-  Textarea,
-  InputGroup,
-  InputLeftAddon,
-  InputRightAddon,
-} from "@chakra-ui/react";
-import { Box, Flex, Heading, Text, Center, Square } from "@chakra-ui/react";
+
+import { Input, Textarea, InputGroup, InputLeftAddon } from "@chakra-ui/react";
+import { Box, Flex, Heading, Center, Button } from "@chakra-ui/react";
 
 import { SimpleGrid } from "@chakra-ui/react";
 
-import Header from "./Header";
-
-import { Button, ButtonGroup } from "@chakra-ui/react";
-
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-} from "@chakra-ui/react";
-
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from "@chakra-ui/react";
+import { FormControl, FormLabel } from "@chakra-ui/react";
 
 import { CloseButton } from "@chakra-ui/react";
 
-import {
-  useFieldArray,
-  useFormContext,
-  useWatch,
-  Controller,
-} from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 
-const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
+const MembersForm = ({ teamMemberPics, setTeamMemberPics }: any) => {
   const {
     register,
-    unregister,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid },
+    formState: { errors },
     setValue,
     control,
   } = useFormContext();
@@ -60,7 +29,7 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
 
   const addTeamMember = () => {
     console.log("Adding team member");
-    append({ name: "", role: "", about: ", place: ", linkedIn: "", photo: "" });
+    append({ name: "", role: "", about: "", linkedIn: "", photo: "" });
   };
 
   const removeTeamMember = (index: any) => {
@@ -161,28 +130,24 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                 </FormControl>
 
                 {teamMemberPics[index] && (
-                  <img src={teamMemberPics[index]} alt={`Team member image`} />
+                  <Box mt="5" width="100%">
+                    <Center>
+                      <img
+                        src={teamMemberPics[index]}
+                        alt={`Team member image`}
+                        style={{
+                          width: "200px",
+                          height: "200px",
+                          borderRadius: "100%",
+                        }}
+                      />
+                    </Center>
+                  </Box>
                 )}
                 {console.log("Team member array is: ", teamMemberPics)}
 
                 <FormControl id={`team[${index}].photo`}>
                   <FormLabel mt="5">Upload team member Picture</FormLabel>
-                  {/* <Controller
-                                                                                    control={control}
-                                                                                    name="test"
-                                                                                    render={({
-                                                                                        field: { onChange, onBlur, value, name, ref },
-                                                                                        fieldState: { invalid, isTouched, isDirty, error },
-                                                                                        formState,
-                                                                                    }) => (
-                                                                                        <Input 
-                                                                                        type="file" 
-                                                                                        value={teamMemberPics[index]}
-                                                                                        placeholder={`Team Member ${index} photo`}
-                                                                                         onChange={(e: any) => (onChange(handleImageChange(e, index)))}  />
-                                                                                         
-                                                                                    )}
-                                                                            /> */}
                   <Input
                     variant="pinkbg"
                     p="1"
@@ -215,7 +180,6 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                     <InputLeftAddon children="https://" />
                     <Input
                       variant="pinkbg"
-                      type="url"
                       {...register(`team[${index}].linkedIn`, {
                         required: true,
                       })}
@@ -273,4 +237,4 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
   );
 };
 
-export default MembersFormv2;
+export default MembersForm;

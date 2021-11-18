@@ -1,18 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Input, Stack } from "@chakra-ui/react";
-import { Box, Flex, HStack, Text } from "@chakra-ui/react";
+import React, { useState, useRef } from "react";
+import { Stack } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 import Header from "./Header";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
-import {
-  useForm,
-  useFieldArray,
-  FormProvider,
-  useFormContext,
-} from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import ProjectForm from "./ProjectForm";
-import MembersFormv2 from "./MemberFormv2";
+import MembersForm from "./MemberForm";
 import Preview from "./Preview";
 
 interface teamMemberPicsProps {
@@ -21,22 +16,15 @@ interface teamMemberPicsProps {
 
 const UploadForm = () => {
   const [formStep, setFormStep] = useState(() => 0);
-  // const [teamDetails, setTeamDetails] = useState(() => [{ name: "", role : "", place: "", about: "", linkedIn: ""}]);
+
   const [teamMemberPics, setTeamMemberPics] = useState<teamMemberPicsProps>({});
-  // const { register, unregister, handleSubmit, watch, formState: { errors, isValid }, setValue,  } = useForm({mode: "all"});
+
   const methods = useForm({
     mode: "all",
     defaultValues: {
       team: [{ name: "", role: "" }],
     },
   });
-  // const {fields, } = useFieldArray()
-
-  // useEffect(() => {
-  //     register('input')
-  //   });
-
-  const renderButton = () => {};
 
   const nextStep = () => {
     setFormStep((prevStep: number) => prevStep + 1);
@@ -71,7 +59,7 @@ const UploadForm = () => {
         <Stack bg="brand.yellow" padding="20" pt="5">
           {formStep === 0 && <ProjectForm />}
           {formStep === 1 && (
-            <MembersFormv2
+            <MembersForm
               teamMemberPics={teamMemberPics}
               setTeamMemberPics={setTeamMemberPics}
             />

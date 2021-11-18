@@ -23,7 +23,7 @@ const Header = () => {
           justifyContent="space-between"
         >
           <LogoWithTitle />
-         
+          <ConnectWallet variant="brand" />
         </Flex>
         <Center>
           <Box
@@ -35,7 +35,6 @@ const Header = () => {
           >
             UPLOAD PROJECT
           </Box>
-          <ConnectWallet variant="brand" />
         </Center>
       </Box>
     </>
