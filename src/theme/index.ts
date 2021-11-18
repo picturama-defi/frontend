@@ -57,6 +57,44 @@ const components = {
       },
     },
   },
+  Input: {
+    variants: {
+      brand: {
+        field: {
+          border: "1px solid",
+          borderColor: "black",
+          color: "black",
+          bg: "brand.yellow",
+          _focus: {
+            borderColor: "black",
+          },
+          _hover: {
+            borderColor: "black",
+          },
+          _placeholder: {
+            color: "#666",
+          },
+        },
+      },
+      pinkbg: {
+        field: {
+          border: "1px solid",
+          borderColor: "black",
+          color: "black",
+          bg: "brand.pink",
+          _focus: {
+            borderColor: "black",
+          },
+          _hover: {
+            borderColor: "black",
+          },
+          _placeholder: {
+            color: "black",
+          },
+        },
+      },
+    },
+  },
 };
 
 export const extendedTheme = extendTheme({ colors, components, fonts });
