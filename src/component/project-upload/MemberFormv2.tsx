@@ -9,7 +9,7 @@ import {
   InputLeftAddon,
   InputRightAddon,
 } from "@chakra-ui/react";
-import { Box, Flex, HStack, Text, Center, Square } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Center, Square } from "@chakra-ui/react";
 
 import { SimpleGrid } from "@chakra-ui/react";
 
@@ -119,7 +119,9 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
   return (
     <div>
       <FormControl id="team members">
-        <FormLabel>Team members</FormLabel>
+        <Box textAlign="center">
+          <Heading fontSize="5xl">Add team members</Heading>
+        </Box>
         <SimpleGrid columns={2}>
           {fields.map((field: any, index: any) => {
             return (
@@ -145,6 +147,7 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                 <FormControl id={`team[${index}].name`}>
                   <FormLabel>Team member Name</FormLabel>
                   <Input
+                    variant="brand"
                     {...register(`team[${index}].name`, { required: true })}
                     placeholder={`Team Member name`}
                   />

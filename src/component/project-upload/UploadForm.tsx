@@ -68,7 +68,7 @@ const UploadForm = () => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <Header />
-        <Stack bg="brand.yellow" padding="20">
+        <Stack bg="brand.yellow" padding="20" pt="5">
           {formStep === 0 && <ProjectForm />}
           {formStep === 1 && (
             <MembersFormv2

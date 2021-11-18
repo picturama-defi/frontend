@@ -30,6 +30,10 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 
+const FieldRequired = () => (
+  <Text color="brand.pink">This field is required</Text>
+);
+
 const ProjectForm = () => {
   const {
     register,
@@ -46,20 +50,11 @@ const ProjectForm = () => {
         <FormControl id="title">
           <FormLabel>Project Title</FormLabel>
           <Input
-            borderColor="black"
-            focusBorderColor="black"
-            _hover={{
-              borderColor: "black",
-            }}
-            _placeholder={{
-              color: "#666",
-            }}
+            variant="brand2"
             {...register("title", { required: true })}
             placeholder="Project Title"
           />
-          {errors.projectTitle?.type === "required" && (
-            <span>This field is required</span>
-          )}
+          {errors.projectTitle?.type === "required" && <FieldRequired />}
         </FormControl>
         <FormControl pt="5" id="description">
           <FormLabel>Describe more about your project</FormLabel>
@@ -76,85 +71,58 @@ const ProjectForm = () => {
               setValue("description", data);
             }}
           />
-          {errors.description && <span>This field is required</span>}
+          {errors.description && <FieldRequired />}
         </FormControl>
         <FormControl pt="5" id="script">
           <FormLabel>Upload Script</FormLabel>
           <Input
-            borderColor="black"
+            variant="brand"
             padding="1"
-            height="10"
-            focusBorderColor="black"
-            _hover={{
-              borderColor: "black",
-            }}
-            _placeholder={{
-              color: "#666",
-            }}
             type="file"
             {...register("script", { required: true })}
             placeholder="Project Script"
           />
-          {errors.script && <span>This field is required</span>}
+          {errors.script && <FieldRequired />}
         </FormControl>
         <FormControl pt="5" id="Demo reel">
           <FormLabel>Link to project demo reel</FormLabel>
           <InputGroup>
             <InputLeftAddon children="https://" />
             <Input
-              borderColor="black"
-              focusBorderColor="black"
-              _hover={{
-                borderColor: "black",
-              }}
-              _placeholder={{
-                color: "#666",
-              }}
+              variant="brand"
               type="url"
               {...register("demoReelLink", { required: true })}
               placeholder="Demo reel link"
             />
           </InputGroup>
-          {errors.demoReelLink && <span>This field is required</span>}
+          {errors.demoReelLink && <FieldRequired />}
         </FormControl>
         <FormControl pt="5" id="Target amount">
           <FormLabel>Enter target project amout</FormLabel>
           <InputGroup>
             <Input
-              borderColor="black"
-              focusBorderColor="black"
-              _hover={{
-                borderColor: "black",
-              }}
-              _placeholder={{
-                color: "#666",
-              }}
+              variant="brand"
               type="number"
               {...register("targetFund", { required: true })}
               placeholder="Target Fund (MATIC)"
             />
             <InputRightAddon children="MATIC" />
           </InputGroup>
-          {errors.targetFund && <span>This field is required</span>}
+          {errors.targetFund && (
+            <Text color="brand.pink">This field is required</Text>
+          )}
         </FormControl>
         <FormControl pt="5" id="Passphrase">
           <FormLabel>Enter passphrase</FormLabel>
           <InputGroup>
             <Input
-              borderColor="black"
-              focusBorderColor="black"
-              _hover={{
-                borderColor: "black",
-              }}
-              _placeholder={{
-                color: "#666",
-              }}
+              variant="brand"
               type="password"
               {...register("passphrase", { required: true })}
               placeholder="Passphrase"
             />
           </InputGroup>
-          {errors.passphrase && <span>This field is required</span>}
+          {errors.passphrase && <FieldRequired />}
         </FormControl>
       </Stack>
     </div>
