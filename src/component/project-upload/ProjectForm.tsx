@@ -50,7 +50,7 @@ const ProjectForm = () => {
         <FormControl id="title">
           <FormLabel>Project Title</FormLabel>
           <Input
-            variant="brand2"
+            variant="brand"
             {...register("title", { required: true })}
             placeholder="Project Title"
           />

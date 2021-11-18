@@ -76,12 +76,12 @@ const components = {
           },
         },
       },
-      brand2: {
+      pinkbg: {
         field: {
           border: "1px solid",
           borderColor: "black",
           color: "black",
-          bg: "brand.yellow",
+          bg: "brand.pink",
           _focus: {
             borderColor: "black",
           },
@@ -89,7 +89,7 @@ const components = {
             borderColor: "black",
           },
           _placeholder: {
-            color: "#666",
+            color: "black",
           },
         },
       },

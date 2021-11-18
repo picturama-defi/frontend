@@ -134,20 +134,23 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                 p="5"
                 m="5"
               >
-                <Flex color="white" width="100%" justifyContent="space-between">
-                  <Text>Team member</Text>
-                  <CloseButton
-                    size="sm"
-                    onClick={() => {
-                      removeTeamMember(index);
-                    }}
-                  />
+                <Flex color="white" width="100%" justifyContent="flex-end">
+                  <Box>
+                    <CloseButton
+                      color="black"
+                      position="relative"
+                      right="right"
+                      onClick={() => {
+                        removeTeamMember(index);
+                      }}
+                    />
+                  </Box>
                 </Flex>
 
                 <FormControl id={`team[${index}].name`}>
                   <FormLabel>Team member Name</FormLabel>
                   <Input
-                    variant="brand"
+                    variant="pinkbg"
                     {...register(`team[${index}].name`, { required: true })}
                     placeholder={`Team Member name`}
                   />
@@ -163,7 +166,7 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                 {console.log("Team member array is: ", teamMemberPics)}
 
                 <FormControl id={`team[${index}].photo`}>
-                  <FormLabel>Upload team member Picture</FormLabel>
+                  <FormLabel mt="5">Upload team member Picture</FormLabel>
                   {/* <Controller
                                                                                     control={control}
                                                                                     name="test"
@@ -181,6 +184,8 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                                                                                     )}
                                                                             /> */}
                   <Input
+                    variant="pinkbg"
+                    p="1"
                     type="file"
                     {...register(`team[${index}].photo`, { required: true })}
                     placeholder={`Team Member photo`}
@@ -192,8 +197,11 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                   )}
                 </FormControl>
                 <FormControl id={`team[${index}].role`}>
-                  <FormLabel>What's their role in the project?</FormLabel>
+                  <FormLabel mt="5">
+                    What's their role in the project?
+                  </FormLabel>
                   <Input
+                    variant="pinkbg"
                     {...register(`team[${index}].role`, { required: true })}
                     placeholder={`Team Member role`}
                   />
@@ -202,10 +210,11 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                   )}
                 </FormControl>
                 <FormControl id={`team[${index}].linkedIn`}>
-                  <FormLabel>LinkedIn / Twitter handle</FormLabel>
-                  <InputGroup size="sm">
+                  <FormLabel mt="5">LinkedIn / Twitter handle</FormLabel>
+                  <InputGroup>
                     <InputLeftAddon children="https://" />
                     <Input
+                      variant="pinkbg"
                       type="url"
                       {...register(`team[${index}].linkedIn`, {
                         required: true,
@@ -218,8 +227,9 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                   )}
                 </FormControl>
                 <FormControl id={`team[${index}].place`}>
-                  <FormLabel>Where are they from</FormLabel>
+                  <FormLabel mt="5">Where are they from</FormLabel>
                   <Input
+                    variant="pinkbg"
                     {...register(`team[${index}].place`, { required: true })}
                     placeholder={`Team Member place`}
                   />
@@ -228,8 +238,9 @@ const MembersFormv2 = ({ teamMemberPics, setTeamMemberPics }: any) => {
                   )}
                 </FormControl>
                 <FormControl id={`team[${index}].about`}>
-                  <FormLabel>Tell us more about them</FormLabel>
+                  <FormLabel mt="5">Tell us more about them</FormLabel>
                   <Textarea
+                    variant="pinkbg"
                     {...register(`team[${index}].about`, { required: true })}
                     placeholder={`Team Member about`}
                   />
