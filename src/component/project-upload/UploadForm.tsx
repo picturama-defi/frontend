@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Input, Stack, Textarea } from "@chakra-ui/react";
+import { Input, Stack } from "@chakra-ui/react";
 import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 
 import Header from "./Header";
@@ -65,66 +65,55 @@ const UploadForm = () => {
 
   const fileInputField = useRef(null);
   return (
-    <Flex>
-      <Box flex="1">
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <Header />
-            <Stack bg="brand.yellow" spacing={3} padding="10">
-              {formStep === 0 && <ProjectForm />}
-              {formStep === 1 && (
-                <MembersFormv2
-                  teamMemberPics={teamMemberPics}
-                  setTeamMemberPics={setTeamMemberPics}
-                />
-              )}
-              {formStep >= 2 && <Preview />}
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <Header />
+        <Stack bg="brand.yellow" padding="20">
+          {formStep === 0 && <ProjectForm />}
+          {formStep === 1 && (
+            <MembersFormv2
+              teamMemberPics={teamMemberPics}
+              setTeamMemberPics={setTeamMemberPics}
+            />
+          )}
+          {formStep >= 2 && <Preview />}
+          <Flex p="5" justifyContent="space-between" flexDirection="row" pt="5">
+            <Button
+              width="200px"
+              colorScheme="teal"
+              variant="outline"
+              onClick={prevStep}
+              visibility={formStep >= 1 ? "visible" : "hidden"}
+            >
+              Back
+            </Button>
 
-              <Stack direction="row" spacing={4} align="center">
-                <Button
-                  colorScheme="teal"
-                  variant="outline"
-                  onClick={prevStep}
-                  display={formStep > 0 ? "block" : "none"}
-                >
-                  Back
-                </Button>
-                <Button
-                  colorScheme="teal"
-                  disabled={!methods.formState.isValid}
-                  variant="solid"
-                  display={formStep < 2 ? "block" : "none"}
-                  onClick={nextStep}
-                >
-                  Next
-                </Button>
-                <Button
-                  type="submit"
-                  colorScheme="teal"
-                  disabled={!methods.formState.isValid}
-                  variant="solid"
-                  display={formStep === 2 ? "block" : "none"}
-                  onClick={() => {}}
-                >
-                  Submit
-                </Button>
-              </Stack>
-            </Stack>
-          </form>
-        </FormProvider>
-        {/* <pre>{JSON.stringify(methods.watch(), null, 2)}</pre> */}
-        {/* <form>
-                    <label>{"label"}</label>
-                    <p>Drag and drop your files anywhere or</p>
-                    <input type="file" ref={fileInputField} />
-                </form> */}
-      </Box>
-    </Flex>
+            <Button
+              width="200px"
+              colorScheme="teal"
+              disabled={!methods.formState.isValid}
+              variant="solid"
+              onClick={nextStep}
+            >
+              Next
+            </Button>
+
+            <Button
+              width="200px"
+              type="submit"
+              colorScheme="teal"
+              disabled={!methods.formState.isValid}
+              variant="solid"
+              onClick={() => {}}
+              visibility={formStep >= 1 ? "visible" : "hidden"}
+            >
+              Submit
+            </Button>
+          </Flex>
+        </Stack>
+      </form>
+    </FormProvider>
   );
 };
-
-const style = `
-
-`;
 
 export default UploadForm;

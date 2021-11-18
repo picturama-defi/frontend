@@ -42,7 +42,7 @@ const ProjectForm = () => {
   } = useFormContext();
   return (
     <div>
-      <Stack bg="brand.yellow" spacing={3} padding="10">
+      <Stack bg="brand.yellow" spacing={3}>
         <FormControl id="title">
           <FormLabel>Project Title</FormLabel>
           <Input
