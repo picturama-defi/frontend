@@ -112,18 +112,6 @@ const ProjectForm = () => {
             <Text color="brand.pink">This field is required</Text>
           )}
         </FormControl>
-        <FormControl pt="5" id="Passphrase">
-          <FormLabel>Enter passphrase</FormLabel>
-          <InputGroup>
-            <Input
-              variant="brand"
-              type="password"
-              {...register("passphrase", { required: true })}
-              placeholder="Passphrase"
-            />
-          </InputGroup>
-          {errors.passphrase && <FieldRequired />}
-        </FormControl>
       </Stack>
     </div>
   );

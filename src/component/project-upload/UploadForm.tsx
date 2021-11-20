@@ -10,6 +10,11 @@ import ProjectForm from "./ProjectForm";
 import MembersForm from "./MemberForm";
 import Preview from "./Preview";
 
+import { getFilms, addFilm } from "../../API/main";
+import { addToIPFS } from "../../API/ipfs";
+
+import { convertToB64 } from "../../helper";
+
 interface teamMemberPicsProps {
   [key: number]: any;
 }
@@ -34,21 +39,33 @@ const UploadForm = () => {
     setFormStep((prevStep: number) => prevStep - 1);
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    let teamB64: any = [];
-    for (let i = 0; i < data.team.length; i++) {
-      let reader = new FileReader();
-      let file = data.team[i].photo[0];
-      console.log("Item photo: ", data.team[i].photo[0]);
-      reader.onloadend = () => {
-        teamB64.push({ ...data.team[i], photo: reader.result });
-      };
+  const inputPassPhrase = () => {
+    return prompt("Enter passphrase");
+  };
 
-      reader.readAsDataURL(file);
+  const onSubmit = async (data: any) => {
+    let teamB64: any = [];
+    const passPhrase = inputPassPhrase();
+    for (let i = 0; i < data.team.length; i++) {
+      const result = await convertToB64(data.team[i].photo[0]);
+      teamB64.push({ ...data.team[i], photo: result });
     }
 
-    console.log("Form submit: ", { ...data, team: teamB64 });
+    console.log("GET FILMS", await getFilms());
+    const resp: any = await addFilm({
+      ...data,
+      team: teamB64,
+      passPhrase,
+      script: await addToIPFS(
+        await convertToB64(data.script[0]),
+        data.script[0].name
+      ),
+    });
+    console.log("Form submit: ", resp);
+    // console.log(
+    //   "UPLOADING IPFS",
+    //   await addToIPFS(await convertToB64(data.script[0]), data.script[0].name)
+    // );
   };
 
   const fileInputField = useRef(null);
