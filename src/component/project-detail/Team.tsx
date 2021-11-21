@@ -1,25 +1,7 @@
 import { Box, Text, Flex } from "@chakra-ui/react";
+import router from "next/router";
 
-const teamMembers = [
-  {
-    name: "Hoyt Dwyer",
-    designation: "WRITER/DIRECTOR",
-    location: "LOS ANGELES/CA",
-    about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
-    image: "images/hoyt.png",
-  },
-  {
-    name: "Haas Carter",
-    designation: "PRODUCER",
-    location: "LOS ANGELES/CA",
-    about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
-    image: "images/haas.png",
-  },
-];
-
-function Team() {
+function Team({ team }: any) {
   return (
     <Box paddingBottom="500px" bg="black" color="brand.yellow" p="20" pt="0">
       <Box borderTop="1px solid yellow">
@@ -29,7 +11,7 @@ function Team() {
         <Box mt="10">
           {/* eslint-disable-next-line @next/next/no-img-element*/}
           <Flex flexDirection="row">
-            {teamMembers.map((teamMember) => (
+            {team.map((teamMember: any) => (
               <MemberTile detail={teamMember} key={teamMember.name} />
             ))}
           </Flex>
@@ -44,20 +26,22 @@ const MemberTile = (props: any) => {
   return (
     <Box mr="10" borderBottom="1px solid yellow" width="220px">
       {/*eslint-disable-next-line @next/next/no-img-element*/}
-      <img width="100%" alt="image of a person" src={detail.image}></img>
+      <img width="100%" alt="image of a person" src={detail.photo}></img>
       <Text mt="10" fontWeight="bold" fontSize="20">
         {detail.name.toUpperCase()}
       </Text>
       <Text mt="3" fontWeight="bold" fontSize="12">
-        {detail.designation}
+        {detail.role}
       </Text>
       <Text fontWeight="bold" fontSize="12">
-        {detail.location}
+        {detail.place}
       </Text>
       <Text mt="3">{detail.about}</Text>
-      <Text pb="3" mt="3">
-        {`Check out linkedin ->`}
-      </Text>
+      <a href={detail.linkedin} target="_blank" rel="noopener noreferrer">
+        <Text pb="3" mt="3">
+          {`Check out linkedin ->`}
+        </Text>
+      </a>
     </Box>
   );
 };

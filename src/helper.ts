@@ -9,3 +9,7 @@ export const convertToB64 = (file: any) => {
     reader.readAsDataURL(file);
   });
 };
+
+export const extractVimeoId = (link: string) => {
+  return link.split("/")[link.split("/").length - 1];
+};

@@ -50,8 +50,17 @@ const UploadForm = () => {
       const result = await convertToB64(data.team[i].photo[0]);
       teamB64.push({ ...data.team[i], photo: result });
     }
+    console.log("Form data: ", {
+      ...data,
+      team: teamB64,
+      passPhrase,
+      script: await addToIPFS(
+        await convertToB64(data.script[0]),
+        data.script[0].name
+      ),
+    });
 
-    console.log("GET FILMS", await getFilms());
+    // console.log("GET FILMS", await getFilms());
     const resp: any = await addFilm({
       ...data,
       team: teamB64,
@@ -61,11 +70,16 @@ const UploadForm = () => {
         data.script[0].name
       ),
     });
-    console.log("Form submit: ", resp);
-    // console.log(
-    //   "UPLOADING IPFS",
-    //   await addToIPFS(await convertToB64(data.script[0]), data.script[0].name)
-    // );
+    console.log("Form data: ", {
+      ...data,
+      team: teamB64,
+      passPhrase,
+      script: await addToIPFS(
+        await convertToB64(data.script[0]),
+        data.script[0].name
+      ),
+    });
+    //TODO: Succesful submission and error validation on UI.
   };
 
   const fileInputField = useRef(null);

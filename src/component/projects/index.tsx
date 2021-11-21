@@ -7,7 +7,7 @@ import ProjectsList from "./ProjectsList";
 import { highlightedProject } from "../../hardCodedData";
 
 function Projects() {
-  const tabs = ["All Projects", "Invested Projects"];
+  const tabs = ["All Listed Projects", "Invested Projects", "All Projects"];
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [descriptionBoxHeight, setDescriptionBoxHeight] = useState(0);
 
@@ -28,13 +28,21 @@ function Projects() {
     <>
       <Header />
       <Tabs selectedTab={selectedTab} onSelect={handleTabSelect} tabs={tabs} />
-      <FeaturedProjectsTitle />
-      <VideoContainer
-        showDescription={true}
+      {selectedTab === "All Listed Projects" && (
+        <>
+          <FeaturedProjectsTitle />
+          <VideoContainer
+            showDescription={true}
+            descriptionBoxHeight={descriptionBoxHeight}
+            details={highlightedProject}
+          />
+        </>
+      )}
+
+      <ProjectsList
+        selectedTab={selectedTab}
         descriptionBoxHeight={descriptionBoxHeight}
-        details={highlightedProject}
       />
-      <ProjectsList descriptionBoxHeight={descriptionBoxHeight} />
     </>
   );
 }

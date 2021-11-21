@@ -1,20 +1,23 @@
 import Header from "./Header";
 import VideoContainer from "../common/VideoContainer";
-import { highlightedProject } from "../../hardCodedData";
 import MoveText from "./MoveText";
 import StakingInfo from "./StakingInfo";
 import Description from "./Description";
 import Team from "./Team";
 
 function ProjectDetail(props: any) {
+  const { details } = props;
+
+  if (!details) return null;
+
   return (
     <>
-      <Header details={highlightedProject} />
-      <VideoContainer showDescription={false} details={highlightedProject} />
-      <MoveText text={`${highlightedProject.percentageFunded}% funded`} />
+      <Header details={details} />
+      <VideoContainer showDescription={false} details={details} />
+      <MoveText text={`${details?.percentageFunded}% funded`} />
       <StakingInfo />
-      <Description />
-      <Team />
+      <Description description={details?.description} />
+      <Team team={details?.team} />
     </>
   );
 }

@@ -1,8 +1,11 @@
 import { Flex, Box, Center } from "@chakra-ui/layout";
 
+import { useAppContext } from "../../context/AppContext";
+import { ADMIN_PUBLIC_ADDRESS } from "../../config";
+
 function Tabs(props: any) {
   const { tabs, onSelect, selectedTab } = props;
-
+  const [selectedAddress]: any = useAppContext();
   const handleTabClick = (selectedTab: string) => () => {
     onSelect(selectedTab);
   };
@@ -40,9 +43,18 @@ function Tabs(props: any) {
         width="100%"
       >
         <Flex flexDirection="row" justifyContent="space-around">
-          {tabs.map((tab: string) => (
-            <Tab tab={tab} key={tab} />
-          ))}
+          {tabs.map((tab: string) => {
+            if (tab === "Invested Projects") {
+              return selectedAddress ? <Tab tab={tab} key={tab} /> : "";
+            }
+            if (tab === "All Projects")
+              return selectedAddress === ADMIN_PUBLIC_ADDRESS ? (
+                <Tab tab={tab} key={tab} />
+              ) : (
+                ""
+              );
+            return <Tab tab={tab} key={tab} />;
+          })}
         </Flex>
       </Box>
     </>

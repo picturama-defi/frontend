@@ -28,7 +28,6 @@ const MembersForm = ({ teamMemberPics, setTeamMemberPics }: any) => {
   );
 
   const addTeamMember = () => {
-    console.log("Adding team member");
     append({ name: "", role: "", about: "", linkedIn: "", photo: "" });
   };
 
@@ -144,7 +143,6 @@ const MembersForm = ({ teamMemberPics, setTeamMemberPics }: any) => {
                     </Center>
                   </Box>
                 )}
-                {console.log("Team member array is: ", teamMemberPics)}
 
                 <FormControl id={`team[${index}].photo`}>
                   <FormLabel mt="5">Upload team member Picture</FormLabel>

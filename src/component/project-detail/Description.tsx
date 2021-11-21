@@ -1,6 +1,7 @@
 import { Box, Text, Flex, Button } from "@chakra-ui/react";
+import parse from "html-react-parser";
 
-function Description() {
+function Description({ description }: any) {
   return (
     <>
       <Box color="brand.yellow" p="20">
@@ -8,7 +9,7 @@ function Description() {
         <Text pt="3" fontWeight="bold">
           PROJECT DETAILS
         </Text>
-        <Text fontSize="30" pt="3">
+        {/* <Text fontSize="30" pt="3">
           Plumb is a car salesman in the dying town of Kitchafoonee, GA who must
           make a commission before the end of the day when the loan sharks will
           come to collect.
@@ -30,7 +31,8 @@ function Description() {
           car at a crippling discount. Plumb is left indebted to his employer to
           save both his and his daughter’s reputation within the close-knit
           community. Plumb is left broke and hopeless. He is meek.
-        </Text>
+        </Text> */}
+        <Text>{parse(description)}</Text>
         <Flex pt="10">
           <Button variant="brand3">PROJECT WEBSITE</Button>
           <Button ml="5" variant="brand3">
