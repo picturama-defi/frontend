@@ -1,9 +1,11 @@
 import ProjectDetail from "../../src/component/project-detail";
 
 import { useRouter } from "next/router";
+import { useAppContext } from "../../src/context/AppContext";
 
 import { highlightedProject, projectsList } from "../../src/hardCodedData";
 function ProjectDetailPage() {
+  const [selectedAddress, setSelectedAddress]: any = useAppContext();
   const router = useRouter();
   const { id } = router.query;
   if (!id) return null;
