@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Box, Center } from "@chakra-ui/layout";
 import VideoContainer from "../common/VideoContainer";
 import ProjectsList from "./ProjectsList";
-import { highlightedProject } from "../../hardCodedData";
 import { getFilms } from "../../API/main";
 import { useAppContext } from "../../context/AppContext";
 import { ADMIN_PUBLIC_ADDRESS } from "../../config";

@@ -1,20 +1,38 @@
 import ProjectDetail from "../../src/component/project-detail";
 
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
-import { highlightedProject, projectsList } from "../../src/hardCodedData";
+import { getFilm } from "../../src/API/main";
+import { useAppContext } from "../../src/context/AppContext";
+import { ADMIN_PUBLIC_ADDRESS } from "../../src/config";
+
 function ProjectDetailPage() {
   const router = useRouter();
   const { id } = router.query;
-  if (!id) return null;
+  const [project, setProject] = useState(null);
+  const [selectedAddress]: any = useAppContext();
 
-  const projectToShow = projectsList.find((item: any) => {
-    return item.id == id;
-  });
-  console.log("Projects to show", projectToShow);
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+
+    getFilm(id).then((res) => {
+      setProject(res);
+    });
+  }, [id]);
+
+  if (!project) {
+    return null;
+  }
+
+  const isAdmin =
+    selectedAddress?.toLowerCase() === ADMIN_PUBLIC_ADDRESS.toLowerCase();
+
   return (
     <>
-      <ProjectDetail details={projectToShow} />
+      <ProjectDetail isAdmin={isAdmin} details={project} />
     </>
   );
 }

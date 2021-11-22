@@ -21,3 +21,14 @@ export const addFilm = async (data: any) => {
     body: JSON.stringify(data),
   });
 };
+
+export const getFilm = async (id: any) => {
+  const response = await fetch(`${BASE_URL}/film?id=${id}`, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json()
+};

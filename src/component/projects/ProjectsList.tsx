@@ -3,11 +3,14 @@ import parse from "html-react-parser";
 import { extractVimeoId } from "../../helper";
 import { Spinner } from "@chakra-ui/spinner";
 import Link from "next/link";
+import { useAppContext } from "../../context/AppContext";
 
 function ProjectsList(props: any) {
   const { descriptionBoxHeight, projectsList } = props;
 
   const isLoading = projectsList.length === 0;
+
+  const [selectedAddress]: any = useAppContext();
 
   return (
     <>
@@ -46,12 +49,12 @@ function Project(props: any) {
       description,
       imageUrl,
       demoReelLink,
-      id,
+      _id,
     },
   } = props;
 
   return (
-    <Link href={`/project-details/${id}/`} passHref>
+    <Link href={`/project-details/${_id}/`} passHref>
       <Box
         cursor="pointer"
         bg="brand.yellow"
