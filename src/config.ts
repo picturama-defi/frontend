@@ -1,3 +1,3 @@
 export const BASE_URL = "http://bb15-103-147-209-5.ngrok.io";
 export const ADMIN_PUBLIC_ADDRESS =
-  "0x23dd6b9005517cf909aabc9e4cd03d9bdd73ba15";
+  "0xB6ccdEcd1a433a39911D6C5cBfEbC29Ee6FE85FF";

@@ -33,6 +33,9 @@ function Tabs(props: any) {
     );
   };
 
+  console.log(selectedAddress)
+  console.log(ADMIN_PUBLIC_ADDRESS)
+
   return (
     <>
       <style>{style}</style>
@@ -48,7 +51,7 @@ function Tabs(props: any) {
               return selectedAddress ? <Tab tab={tab} key={tab} /> : "";
             }
             if (tab === "All Projects")
-              return selectedAddress === ADMIN_PUBLIC_ADDRESS ? (
+              return selectedAddress.toLowerCase() === ADMIN_PUBLIC_ADDRESS.toLowerCase() ? (
                 <Tab tab={tab} key={tab} />
               ) : (
                 ""

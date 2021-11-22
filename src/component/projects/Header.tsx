@@ -18,9 +18,6 @@ const Header = () => {
           <LogoWithTitle />
           <Center>
             <ConnectWallet variant="brand2" />
-            <Button ml="2" variant="brand2">
-              MENU
-            </Button>
           </Center>
         </Flex>
         <Center>
