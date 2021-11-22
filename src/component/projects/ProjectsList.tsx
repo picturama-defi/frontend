@@ -1,14 +1,16 @@
-import { Box, Text, Heading, Flex } from "@chakra-ui/layout";
-import React, { useState, useEffect } from "react";
-
+import { Box, Text, Heading, Flex, Center } from "@chakra-ui/layout";
 import parse from "html-react-parser";
-
 import { extractVimeoId } from "../../helper";
-
+import { Spinner } from "@chakra-ui/spinner";
 import Link from "next/link";
+import { useAppContext } from "../../context/AppContext";
 
 function ProjectsList(props: any) {
   const { descriptionBoxHeight, projectsList } = props;
+
+  const isLoading = projectsList.length === 0;
+
+  const [selectedAddress]: any = useAppContext();
 
   return (
     <>
@@ -20,6 +22,17 @@ function ProjectsList(props: any) {
         flex="1"
         bg="brand.yellow"
       >
+        {isLoading && (
+          <Center pt="20">
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="black"
+              size="xl"
+            />
+          </Center>
+        )}
         {projectsList.map((project: any) => (
           <Project details={project} key={project.title} />
         ))}
@@ -36,12 +49,12 @@ function Project(props: any) {
       description,
       imageUrl,
       demoReelLink,
-      id,
+      _id,
     },
   } = props;
 
   return (
-    <Link href={`/project-details/${id}/`} passHref>
+    <Link href={`/project-details/${_id}/`} passHref>
       <Box
         cursor="pointer"
         bg="brand.yellow"
