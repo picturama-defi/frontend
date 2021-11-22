@@ -6,12 +6,15 @@ import VideoContainer from "../common/VideoContainer";
 import ProjectsList from "./ProjectsList";
 import { highlightedProject } from "../../hardCodedData";
 import { getFilms } from "../../API/main";
+import { useAppContext } from "../../context/AppContext";
+import { ADMIN_PUBLIC_ADDRESS } from "../../config";
 
 function Projects() {
   const tabs = ["All Listed Projects", "Invested Projects", "All Projects"];
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [descriptionBoxHeight, setDescriptionBoxHeight] = useState(0);
   const [projectsList, setProjectsList]: any = useState(() => []);
+  const [selectedAddress]: any = useAppContext();
 
   const handleTabSelect = (tabToChangeTo: string) => {
     setSelectedTab(tabToChangeTo);
@@ -52,6 +55,11 @@ function Projects() {
     }
   }, [selectedTab]);
 
+  const isAdmin =
+    selectedAddress?.toLowerCase() === ADMIN_PUBLIC_ADDRESS.toLowerCase();
+
+  const isSignedIn = !!selectedAddress;
+
   return (
     <>
       <Box minHeight="100vh" display="flex" flexDirection="column">
@@ -60,6 +68,8 @@ function Projects() {
           selectedTab={selectedTab}
           onSelect={handleTabSelect}
           tabs={tabs}
+          isAdmin={isAdmin}
+          isSignedIn={isSignedIn}
         />
         {selectedTab === "All Listed Projects" && (
           <>
