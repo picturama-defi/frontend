@@ -1,7 +1,6 @@
 import { Box, Text, Heading, Flex } from "@chakra-ui/layout";
 import React, { useState, useEffect } from "react";
 
-import { getFilms } from "../../API/main";
 import parse from "html-react-parser";
 
 import { extractVimeoId } from "../../helper";
@@ -9,30 +8,7 @@ import { extractVimeoId } from "../../helper";
 import Link from "next/link";
 
 function ProjectsList(props: any) {
-  const { descriptionBoxHeight, selectedTab } = props;
-  const [projectsList, setProjectsList]: any = useState(() => []);
-
-  useEffect(() => {
-    switch (selectedTab) {
-      case "All Listed Projects":
-        getFilms().then((res) => {
-          setProjectsList(res);
-        });
-      case "Invested Projects": {
-        getFilms().then((res) => {
-          setProjectsList(res);
-        });
-      }
-      case "All Projects":
-        getFilms().then((res) => {
-          setProjectsList(res);
-        });
-      default:
-        getFilms().then((res) => {
-          setProjectsList(res);
-        });
-    }
-  }, [selectedTab]);
+  const { descriptionBoxHeight, projectsList } = props;
 
   return (
     <>
