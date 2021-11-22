@@ -17,36 +17,42 @@ function Projects() {
 
   useEffect(() => {
     if (selectedTab !== "All Listed Projects") {
-      setDescriptionBoxHeight(0)
+      setDescriptionBoxHeight(0);
     } else {
       if (document.getElementsByClassName("description-container").length > 0) {
-      const descriptionBoxHeight = document.getElementsByClassName(
-        "description-container"
-      )[0].clientHeight;
-      setDescriptionBoxHeight(descriptionBoxHeight * (3 / 4));
-    }
+        const descriptionBoxHeight = document.getElementsByClassName(
+          "description-container"
+        )[0].clientHeight;
+        setDescriptionBoxHeight(descriptionBoxHeight * (3 / 4));
+      }
     }
   }, [selectedTab]);
 
   return (
     <>
-      <Header />
-      <Tabs selectedTab={selectedTab} onSelect={handleTabSelect} tabs={tabs} />
-      {selectedTab === "All Listed Projects" && (
-        <>
-          <FeaturedProjectsTitle />
-          <VideoContainer
-            showDescription={true}
-            descriptionBoxHeight={descriptionBoxHeight}
-            details={highlightedProject}
-          />
-        </>
-      )}
+      <Box minHeight="100vh" display="flex" flexDirection="column">
+        <Header />
+        <Tabs
+          selectedTab={selectedTab}
+          onSelect={handleTabSelect}
+          tabs={tabs}
+        />
+        {selectedTab === "All Listed Projects" && (
+          <>
+            <FeaturedProjectsTitle />
+            <VideoContainer
+              showDescription={true}
+              descriptionBoxHeight={descriptionBoxHeight}
+              details={highlightedProject}
+            />
+          </>
+        )}
 
-      <ProjectsList
-        selectedTab={selectedTab}
-        descriptionBoxHeight={descriptionBoxHeight}
-      />
+        <ProjectsList
+          selectedTab={selectedTab}
+          descriptionBoxHeight={descriptionBoxHeight}
+        />
+      </Box>
     </>
   );
 }

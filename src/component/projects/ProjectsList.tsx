@@ -1,5 +1,4 @@
 import { Box, Text, Heading, Flex } from "@chakra-ui/layout";
-import { projectsList } from "../../hardCodedData";
 import React, { useState, useEffect } from "react";
 
 import { getFilms } from "../../API/main";
@@ -11,38 +10,43 @@ import Link from "next/link";
 
 function ProjectsList(props: any) {
   const { descriptionBoxHeight, selectedTab } = props;
-  // const [projectsList, setProjectsList]: any = useState(() => []);
+  const [projectsList, setProjectsList]: any = useState(() => []);
 
   useEffect(() => {
-    // switch (selectedTab) {
-    //   case "All Listed Projects":
-    //     getFilms().then((res) => {
-    //       setProjectsList(res);
-    //     });
-    //   case "Invested Projects": {
-    //     getFilms().then((res) => {
-    //       setProjectsList(res);
-    //     });
-    //   }
-    //   case "All Projects":
-    //     getFilms().then((res) => {
-    //       setProjectsList(res);
-    //     });
-    //   default:
-    //     getFilms().then((res) => {
-    //       setProjectsList(res);
-    //     });
-    // }
+    switch (selectedTab) {
+      case "All Listed Projects":
+        getFilms().then((res) => {
+          setProjectsList(res);
+        });
+      case "Invested Projects": {
+        getFilms().then((res) => {
+          setProjectsList(res);
+        });
+      }
+      case "All Projects":
+        getFilms().then((res) => {
+          setProjectsList(res);
+        });
+      default:
+        getFilms().then((res) => {
+          setProjectsList(res);
+        });
+    }
   }, [selectedTab]);
 
   return (
     <>
-      <Box bg="brand.yellow" mt={descriptionBoxHeight + "px"}>
-        <Box p="20">
-          {projectsList.map((project: any) => (
-            <Project details={project} key={project.title} />
-          ))}
-        </Box>
+      <Box
+        position="relative"
+        top={descriptionBoxHeight + "px"}
+        p="10"
+        pt="5"
+        flex="1"
+        bg="brand.yellow"
+      >
+        {projectsList.map((project: any) => (
+          <Project details={project} key={project.title} />
+        ))}
       </Box>
     </>
   );
@@ -79,7 +83,7 @@ function Project(props: any) {
             ></img>
           </Box>
           <Box pl="5" position="relative" width="50%" color="black">
-            <Text>{`${percentageFunded}% funded`}</Text>
+            {percentageFunded && <Text>{`${percentageFunded}% funded`}</Text>}
             <Heading mt="2" size="lg">
               {title}
             </Heading>
