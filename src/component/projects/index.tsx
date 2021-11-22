@@ -43,17 +43,25 @@ function Projects() {
   }, [selectedTab]);
 
   useEffect(() => {
+    setHeightOfDescriptionContainer();
+  }, [projectsList]);
+
+  useEffect(() => {
     if (selectedTab !== "All Listed Projects") {
       setDescriptionBoxHeight(0);
     } else {
-      if (document.getElementsByClassName("description-container").length > 0) {
-        const descriptionBoxHeight = document.getElementsByClassName(
-          "description-container"
-        )[0].clientHeight;
-        setDescriptionBoxHeight(descriptionBoxHeight * (3 / 4));
-      }
+      setHeightOfDescriptionContainer();
     }
   }, [selectedTab]);
+
+  const setHeightOfDescriptionContainer = () => {
+    if (document.getElementsByClassName("description-container").length > 0) {
+      const descriptionBoxHeight = document.getElementsByClassName(
+        "description-container"
+      )[0].clientHeight;
+      setDescriptionBoxHeight(descriptionBoxHeight * (3 / 4));
+    }
+  };
 
   const isAdmin =
     selectedAddress?.toLowerCase() === ADMIN_PUBLIC_ADDRESS.toLowerCase();
@@ -71,13 +79,13 @@ function Projects() {
           isAdmin={isAdmin}
           isSignedIn={isSignedIn}
         />
-        {selectedTab === "All Listed Projects" && (
+        {selectedTab === "All Listed Projects" && projectsList.length > 0 && (
           <>
             <FeaturedProjectsTitle />
             <VideoContainer
               showDescription={true}
               descriptionBoxHeight={descriptionBoxHeight}
-              details={highlightedProject}
+              details={projectsList[0]}
             />
           </>
         )}
