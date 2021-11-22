@@ -55,6 +55,12 @@ const components = {
         fontSize: "10px",
         borderRadius: "20px",
       },
+      yellow: {
+        bg: "yellow",
+        color: "black",
+        fontSize: "10px",
+        borderRadius: "20px",
+      },
     },
   },
   Input: {

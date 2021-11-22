@@ -28,7 +28,6 @@ const MembersForm = ({ teamMemberPics, setTeamMemberPics }: any) => {
   );
 
   const addTeamMember = () => {
-    console.log("Adding team member");
     append({ name: "", role: "", about: "", linkedIn: "", photo: "" });
   };
 
@@ -144,7 +143,6 @@ const MembersForm = ({ teamMemberPics, setTeamMemberPics }: any) => {
                     </Center>
                   </Box>
                 )}
-                {console.log("Team member array is: ", teamMemberPics)}
 
                 <FormControl id={`team[${index}].photo`}>
                   <FormLabel mt="5">Upload team member Picture</FormLabel>
@@ -174,13 +172,13 @@ const MembersForm = ({ teamMemberPics, setTeamMemberPics }: any) => {
                     <span>This field is required</span>
                   )}
                 </FormControl>
-                <FormControl id={`team[${index}].linkedIn`}>
+                <FormControl id={`team[${index}].linkedin`}>
                   <FormLabel mt="5">LinkedIn / Twitter handle</FormLabel>
                   <InputGroup>
                     <InputLeftAddon children="https://" />
                     <Input
                       variant="pinkbg"
-                      {...register(`team[${index}].linkedIn`, {
+                      {...register(`team[${index}].linkedin`, {
                         required: true,
                       })}
                       placeholder={`Team Member LinkedIn`}
@@ -216,6 +214,7 @@ const MembersForm = ({ teamMemberPics, setTeamMemberPics }: any) => {
             );
           })}
         </SimpleGrid>
+
         <Box textAlign="center">
           <Button
             m="5"
@@ -233,6 +232,18 @@ const MembersForm = ({ teamMemberPics, setTeamMemberPics }: any) => {
           </Button>
         </Box>
       </FormControl>
+      {/* <FormControl pt="5" id="Passphrase">
+        <FormLabel>Enter passphrase</FormLabel>
+        <InputGroup>
+          <Input
+            variant="brand"
+            type="password"
+            {...register("passphrase", { required: true })}
+            placeholder="Passphrase"
+          />
+        </InputGroup>
+        {errors.passphrase && <FieldRequired />}
+      </FormControl> */}
     </div>
   );
 };

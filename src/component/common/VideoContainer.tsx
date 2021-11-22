@@ -2,22 +2,32 @@ import { Box, Center, VStack, Button } from "@chakra-ui/react";
 import PlayButton from "./PlayButton";
 import VideoModal from "./VideoModal";
 import { useState } from "react";
+import parse from "html-react-parser";
+import { extractVimeoId } from "../../helper";
 
 const VideoContainer = (props: any) => {
   const { details, descriptionBoxHeight, showDescription } = props;
+
+  const videoId = extractVimeoId(details.demoReelLink);
+
+  const vimeoLink = `https://player.vimeo.com/video/${videoId}?h=947ea22e11`;
 
   return (
     <>
       <style>{style}</style>
       <Box className="video-container" width="100%">
         <iframe
-          src={`${details.link}&title=0&byline=0&portrait=0&controls=0`}
+          src={`${vimeoLink}&title=0&byline=0&portrait=0&controls=0`}
           allow="autoplay; fullscreen; picture-in-picture"
           width="100%"
           height="100%"
         ></iframe>
         <Box className="description">
-          <VideoOverlay showDescription={showDescription} details={details} />
+          <VideoOverlay
+            videoId={videoId}
+            showDescription={showDescription}
+            details={details}
+          />
         </Box>
         <Box height={`${descriptionBoxHeight}px`} background="black"></Box>
       </Box>
@@ -25,14 +35,16 @@ const VideoContainer = (props: any) => {
   );
 };
 
-const ProjectDetailVideo = () => {
+const ProjectDetailVideo = (props: any) => {
+  const { videoId } = props;
+
   return (
     <>
       <style>{style}</style>
       <Box className="video-container" width="100%">
         <a>
           <iframe
-            src="https://player.vimeo.com/video/391331514?h=947ea22e11&title=0&byline=0&portrait=0"
+            src={`https://player.vimeo.com/video/${videoId}?h=947ea22e11&title=0&byline=0&portrait=0`}
             allow="autoplay; fullscreen; picture-in-picture"
             width="100%"
             height="100%"
@@ -44,7 +56,7 @@ const ProjectDetailVideo = () => {
 };
 
 const VideoOverlay = (props: any) => {
-  const { details, showDescription } = props;
+  const { details, showDescription, videoId } = props;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -61,7 +73,7 @@ const VideoOverlay = (props: any) => {
       <VideoModal
         onClose={onModalClose}
         isOpen={isOpen}
-        modalBody={<ProjectDetailVideo />}
+        modalBody={<ProjectDetailVideo videoId={videoId} />}
       />
       <Box width="8vw" height="8vw">
         <PlayButton onClick={onPlayClick} />
@@ -76,7 +88,7 @@ const VideoOverlay = (props: any) => {
                 fontSize="15px"
                 p="2"
               >
-                {`${details.percentageFunded}% funded`}
+                {`${details.percentageFunded || 0}% funded`}
               </Box>
               <Box
                 position="relative"
@@ -85,6 +97,7 @@ const VideoOverlay = (props: any) => {
                 textAlign="center"
                 width={details?.title.length * 20}
                 p="2"
+                minWidth="300px"
               >
                 {details?.title.toUpperCase()}
               </Box>
@@ -94,8 +107,9 @@ const VideoOverlay = (props: any) => {
                 backgroundColor="black"
                 textAlign="center"
                 fontSize="15px"
+                p="2"
               >
-                {details?.description}
+                {parse(details?.description)}
               </Box>
               <Button position="relative" top="20px" variant="brand3">
                 VIEW PROJECT DETAILS

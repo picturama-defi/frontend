@@ -1,8 +1,15 @@
 import { Flex, Button, Center, Box } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import ConnectWallet from "../common/ConnectWallet";
 import LogoWithTitle from "../common/LogoWithTitle";
 
 const Header = () => {
+  const router = useRouter();
+
+  const goToProjectUpload = () => {
+    router.push("project-upload");
+  };
+
   return (
     <>
       <style>{style}</style>
@@ -17,10 +24,10 @@ const Header = () => {
         >
           <LogoWithTitle />
           <Center>
-            <ConnectWallet variant="brand2" />
-            <Button ml="2" variant="brand2">
-              MENU
+            <Button onClick={goToProjectUpload} variant="brand2" mr="5">
+              ADD MOVIE
             </Button>
+            <ConnectWallet variant="brand2" />
           </Center>
         </Flex>
         <Center>

@@ -10,12 +10,20 @@ import ProjectForm from "./ProjectForm";
 import MembersForm from "./MemberForm";
 import Preview from "./Preview";
 
+import { getFilms, addFilm } from "../../API/main";
+import { addToIPFS } from "../../API/ipfs";
+
+import { convertToB64 } from "../../helper";
+import { useRouter } from "next/router";
+
 interface teamMemberPicsProps {
   [key: number]: any;
 }
 
 const UploadForm = () => {
   const [formStep, setFormStep] = useState(() => 0);
+
+  const router = useRouter();
 
   const [teamMemberPics, setTeamMemberPics] = useState<teamMemberPicsProps>({});
 
@@ -34,21 +42,49 @@ const UploadForm = () => {
     setFormStep((prevStep: number) => prevStep - 1);
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const inputPassPhrase = () => {
+    return prompt("Enter passphrase");
+  };
+
+  const onSubmit = async (data: any) => {
     let teamB64: any = [];
+    const passPhrase = inputPassPhrase();
     for (let i = 0; i < data.team.length; i++) {
-      let reader = new FileReader();
-      let file = data.team[i].photo[0];
-      console.log("Item photo: ", data.team[i].photo[0]);
-      reader.onloadend = () => {
-        teamB64.push({ ...data.team[i], photo: reader.result });
-      };
-
-      reader.readAsDataURL(file);
+      const result = await convertToB64(data.team[i].photo[0]);
+      teamB64.push({ ...data.team[i], photo: result });
     }
+    console.log("Form data: ", {
+      ...data,
+      team: teamB64,
+      passPhrase,
+      script: await addToIPFS(
+        await convertToB64(data.script[0]),
+        data.script[0].name
+      ),
+    });
 
-    console.log("Form submit: ", { ...data, team: teamB64 });
+    // console.log("GET FILMS", await getFilms());
+    const resp: any = await addFilm({
+      ...data,
+      team: teamB64,
+      passPhrase,
+      script: await addToIPFS(
+        await convertToB64(data.script[0]),
+        data.script[0].name
+      ),
+    });
+    console.log("Form data: ", {
+      ...data,
+      team: teamB64,
+      passPhrase,
+      script: await addToIPFS(
+        await convertToB64(data.script[0]),
+        data.script[0].name
+      ),
+    });
+    alert("Successfully added film");
+    router.push("/projects");
+    //TODO: Succesful submission and error validation on UI.
   };
 
   const fileInputField = useRef(null);
