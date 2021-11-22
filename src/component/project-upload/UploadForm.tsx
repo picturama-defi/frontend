@@ -14,6 +14,7 @@ import { getFilms, addFilm } from "../../API/main";
 import { addToIPFS } from "../../API/ipfs";
 
 import { convertToB64 } from "../../helper";
+import { useRouter } from "next/router";
 
 interface teamMemberPicsProps {
   [key: number]: any;
@@ -21,6 +22,8 @@ interface teamMemberPicsProps {
 
 const UploadForm = () => {
   const [formStep, setFormStep] = useState(() => 0);
+
+  const router = useRouter();
 
   const [teamMemberPics, setTeamMemberPics] = useState<teamMemberPicsProps>({});
 
@@ -79,6 +82,8 @@ const UploadForm = () => {
         data.script[0].name
       ),
     });
+    alert("Successfully added film");
+    router.push("/projects");
     //TODO: Succesful submission and error validation on UI.
   };
 
