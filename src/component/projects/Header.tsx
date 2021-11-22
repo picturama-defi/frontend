@@ -25,7 +25,7 @@ const Header = () => {
           <LogoWithTitle />
           <Center>
             <Button onClick={goToProjectUpload} variant="brand2" mr="5">
-              ADD MOVIE
+              ADD PROJECT
             </Button>
             <ConnectWallet variant="brand2" />
           </Center>
