@@ -16,13 +16,17 @@ function Projects() {
   };
 
   useEffect(() => {
-    if (document.getElementsByClassName("description-container").length > 0) {
+    if (selectedTab !== "All Listed Projects") {
+      setDescriptionBoxHeight(0)
+    } else {
+      if (document.getElementsByClassName("description-container").length > 0) {
       const descriptionBoxHeight = document.getElementsByClassName(
         "description-container"
       )[0].clientHeight;
       setDescriptionBoxHeight(descriptionBoxHeight * (3 / 4));
     }
-  }, []);
+    }
+  }, [selectedTab]);
 
   return (
     <>
