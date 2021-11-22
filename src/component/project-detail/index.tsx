@@ -5,15 +5,21 @@ import StakingInfo from "./StakingInfo";
 import Description from "./Description";
 import Team from "./Team";
 import { Button, Center } from "@chakra-ui/react";
+import Loading from "../common/Loading";
 
 function ProjectDetail(props: any) {
   const { details, isAdmin } = props;
 
-  if (!details) return null;
+  const isLoading = !details;
+
+  if (isLoading) {
+    return <Loading emptyColor="black" isLoading={isLoading} color="yellow" />;
+  }
 
   return (
     <>
       <Header details={details} />
+
       <VideoContainer showDescription={false} details={details} />
       {!isAdmin && (
         <>

@@ -23,10 +23,6 @@ function ProjectDetailPage() {
     });
   }, [id]);
 
-  if (!project) {
-    return null;
-  }
-
   const isAdmin =
     selectedAddress?.toLowerCase() === ADMIN_PUBLIC_ADDRESS.toLowerCase();
 
