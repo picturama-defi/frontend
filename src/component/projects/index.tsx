@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Box, Center } from "@chakra-ui/layout";
 import VideoContainer from "../common/VideoContainer";
 import ProjectsList from "./ProjectsList";
-import { getFilms } from "../../API/main";
+import { getFilms, getListedFilms, getNonFundedFilms } from "../../API/main";
 import { useAppContext } from "../../context/AppContext";
 import { ADMIN_PUBLIC_ADDRESS } from "../../config";
 
@@ -22,18 +22,22 @@ function Projects() {
   useEffect(() => {
     switch (selectedTab) {
       case "All Listed Projects":
-        getFilms().then((res) => {
+        getListedFilms().then((res) => {
           setProjectsList(res);
         });
-      case "Invested Projects": {
-        getFilms().then((res) => {
-          setProjectsList(res);
-        });
-      }
+        break;
+      case "Invested Projects":
+        {
+          getFilms().then((res) => {
+            setProjectsList(res);
+          });
+        }
+        break;
       case "All Projects":
-        getFilms().then((res) => {
+        getNonFundedFilms().then((res) => {
           setProjectsList(res);
         });
+        break;
       default:
         getFilms().then((res) => {
           setProjectsList(res);
@@ -70,7 +74,7 @@ function Projects() {
   return (
     <>
       <Box minHeight="100vh" display="flex" flexDirection="column">
-        <Header />
+        <Header isSignedIn={isSignedIn} />
         <Tabs
           selectedTab={selectedTab}
           onSelect={handleTabSelect}

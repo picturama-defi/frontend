@@ -20,8 +20,6 @@ const ApproveButton = ({ id }: any) => {
         message,
       };
 
-      const address = await signer.getAddress();
-
       approveFilm(payload);
     } catch (err: any) {
       alert(err.message);

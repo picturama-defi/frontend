@@ -33,6 +33,29 @@ export const getFilm = async (id: any) => {
   return await response.json()
 };
 
+export const getListedFilms = async () => {
+  const response = await fetch(`${BASE_URL}/funded-films `, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json()
+};
+
+export const getNonFundedFilms = async () => {
+  const response = await fetch(`${BASE_URL}/non-funded-films `, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json()
+};
+
+
 export const approveFilm = async (payload: any) => {
   const response = await fetch(`${BASE_URL}/approve-film`, {
     method: "POST",

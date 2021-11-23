@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Stack } from "@chakra-ui/react";
 import { Flex } from "@chakra-ui/react";
 
@@ -10,15 +10,19 @@ import ProjectForm from "./ProjectForm";
 import MembersForm from "./MemberForm";
 import Preview from "./Preview";
 
-import { getFilms, addFilm } from "../../API/main";
+import { addFilm } from "../../API/main";
 import { addToIPFS } from "../../API/ipfs";
 
 import { convertToB64 } from "../../helper";
 import { useRouter } from "next/router";
 
+import { useAppContext } from "../../context/AppContext";
+
 interface teamMemberPicsProps {
   [key: number]: any;
 }
+
+import Loading from "../common/Loading";
 
 const UploadForm = () => {
   const [formStep, setFormStep] = useState(() => 0);
@@ -26,6 +30,16 @@ const UploadForm = () => {
   const router = useRouter();
 
   const [teamMemberPics, setTeamMemberPics] = useState<teamMemberPicsProps>({});
+
+  const [selectedAddress]: any = useAppContext();
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!selectedAddress) {
+      router.push("/projects");
+    }
+  }, []);
 
   const methods = useForm({
     mode: "all",
@@ -47,6 +61,7 @@ const UploadForm = () => {
   };
 
   const onSubmit = async (data: any) => {
+    setLoading(true);
     let teamB64: any = [];
     const passPhrase = inputPassPhrase();
     for (let i = 0; i < data.team.length; i++) {
@@ -63,8 +78,7 @@ const UploadForm = () => {
       ),
     });
 
-    // console.log("GET FILMS", await getFilms());
-    const resp: any = await addFilm({
+    const dataToAdd = {
       ...data,
       team: teamB64,
       passPhrase,
@@ -72,22 +86,21 @@ const UploadForm = () => {
         await convertToB64(data.script[0]),
         data.script[0].name
       ),
-    });
-    console.log("Form data: ", {
-      ...data,
-      team: teamB64,
-      passPhrase,
-      script: await addToIPFS(
-        await convertToB64(data.script[0]),
-        data.script[0].name
-      ),
-    });
+      ownerPublicAddress: selectedAddress,
+    };
+
+    console.log(dataToAdd);
+
+    const resp: any = await addFilm(dataToAdd);
+    setLoading(false);
     alert("Successfully added film");
     router.push("/projects");
-    //TODO: Succesful submission and error validation on UI.
   };
 
-  const fileInputField = useRef(null);
+  if (loading) {
+    return <Loading color="yellow" emptyColor="black" />;
+  }
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
