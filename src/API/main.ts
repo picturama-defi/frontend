@@ -20,6 +20,7 @@ export const addFilm = async (data: any) => {
     },
     body: JSON.stringify(data),
   });
+  return await response.json()
 };
 
 export const getFilm = async (id: any) => {

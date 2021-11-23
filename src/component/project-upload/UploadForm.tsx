@@ -92,9 +92,15 @@ const UploadForm = () => {
     console.log(dataToAdd);
 
     const resp: any = await addFilm(dataToAdd);
-    setLoading(false);
-    alert("Successfully added film");
+
+    if (resp.status === "failed") {
+      alert("Unable to add film");
+    } else {
+      alert("Successfully added the film");
+    }
+
     router.push("/projects");
+    setLoading(false);
   };
 
   if (loading) {
@@ -125,15 +131,17 @@ const UploadForm = () => {
               Back
             </Button>
 
-            <Button
-              width="200px"
-              colorScheme="teal"
-              disabled={!methods.formState.isValid}
-              variant="solid"
-              onClick={nextStep}
-            >
-              Next
-            </Button>
+            {formStep !== 1 && (
+              <Button
+                width="200px"
+                colorScheme="teal"
+                disabled={!methods.formState.isValid}
+                variant="solid"
+                onClick={nextStep}
+              >
+                Next
+              </Button>
+            )}
 
             <Button
               width="200px"
