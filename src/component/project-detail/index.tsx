@@ -6,9 +6,10 @@ import Description from "./Description";
 import Team from "./Team";
 import { Button, Center } from "@chakra-ui/react";
 import Loading from "../common/Loading";
+import ApproveButton from "../common/ApproveButton";
 
 function ProjectDetail(props: any) {
-  const { details, isAdmin } = props;
+  const { details, isAdmin, id } = props;
 
   const isLoading = !details;
 
@@ -30,9 +31,7 @@ function ProjectDetail(props: any) {
       <Description description={details?.description} />
       <Team team={details?.team} />
       <Center pt="0" pb="20">
-        <Button fontSize="xl" size="lg" variant="brand3">
-          Approve
-        </Button>
+        <ApproveButton id={id} />
       </Center>
     </>
   );

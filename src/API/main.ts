@@ -32,3 +32,15 @@ export const getFilm = async (id: any) => {
   });
   return await response.json()
 };
+
+export const approveFilm = async (payload: any) => {
+  const response = await fetch(`${BASE_URL}/approve-film`, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
+  return await response.json()
+};
