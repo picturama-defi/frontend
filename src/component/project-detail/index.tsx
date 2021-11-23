@@ -22,8 +22,6 @@ function ProjectDetail(props: any) {
     details.demoReelLink
   )}.jpg`;
 
-  console.log(src);
-
   return (
     <>
       <Header details={details} />
@@ -37,9 +35,11 @@ function ProjectDetail(props: any) {
       )}
       <Description description={details?.description} />
       <Team team={details?.team} />
-      <Center pt="0" pb="20">
-        <ApproveButton id={id} />
-      </Center>
+      {isAdmin && (
+        <Center pt="0" pb="20">
+          <ApproveButton id={id} />
+        </Center>
+      )}
     </>
   );
 }
