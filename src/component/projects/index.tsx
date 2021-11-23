@@ -28,7 +28,7 @@ function Projects() {
         break;
       case "Invested Projects":
         {
-          getFilms().then((res) => {
+          getListedFilms().then((res) => {
             setProjectsList(res);
           });
         }
