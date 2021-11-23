@@ -66,10 +66,11 @@ function Projects() {
     }
   };
 
-  const isAdmin =
-    selectedAddress?.toLowerCase() === ADMIN_PUBLIC_ADDRESS.toLowerCase();
-
   const isSignedIn = !!selectedAddress;
+
+  const isAdmin =
+    selectedAddress?.toLowerCase() === ADMIN_PUBLIC_ADDRESS.toLowerCase() &&
+    !!isSignedIn;
 
   return (
     <>

@@ -41,12 +41,14 @@ function Tabs(props: any) {
       >
         <Flex flexDirection="row" justifyContent="space-around">
           {tabs.map((tab: string) => {
+            if (tab === "All Listed Projects") {
+              return <Tab tab={tab} key={tab} />;
+            }
             if (tab === "Invested Projects") {
               return isSignedIn ? <Tab tab={tab} key={tab} /> : "";
             }
             if (tab === "All Projects")
-              isAdmin ? <Tab tab={tab} key={tab} /> : "";
-            return <Tab tab={tab} key={tab} />;
+              return isAdmin ? <Tab tab={tab} key={tab} /> : "";
           })}
         </Flex>
       </Box>
