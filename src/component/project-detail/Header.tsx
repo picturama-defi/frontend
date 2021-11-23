@@ -7,11 +7,18 @@ import {
   Heading,
   VStack,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import ConnectWallet from "../common/ConnectWallet";
 import LogoWithTitle from "../common/LogoWithTitle";
 
 const Header = (props: any) => {
   const { details } = props;
+
+  const router = useRouter();
+
+  const goToProjects = () => {
+    router.push("/projects");
+  };
 
   return (
     <>
@@ -28,7 +35,7 @@ const Header = (props: any) => {
           <LogoWithTitle />
           <Center>
             <ConnectWallet variant="brand" />
-            <Button ml="2" variant="brand">
+            <Button onClick={goToProjects} ml="2" variant="brand">
               MENU
             </Button>
           </Center>
