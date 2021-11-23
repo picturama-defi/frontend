@@ -2,11 +2,11 @@ import { Box } from "@chakra-ui/react";
 import StakingButtons from "./StakingButtons";
 import StakingDetails from "./StakingDetails";
 
-function StakingInfo() {
+function StakingInfo(props: any) {
   return (
     <>
       <Box bg="brand.yellow" padding="8%" pt="10">
-        <StakingDetails />
+        <StakingDetails {...props} />
         <StakingButtons />
       </Box>
     </>

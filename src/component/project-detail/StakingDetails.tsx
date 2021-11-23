@@ -1,11 +1,13 @@
 import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 
-const StakingDetails = () => {
+const StakingDetails = ({ imgSrc }: any) => {
+  console.log(imgSrc);
+
   return (
     <Flex borderTop="5px solid black" borderBottom="5px solid black">
-      <Box p="5" flex="1">
+      <Box p="5" flex="2">
         {/* eslint-disable-next-line @next/next/no-img-element*/}
-        <img alt="preview image of the project" src="images/preview.png"></img>
+        <img alt="preview image of the project" src={imgSrc}></img>
       </Box>
       <Box flex="5">
         <Row1 />

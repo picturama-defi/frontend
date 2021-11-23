@@ -7,6 +7,7 @@ import Team from "./Team";
 import { Button, Center } from "@chakra-ui/react";
 import Loading from "../common/Loading";
 import ApproveButton from "../common/ApproveButton";
+import { extractVimeoId } from "../../helper";
 
 function ProjectDetail(props: any) {
   const { details, isAdmin, id } = props;
@@ -17,6 +18,10 @@ function ProjectDetail(props: any) {
     return <Loading emptyColor="black" isLoading={isLoading} color="yellow" />;
   }
 
+  const src = `https://vumbnail.com/${extractVimeoId(
+    details.demoReelLink
+  )}.jpg`;
+
   return (
     <>
       <Header details={details} />
@@ -24,15 +29,17 @@ function ProjectDetail(props: any) {
       <VideoContainer showDescription={false} details={details} />
       {!isAdmin && (
         <>
-          <MoveText text={`${details?.percentageFunded}% funded`} />
-          <StakingInfo />
+          <MoveText text={`${details?.percentageFunded || 0}% funded`} />
+          <StakingInfo imgSrc={src} />
         </>
       )}
       <Description description={details?.description} />
       <Team team={details?.team} />
-      <Center pt="0" pb="20">
-        <ApproveButton id={id} />
-      </Center>
+      {isAdmin && (
+        <Center pt="0" pb="20">
+          <ApproveButton id={id} />
+        </Center>
+      )}
     </>
   );
 }
