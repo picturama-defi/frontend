@@ -7,9 +7,8 @@ import { approveFilm } from "../../API/main";
 import { useRouter } from "next/router";
 import Loading from "./Loading";
 
-const ApproveButton = ({ id }: any) => {
+const ApproveButton = ({ id, setLoading }: any) => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
 
   const goToProjects = () => {
     router.push("/projects");
@@ -49,10 +48,6 @@ const ApproveButton = ({ id }: any) => {
       alert("Install metamask");
     }
   };
-
-  if (loading) {
-    return <Loading color="yellow" emptyColor="black" />;
-  }
 
   return (
     <Flex justifyContent="center" alignContent="center" alignItems="center">

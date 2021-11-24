@@ -26,7 +26,7 @@ const Row1 = () => {
           STAKE
         </Text>
         <Text position="relative" top="0" fontWeight="bold">
-          $NEXT
+          $MATIC
         </Text>
         <Text position="relative" top="0" fontWeight="bold">
           100000000
@@ -50,7 +50,7 @@ const Row2 = () => {
     <Flex pt="5" pb="5" borderTop="1px solid black">
       <Box w="30%">
         <Text>MY STAKE</Text>
-        <Text fontWeight="bold">$NEXT</Text>
+        <Text fontWeight="bold">$MATIC</Text>
         <Text fontWeight="bold">10000</Text>
       </Box>
       <Box w="30%">
