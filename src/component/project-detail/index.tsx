@@ -8,14 +8,15 @@ import { Button, Center } from "@chakra-ui/react";
 import Loading from "../common/Loading";
 import ApproveButton from "../common/ApproveButton";
 import { extractVimeoId } from "../../helper";
+import { useState } from "react";
 
 function ProjectDetail(props: any) {
   const { details, isAdmin, id } = props;
 
-  const isLoading = !details;
+  const [loading, setLoading] = useState(false);
 
-  if (isLoading) {
-    return <Loading emptyColor="black" isLoading={isLoading} color="yellow" />;
+  if (!details || loading) {
+    return <Loading emptyColor="black" color="yellow" />;
   }
 
   const src = `https://vumbnail.com/${extractVimeoId(
@@ -25,7 +26,6 @@ function ProjectDetail(props: any) {
   return (
     <>
       <Header details={details} />
-
       <VideoContainer showDescription={false} details={details} />
       {!isAdmin && (
         <>
@@ -37,7 +37,7 @@ function ProjectDetail(props: any) {
       <Team team={details?.team} />
       {isAdmin && (
         <Center pt="0" pb="20">
-          <ApproveButton id={id} />
+          <ApproveButton setLoading={setLoading} id={id} />
         </Center>
       )}
     </>
