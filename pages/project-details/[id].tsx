@@ -28,7 +28,12 @@ function ProjectDetailPage() {
 
   return (
     <>
-      <ProjectDetail id={id} isAdmin={isAdmin} details={project} />
+      <ProjectDetail
+        selectedAddress={selectedAddress}
+        id={id}
+        isAdmin={isAdmin}
+        details={project}
+      />
     </>
   );
 }

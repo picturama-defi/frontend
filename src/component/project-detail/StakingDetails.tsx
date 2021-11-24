@@ -1,8 +1,6 @@
 import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 
-const StakingDetails = ({ imgSrc }: any) => {
-  console.log(imgSrc);
-
+const StakingDetails = ({ imgSrc, selectedAddress }: any) => {
   return (
     <Flex borderTop="5px solid black" borderBottom="5px solid black">
       <Box p="5" flex="2">
@@ -11,7 +9,7 @@ const StakingDetails = ({ imgSrc }: any) => {
       </Box>
       <Box flex="5">
         <Row1 />
-        <Row2 />
+        <Row2 selectedAddress={selectedAddress} />
         <Row3 />
       </Box>
     </Flex>
@@ -45,23 +43,29 @@ const Row1 = () => {
   );
 };
 
-const Row2 = () => {
+const Row2 = ({ selectedAddress }) => {
   return (
     <Flex pt="5" pb="5" borderTop="1px solid black">
-      <Box w="30%">
-        <Text>MY STAKE</Text>
-        <Text fontWeight="bold">$MATIC</Text>
-        <Text fontWeight="bold">10000</Text>
-      </Box>
-      <Box w="30%">
-        <Text>REWARDS UPDATE</Text>
-        <Text fontWeight="bold">6H 28M</Text>
-      </Box>
-      <Box w="30%">
-        <Text>MY CLAIMABLE REWARDS</Text>
-        <Text fontWeight="bold">$RAMA</Text>
-        <Text fontWeight="bold">100000000</Text>
-      </Box>
+      {selectedAddress ? (
+        <>
+          <Box w="30%">
+            <Text>MY STAKE</Text>
+            <Text fontWeight="bold">$MATIC</Text>
+            <Text fontWeight="bold">10000</Text>
+          </Box>
+          <Box w="30%">
+            <Text>REWARDS UPDATE</Text>
+            <Text fontWeight="bold">6H 28M</Text>
+          </Box>
+          <Box w="30%">
+            <Text>MY CLAIMABLE REWARDS</Text>
+            <Text fontWeight="bold">$RAMA</Text>
+            <Text fontWeight="bold">100000000</Text>
+          </Box>
+        </>
+      ) : (
+        <Text>Connect wallet to start staking</Text>
+      )}
     </Flex>
   );
 };

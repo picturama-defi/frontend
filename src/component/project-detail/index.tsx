@@ -11,7 +11,7 @@ import { extractVimeoId } from "../../helper";
 import { useState } from "react";
 
 function ProjectDetail(props: any) {
-  const { details, isAdmin, id } = props;
+  const { details, isAdmin, id, selectedAddress } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +30,7 @@ function ProjectDetail(props: any) {
       {!isAdmin && (
         <>
           <MoveText text={`${details?.percentageFunded || 0}% funded`} />
-          <StakingInfo imgSrc={src} />
+          <StakingInfo selectedAddress={selectedAddress} imgSrc={src} />
         </>
       )}
       <Description description={details?.description} />
