@@ -2,6 +2,8 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 import router from "next/router";
 
 function Team({ team }: any) {
+  console.log(team);
+
   return (
     <Box paddingBottom="500px" bg="black" color="brand.yellow" p="20" pt="0">
       <Box borderTop="1px solid yellow">
@@ -38,7 +40,14 @@ const MemberTile = (props: any) => {
       </Text>
       <Text mt="3">{detail.about}</Text>
       <a href={detail.linkedin} target="_blank" rel="noopener noreferrer">
-        <Text pb="3" mt="3">
+        <Text
+          p="2"
+          pl="0"
+          _hover={{ bg: "brand.yellow", color: "black" }}
+          pb="3"
+          mt="3"
+          textAlign="center"
+        >
           {`Check out linkedin ->`}
         </Text>
       </a>
