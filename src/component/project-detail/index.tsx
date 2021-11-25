@@ -30,7 +30,7 @@ function ProjectDetail(props: any) {
       {!isAdmin && (
         <>
           <MoveText text={`${details?.percentageFunded || 0}% funded`} />
-          <StakingInfo selectedAddress={selectedAddress} imgSrc={src} />
+          <StakingInfo id={id} selectedAddress={selectedAddress} imgSrc={src} />
         </>
       )}
       <Description description={details?.description} />
