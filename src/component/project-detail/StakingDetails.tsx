@@ -1,18 +1,13 @@
 import { Box, Flex, HStack, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { getFilmData } from "../../API/contract.ts/main";
+
 import { useState } from "react";
 import Loading from "../common/Loading";
 
-const StakingDetails = ({ imgSrc, selectedAddress, id }: any) => {
-  const [filmDetails, setFilmDetails] = useState(null);
-
-  useEffect(() => {
-    getFilmData(id).then((res: any) => {
-      setFilmDetails(res);
-    });
-  }, [id]);
-
+const StakingDetails = ({
+  imgSrc,
+  selectedAddress,
+  details: filmDetails,
+}: any) => {
   if (!filmDetails) {
     return <Loading color="yellow" emptyColor="black" />;
   }
@@ -86,7 +81,7 @@ const Row2 = ({ selectedAddress, details }: any) => {
   );
 };
 
-const Row3 = ({ details }: any) => {
+const Row3 = ({ details, fundProject }: any) => {
   return (
     <HStack pt="5" pb="5" borderTop="1px solid black">
       <Box w="30%">
@@ -108,7 +103,7 @@ const Row3 = ({ details }: any) => {
             bg="brand.pink"
             width={`${
               (details["amountFundedSoFar"] / details["targetFund"]) * 100
-            }`}
+            }%`}
             height="100%"
             zIndex={1}
           >
