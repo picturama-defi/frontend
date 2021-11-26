@@ -1,6 +1,8 @@
 import { Button, Text, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/AppContext";
+import { useToast } from "@chakra-ui/react";
+import { CORRECT_CHAIN } from "../../config";
 
 declare global {
   interface Window {
@@ -11,6 +13,7 @@ declare global {
 const ConnectWallet = (props: any) => {
   const { variant } = props;
   const [selectedAddress, setSelectedAddress]: any = useAppContext();
+  const toast = useToast();
 
   useEffect(() => {
     window.ethereum.on("accountsChanged", (res: any) => {
@@ -22,6 +25,18 @@ const ConnectWallet = (props: any) => {
     });
     setSelectedAddress(window.ethereum.selectedAddress);
   }, [setSelectedAddress]);
+
+  useEffect(() => {
+    if (window.ethereum.chainId !== CORRECT_CHAIN) {
+      toast({
+        title: "Wrong chain selected",
+        status: "warning",
+        duration: null,
+        isClosable: false,
+        position: "top",
+      });
+    }
+  }, []);
 
   const handleClick = () => {
     if (window?.ethereum) {

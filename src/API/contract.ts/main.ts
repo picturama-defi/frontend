@@ -29,7 +29,7 @@ export const getFilmData = async (id: string) => {
 
         userFundDetails = {
             userFund: res["userFund"].toString(),
-            yieldGenerated: res["yieldGenerated"].toString()
+            yieldGenerated: ((res["yieldGenerated"].toString() * (await provider.getBlock(-1)).timestamp) / 1000000000000000000000).toFixed(2)
         }
     } catch (err) {
         userFundDetails = {
@@ -38,9 +38,12 @@ export const getFilmData = async (id: string) => {
         }
     }
 
+    console.log(userFundDetails)
+    console.log(provider.blockNumber)
+
     return {
         ...projectFundDetails,
-        ...userFundDetails
+        ...userFundDetails,
     }
 }
 
