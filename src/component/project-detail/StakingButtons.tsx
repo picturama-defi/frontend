@@ -1,11 +1,12 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { fundProject } from "../../API/contract.ts/main";
 
-function StakingButtons({ id, setLoading, fetch }: any) {
+function StakingButtons({ id, setLoading, fetchFilm }: any) {
   const handleClick = async () => {
     setLoading(true);
     await fundProject(id);
     setLoading(false);
+    fetchFilm();
   };
 
   return (
