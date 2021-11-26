@@ -16,7 +16,6 @@ export const getFilmData = async (id: string) => {
     let userFundDetails, projectFundDetails
     try {
         const res = await ramaContract.getProjectFundDetails(ethers.utils.formatBytes32String(id))
-        console.log(res)
         projectFundDetails = {
             amountFundedSoFar: res["fundedSoFar"].toString(),
             targetFund: res["targetFund"].toString(),
@@ -26,7 +25,12 @@ export const getFilmData = async (id: string) => {
     }
 
     try {
-        userFundDetails = await ramaContract.connect(signer).getFundOfUserOnAProject(ethers.utils.formatBytes32String(id))
+        const res = await ramaContract.connect(signer).getFundOfUserOnAProject(ethers.utils.formatBytes32String(id))
+
+        userFundDetails = {
+            userFund: res["userFund"].toString(),
+            yieldGenerated: res["yieldGenerated"].toString()
+        }
     } catch (err) {
         userFundDetails = {
             userFund: 0,
