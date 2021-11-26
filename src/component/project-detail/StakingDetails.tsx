@@ -1,6 +1,17 @@
 import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 
-const StakingDetails = ({ imgSrc, selectedAddress }: any) => {
+import { useState } from "react";
+import Loading from "../common/Loading";
+
+const StakingDetails = ({
+  imgSrc,
+  selectedAddress,
+  details: filmDetails,
+}: any) => {
+  if (!filmDetails) {
+    return <Loading color="yellow" emptyColor="black" />;
+  }
+
   return (
     <Flex borderTop="5px solid black" borderBottom="5px solid black">
       <Box p="5" flex="2">
@@ -9,8 +20,8 @@ const StakingDetails = ({ imgSrc, selectedAddress }: any) => {
       </Box>
       <Box flex="5">
         <Row1 />
-        <Row2 selectedAddress={selectedAddress} />
-        <Row3 />
+        <Row2 details={filmDetails} selectedAddress={selectedAddress} />
+        <Row3 details={filmDetails} />
       </Box>
     </Flex>
   );
@@ -27,13 +38,13 @@ const Row1 = () => {
           $MATIC
         </Text>
         <Text position="relative" top="0" fontWeight="bold">
-          100000000
+          1
         </Text>
       </Box>
       <Box w="30%">
         <Text>EARN</Text>
         <Text fontWeight="bold">$RAMA</Text>
-        <Text fontWeight="bold">100000000</Text>
+        <Text fontWeight="bold">1</Text>
       </Box>
       <Box w="30%">
         <Text>EST.APY</Text>
@@ -43,7 +54,7 @@ const Row1 = () => {
   );
 };
 
-const Row2 = ({ selectedAddress }) => {
+const Row2 = ({ selectedAddress, details }: any) => {
   return (
     <Flex pt="5" pb="5" borderTop="1px solid black">
       {selectedAddress ? (
@@ -51,7 +62,7 @@ const Row2 = ({ selectedAddress }) => {
           <Box w="30%">
             <Text>MY STAKE</Text>
             <Text fontWeight="bold">$MATIC</Text>
-            <Text fontWeight="bold">10000</Text>
+            <Text fontWeight="bold">{details["userFund"]}</Text>
           </Box>
           <Box w="30%">
             <Text>REWARDS UPDATE</Text>
@@ -60,7 +71,7 @@ const Row2 = ({ selectedAddress }) => {
           <Box w="30%">
             <Text>MY CLAIMABLE REWARDS</Text>
             <Text fontWeight="bold">$RAMA</Text>
-            <Text fontWeight="bold">100000000</Text>
+            <Text fontWeight="bold">{details["yieldGenerated"]}</Text>
           </Box>
         </>
       ) : (
@@ -70,14 +81,14 @@ const Row2 = ({ selectedAddress }) => {
   );
 };
 
-const Row3 = () => {
+const Row3 = ({ details, fundProject }: any) => {
   return (
     <HStack pt="5" pb="5" borderTop="1px solid black">
       <Box w="30%">
         <Box>TVL</Box>
         <Text fontWeight="bold">$MATIC</Text>
-        <Text fontWeight="bold">111,979,625</Text>
-        <Box>$1,740.163</Box>
+        <Text fontWeight="bold">Target: {details["targetFund"]}</Text>
+        <Box>Funded so far: {details["amountFundedSoFar"]}</Box>
       </Box>
       <Box w="70%">
         <Box
@@ -90,12 +101,14 @@ const Row3 = () => {
           <Box
             borderRight="2px solid black"
             bg="brand.pink"
-            width="75%"
+            width={`${
+              (details["amountFundedSoFar"] / details["targetFund"]) * 100
+            }%`}
             height="100%"
             zIndex={1}
           >
             <Box fontWeight="bold" ml="20px" width="200px">
-              75% FUNDED
+              {(details["amountFundedSoFar"] / details["targetFund"]) * 100}%
             </Box>
           </Box>
         </Box>

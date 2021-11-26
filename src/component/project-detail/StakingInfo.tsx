@@ -3,13 +3,19 @@ import StakingButtons from "./StakingButtons";
 import StakingDetails from "./StakingDetails";
 
 function StakingInfo(props: any) {
-  const { selectedAddress } = props;
+  const { selectedAddress, id, setLoading, fetchFilm } = props;
 
   return (
     <>
       <Box bg="brand.yellow" padding="8%" pt="10">
         <StakingDetails {...props} />
-        {selectedAddress && <StakingButtons />}
+        {selectedAddress && (
+          <StakingButtons
+            fetchFilm={fetchFilm}
+            setLoading={setLoading}
+            id={id}
+          />
+        )}
       </Box>
     </>
   );

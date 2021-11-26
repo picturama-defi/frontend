@@ -1,11 +1,7 @@
-import React from "react";
 import { Button, Text, Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useAppContext } from "../../context/AppContext";
 import { ethers } from "ethers";
 import { approveFilm } from "../../API/main";
 import { useRouter } from "next/router";
-import Loading from "./Loading";
 
 const ApproveButton = ({ id, setLoading }: any) => {
   const router = useRouter();

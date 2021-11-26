@@ -9,11 +9,30 @@ import Loading from "../common/Loading";
 import ApproveButton from "../common/ApproveButton";
 import { extractVimeoId } from "../../helper";
 import { useState } from "react";
+import { useEffect, useCallback } from "react";
+import { getFilmData } from "../../API/contract.ts/main";
 
 function ProjectDetail(props: any) {
   const { details, isAdmin, id, selectedAddress } = props;
+  const [stakingDetails, setStakingDetails] = useState(null);
 
   const [loading, setLoading] = useState(false);
+
+  const fetchFilm = useCallback(() => {
+    setLoading(true);
+    getFilmData(id).then((res: any) => {
+      console.log(res);
+      setStakingDetails(res);
+      setLoading(false);
+    });
+  }, [id]);
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    fetchFilm();
+  }, [id, fetchFilm]);
 
   if (!details || loading) {
     return <Loading emptyColor="black" color="yellow" />;
@@ -23,14 +42,25 @@ function ProjectDetail(props: any) {
     details.demoReelLink
   )}.jpg`;
 
+  const percentageFunded = stakingDetails
+    ? (stakingDetails["amountFundedSoFar"] / stakingDetails["targetFund"]) * 100
+    : "0";
+
   return (
     <>
       <Header details={details} />
       <VideoContainer showDescription={false} details={details} />
       {!isAdmin && (
         <>
-          <MoveText text={`${details?.percentageFunded || 0}% funded`} />
-          <StakingInfo selectedAddress={selectedAddress} imgSrc={src} />
+          <MoveText text={percentageFunded + "% funded"} />
+          <StakingInfo
+            details={stakingDetails}
+            id={id}
+            selectedAddress={selectedAddress}
+            imgSrc={src}
+            setLoading={setLoading}
+            fetchFilm={fetchFilm}
+          />
         </>
       )}
       <Description description={details?.description} />
