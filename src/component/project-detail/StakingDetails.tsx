@@ -102,13 +102,15 @@ const Row3 = ({ details, fundProject }: any) => {
             borderRight="2px solid black"
             bg="brand.pink"
             width={`${
-              (details["amountFundedSoFar"] / details["targetFund"]) * 100
+              (details["amountFundedSoFar"] / details["targetFund"]) * 100 || 0
             }%`}
             height="100%"
             zIndex={1}
           >
             <Box fontWeight="bold" ml="20px" width="200px">
-              {(details["amountFundedSoFar"] / details["targetFund"]) * 100}%
+              {(details["amountFundedSoFar"] / details["targetFund"]) * 100 ||
+                0}
+              %
             </Box>
           </Box>
         </Box>

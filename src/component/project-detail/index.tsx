@@ -43,7 +43,8 @@ function ProjectDetail(props: any) {
   )}.jpg`;
 
   const percentageFunded = stakingDetails
-    ? (stakingDetails["amountFundedSoFar"] / stakingDetails["targetFund"]) * 100
+    ? (stakingDetails["amountFundedSoFar"] / stakingDetails["targetFund"]) *
+        100 || 0
     : "0";
 
   return (
