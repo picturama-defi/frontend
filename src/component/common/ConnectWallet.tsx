@@ -17,6 +17,9 @@ const ConnectWallet = (props: any) => {
       setSelectedAddress(res[0]);
       location.reload();
     });
+    window.ethereum.on("chainChanged", () => {
+      window.location.reload();
+    });
     setSelectedAddress(window.ethereum.selectedAddress);
   }, [setSelectedAddress]);
 
