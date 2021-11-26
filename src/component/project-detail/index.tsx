@@ -21,6 +21,7 @@ function ProjectDetail(props: any) {
   const fetchFilm = useCallback(() => {
     setLoading(true);
     getFilmData(id).then((res: any) => {
+      console.log(res);
       setStakingDetails(res);
       setLoading(false);
     });
