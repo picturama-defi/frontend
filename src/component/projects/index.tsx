@@ -7,6 +7,7 @@ import ProjectsList from "./ProjectsList";
 import { getFilms, getListedFilms, getNonFundedFilms } from "../../API/main";
 import { useAppContext } from "../../context/AppContext";
 import { ADMIN_PUBLIC_ADDRESS } from "../../config";
+import { getRawFilmData } from "../../API/contract.ts/main";
 
 function Projects() {
   const tabs = ["All Listed Projects", "Invested Projects", "All Projects"];
@@ -14,10 +15,22 @@ function Projects() {
   const [descriptionBoxHeight, setDescriptionBoxHeight] = useState(0);
   const [projectsList, setProjectsList]: any = useState(() => []);
   const [selectedAddress]: any = useAppContext();
+  const [percentageFundedFeatured, setPercentageFundedFeatured] = useState(0);
 
   const handleTabSelect = (tabToChangeTo: string) => {
     setSelectedTab(tabToChangeTo);
   };
+
+  useEffect(() => {
+    if (!projectsList[0]) {
+      return;
+    }
+    getRawFilmData(projectsList[0]._id).then((res: any) => {
+      setPercentageFundedFeatured(
+        (res["amountFundedSoFar"] / res["targetFund"]) * 100
+      );
+    });
+  });
 
   useEffect(() => {
     switch (selectedTab) {
@@ -90,6 +103,7 @@ function Projects() {
               showDescription={true}
               descriptionBoxHeight={descriptionBoxHeight}
               details={projectsList[0]}
+              percentageFundedFeatured={percentageFundedFeatured}
             />
           </>
         )}

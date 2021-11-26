@@ -4,9 +4,15 @@ import VideoModal from "./VideoModal";
 import { useState } from "react";
 import parse from "html-react-parser";
 import { extractVimeoId } from "../../helper";
+import { useRouter } from "next/router";
 
 const VideoContainer = (props: any) => {
-  const { details, descriptionBoxHeight, showDescription } = props;
+  const {
+    details,
+    descriptionBoxHeight,
+    showDescription,
+    percentageFundedFeatured,
+  } = props;
 
   const videoId = extractVimeoId(details.demoReelLink);
 
@@ -27,6 +33,7 @@ const VideoContainer = (props: any) => {
             videoId={videoId}
             showDescription={showDescription}
             details={details}
+            percentageFundedFeatured={percentageFundedFeatured}
           />
         </Box>
         <Box height={`${descriptionBoxHeight}px`} background="black"></Box>
@@ -56,9 +63,10 @@ const ProjectDetailVideo = (props: any) => {
 };
 
 const VideoOverlay = (props: any) => {
-  const { details, showDescription, videoId } = props;
+  const { details, showDescription, videoId, percentageFundedFeatured } = props;
 
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const onPlayClick = () => {
     setIsOpen(true);
@@ -66,6 +74,10 @@ const VideoOverlay = (props: any) => {
 
   const onModalClose = () => {
     setIsOpen(false);
+  };
+
+  const onProjectClick = () => {
+    router.push(`/project-details/${details._id}`);
   };
 
   return (
@@ -88,7 +100,7 @@ const VideoOverlay = (props: any) => {
                 fontSize="15px"
                 p="2"
               >
-                {`${details.percentageFunded || 0}% funded`}
+                {`${percentageFundedFeatured}% funded`}
               </Box>
               <Box
                 position="relative"
@@ -111,7 +123,12 @@ const VideoOverlay = (props: any) => {
               >
                 {parse(details?.description)}
               </Box>
-              <Button position="relative" top="20px" variant="brand3">
+              <Button
+                onClick={onProjectClick}
+                position="relative"
+                top="20px"
+                variant="brand3"
+              >
                 VIEW PROJECT DETAILS
               </Button>
             </VStack>
