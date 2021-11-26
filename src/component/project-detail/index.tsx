@@ -18,19 +18,16 @@ function ProjectDetail(props: any) {
 
   const [loading, setLoading] = useState(false);
 
-  const fetch = useCallback(() => {
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
     setLoading(true);
     getFilmData(id).then((res: any) => {
       setStakingDetails(res);
       setLoading(false);
     });
   }, [id]);
-
-  useEffect(() => {
-    if (!id) {
-      fetch();
-    }
-  }, [id, setStakingDetails, fetch]);
 
   if (!details || loading) {
     return <Loading emptyColor="black" color="yellow" />;

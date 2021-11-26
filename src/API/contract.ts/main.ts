@@ -5,24 +5,30 @@ import { ethers } from "ethers";
 
 export const getFilmData = async (id: string) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner()
+    const signer = await provider.getSigner()
+
     const ramaContract = new ethers.Contract(
         CONTRACT_ADDRESS,
         Abi.abi,
         provider
     );
 
-    const res = await ramaContract.getFundOfUserOnAProject(ethers.utils.formatBytes32String(id))
-
-    console.log(res)
-
-    const details = {
-        amountFundedSoFar: res["amountFundedSoFar"].toString(),
-        targetFund: res["targetFund"].toString(),
-        userFund: res["userFund"].toString(),
-        yieldGenerated: res["yieldGenerated"].toString()
+    try {
+        const res = await ramaContract.connect(signer).getFundOfUserOnAProject(ethers.utils.formatBytes32String(id))
+        console.log(res)
+        return {
+            amountFundedSoFar: res["amountFundedSoFar"].toString(),
+            targetFund: res["targetFund"].toString(),
+            userFund: res["userFund"].toString(),
+            yieldGenerated: res["yieldGenerated"].toString()
+        }
+    } catch (err) {
+        return null
     }
-    return details
+
+
+
+
 }
 
 export const fundProject = async (id: string) => {

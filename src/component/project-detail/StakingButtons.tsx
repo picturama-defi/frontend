@@ -6,7 +6,6 @@ function StakingButtons({ id, setLoading, fetch }: any) {
     setLoading(true);
     await fundProject(id);
     setLoading(false);
-    fetch();
   };
 
   return (
