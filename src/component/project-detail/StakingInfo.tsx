@@ -3,7 +3,14 @@ import StakingButtons from "./StakingButtons";
 import StakingDetails from "./StakingDetails";
 
 function StakingInfo(props: any) {
-  const { selectedAddress, id, setLoading, fetchFilm, ramaBalance } = props;
+  const {
+    selectedAddress,
+    id,
+    setLoading,
+    fetchFilm,
+    ramaBalance,
+    showWithdrawClaimBtn,
+  } = props;
 
   return (
     <>
@@ -14,6 +21,7 @@ function StakingInfo(props: any) {
             fetchFilm={fetchFilm}
             setLoading={setLoading}
             id={id}
+            showWithdrawClaimBtn={showWithdrawClaimBtn}
           />
         )}
       </Box>

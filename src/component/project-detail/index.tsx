@@ -18,13 +18,19 @@ function ProjectDetail(props: any) {
   const [ramaBalance, setRamaBalance] = useState(0);
 
   const [loading, setLoading] = useState(false);
-
+  const [showWithdrawClaimBtn, setShowWithdrawClainBtn] = useState(false);
   const fetchFilm = useCallback(() => {
     setLoading(true);
     getFilmData(id).then((res: any) => {
       getRamaBalance().then((res: any) => {
         setRamaBalance(res);
       });
+      if (res?.isError) {
+        setShowWithdrawClainBtn(false);
+        console.log("Is funded: ", res?.isError);
+      } else {
+        setShowWithdrawClainBtn(true);
+      }
       setStakingDetails(res);
       setLoading(false);
     });
@@ -74,6 +80,7 @@ function ProjectDetail(props: any) {
             setLoading={setLoading}
             fetchFilm={fetchFilm}
             ramaBalance={ramaBalance}
+            showWithdrawClaimBtn={showWithdrawClaimBtn}
           />
         </>
       )}

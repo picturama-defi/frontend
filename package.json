@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.1",
     "@chakra-ui/react": "^1.6.10",
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.3",
