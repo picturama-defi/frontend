@@ -1,10 +1,17 @@
 import { Button, Flex } from "@chakra-ui/react";
-import { fundProject } from "../../API/contract.ts/main";
+import { fundProject, claim } from "../../API/contract/main";
 
 function StakingButtons({ id, setLoading, fetchFilm }: any) {
   const handleClick = async () => {
     setLoading(true);
     await fundProject(id);
+    setLoading(false);
+    fetchFilm();
+  };
+
+  const handleClaimClick = async () => {
+    setLoading(true);
+    await claim(id);
     setLoading(false);
     fetchFilm();
   };
@@ -17,7 +24,7 @@ function StakingButtons({ id, setLoading, fetchFilm }: any) {
       <Button width="25%" ml="2" variant="brand2">
         WITHDRAW
       </Button>
-      <Button width="25%" ml="2" variant="brand2">
+      <Button onClick={handleClaimClick} width="25%" ml="2" variant="brand2">
         CLAIM
       </Button>
     </Flex>

@@ -10,18 +10,21 @@ import ApproveButton from "../common/ApproveButton";
 import { extractVimeoId } from "../../helper";
 import { useState } from "react";
 import { useEffect, useCallback } from "react";
-import { getFilmData } from "../../API/contract.ts/main";
+import { getFilmData, getRamaBalance } from "../../API/contract/main";
 
 function ProjectDetail(props: any) {
   const { details, isAdmin, id, selectedAddress } = props;
   const [stakingDetails, setStakingDetails] = useState(null);
+  const [ramaBalance, setRamaBalance] = useState(0);
 
   const [loading, setLoading] = useState(false);
 
   const fetchFilm = useCallback(() => {
     setLoading(true);
     getFilmData(id).then((res: any) => {
-      console.log(res);
+      getRamaBalance().then((res: any) => {
+        setRamaBalance(res);
+      });
       setStakingDetails(res);
       setLoading(false);
     });
@@ -52,6 +55,10 @@ function ProjectDetail(props: any) {
     ).toFixed(2);
   }
 
+  if (percentageFunded === NaN) {
+    percentageFunded = 0;
+  }
+
   return (
     <>
       <Header details={details} />
@@ -66,6 +73,7 @@ function ProjectDetail(props: any) {
             imgSrc={src}
             setLoading={setLoading}
             fetchFilm={fetchFilm}
+            ramaBalance={ramaBalance}
           />
         </>
       )}
