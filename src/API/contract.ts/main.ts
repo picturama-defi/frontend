@@ -73,16 +73,14 @@ export const getFilmData = async (id: string) => {
     try {
         const res = await ramaContract.connect(signer).getFundOfUserOnAProject(ethers.utils.formatBytes32String(id))
 
-        console.log(res)
-
         userFundDetails = {
             userFund: res["userFund"].toString(),
-            yieldGenerated: ((res["yieldGenerated"].toString() * (await provider.getBlock(-1)).timestamp) / 1000000000000000000000).toFixed(2)
+            claimableYield: res["claimableYield"].toString()
         }
     } catch (err) {
         userFundDetails = {
             userFund: 0,
-            yieldGenerated: 0
+            claimableYield: 0
         }
     }
 

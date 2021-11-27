@@ -71,7 +71,7 @@ const Row2 = ({ selectedAddress, details }: any) => {
           <Box w="30%">
             <Text>MY CLAIMABLE REWARDS</Text>
             <Text fontWeight="bold">$RAMA</Text>
-            <Text fontWeight="bold">{details["yieldGenerated"]}</Text>
+            <Text fontWeight="bold">{details["claimableYield"]}</Text>
           </Box>
         </>
       ) : (
