@@ -100,7 +100,7 @@ const VideoOverlay = (props: any) => {
                 fontSize="15px"
                 p="2"
               >
-                {`${percentageFundedFeatured}% funded`}
+                {`${percentageFundedFeatured.toFixed(2)}% funded`}
               </Box>
               <Box
                 position="relative"

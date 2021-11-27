@@ -7,7 +7,10 @@ import ProjectsList from "./ProjectsList";
 import { getFilms, getListedFilms, getNonFundedFilms } from "../../API/main";
 import { useAppContext } from "../../context/AppContext";
 import { ADMIN_PUBLIC_ADDRESS } from "../../config";
-import { getRawFilmData } from "../../API/contract.ts/main";
+import {
+  getRawFilmData,
+  getUserFundedFilmIds,
+} from "../../API/contract.ts/main";
 
 function Projects() {
   const tabs = ["All Listed Projects", "Invested Projects", "All Projects"];
@@ -30,7 +33,7 @@ function Projects() {
         (res["amountFundedSoFar"] / res["targetFund"]) * 100
       );
     });
-  });
+  }, [projectsList]);
 
   useEffect(() => {
     switch (selectedTab) {
@@ -41,8 +44,11 @@ function Projects() {
         break;
       case "Invested Projects":
         {
-          getListedFilms().then((res) => {
-            setProjectsList(res);
+          getListedFilms().then(async (res) => {
+            const userFundedFilms = await getUserFundedFilmIds();
+            setProjectsList(
+              res.filter((film: string) => userFundedFilms.includes(film._id))
+            );
           });
         }
         break;

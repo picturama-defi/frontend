@@ -42,10 +42,15 @@ function ProjectDetail(props: any) {
     details.demoReelLink
   )}.jpg`;
 
-  const percentageFunded = stakingDetails
-    ? (stakingDetails["amountFundedSoFar"] / stakingDetails["targetFund"]) *
-        100 || 0
-    : "0";
+  let percentageFunded = 0;
+
+  if (stakingDetails) {
+    //@ts-ignore
+    percentageFunded = (
+      (stakingDetails["amountFundedSoFar"] / stakingDetails["targetFund"]) *
+      100
+    ).toFixed(2);
+  }
 
   return (
     <>

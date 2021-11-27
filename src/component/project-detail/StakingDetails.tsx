@@ -82,6 +82,16 @@ const Row2 = ({ selectedAddress, details }: any) => {
 };
 
 const Row3 = ({ details, fundProject }: any) => {
+  let percentageFunded = 0;
+
+  if (details) {
+    //@ts-ignore
+    percentageFunded = (
+      (details["amountFundedSoFar"] / details["targetFund"]) *
+      100
+    ).toFixed(2);
+  }
+
   return (
     <HStack pt="5" pb="5" borderTop="1px solid black">
       <Box w="30%">
@@ -108,9 +118,7 @@ const Row3 = ({ details, fundProject }: any) => {
             zIndex={1}
           >
             <Box fontWeight="bold" ml="20px" width="200px">
-              {(details["amountFundedSoFar"] / details["targetFund"]) * 100 ||
-                0}
-              %
+              {percentageFunded}%
             </Box>
           </Box>
         </Box>

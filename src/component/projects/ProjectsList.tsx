@@ -62,7 +62,9 @@ function Project(props: any) {
             ></img>
           </Box>
           <Box pl="5" position="relative" width="50%" color="black">
-            {percentageFunded && <Text>{`${percentageFunded}% funded`}</Text>}
+            {percentageFunded && (
+              <Text>{`${percentageFunded.toFixed(2)}% funded`}</Text>
+            )}
             <Heading mt="2" size="lg">
               {title}
             </Heading>

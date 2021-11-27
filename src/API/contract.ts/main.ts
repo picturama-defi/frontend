@@ -3,9 +3,10 @@ import Abi from "./artifact.json";
 
 import { ethers } from "ethers";
 
+
 export const getRawFilmData = async (id: string) => {
+
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = await provider.getSigner()
 
     const ramaContract = new ethers.Contract(
         CONTRACT_ADDRESS,
@@ -17,6 +18,7 @@ export const getRawFilmData = async (id: string) => {
 
     try {
         const res = await ramaContract.getProjectFundDetails(ethers.utils.formatBytes32String(id))
+        console.log(res)
         projectFundDetails = {
             amountFundedSoFar: res["fundedSoFar"].toString(),
             targetFund: res["targetFund"].toString(),
@@ -26,6 +28,25 @@ export const getRawFilmData = async (id: string) => {
     }
 
     return projectFundDetails;
+}
+
+export const getUserFundedFilmIds = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = await provider.getSigner()
+
+    const ramaContract = new ethers.Contract(
+        CONTRACT_ADDRESS,
+        Abi.abi,
+        provider
+    );
+    try {
+        const res = await ramaContract.connect(signer).getUserFundedProjects()
+        return res.map((item: any) => ethers.utils.parseBytes32String(item)).filter((item: any) => item !== "0")
+    } catch (err) {
+        console.log(err)
+    }
+
+    return []
 }
 
 export const getFilmData = async (id: string) => {
@@ -51,6 +72,8 @@ export const getFilmData = async (id: string) => {
 
     try {
         const res = await ramaContract.connect(signer).getFundOfUserOnAProject(ethers.utils.formatBytes32String(id))
+
+        console.log(res)
 
         userFundDetails = {
             userFund: res["userFund"].toString(),
