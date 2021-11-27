@@ -100,7 +100,7 @@ const Row3 = ({ details, fundProject }: any) => {
     ).toFixed(2);
   }
 
-  if (percentageFunded === NaN) {
+  if (isNaN(percentageFunded)) {
     percentageFunded = 0;
   }
 

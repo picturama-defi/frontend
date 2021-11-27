@@ -73,7 +73,8 @@ export const getFilmData = async (id: string) => {
 
     try {
         const res = await ramaContract.connect(signer).getFundOfUserOnAProject(ethers.utils.formatBytes32String(id))
-
+        console.log("sdadas")
+        console.log(res["claimableYield"])
         userFundDetails = {
             userFund: ethers.utils.formatUnits(res["userFund"]),
             claimableYield: ethers.utils.formatUnits(res["claimableYield"])

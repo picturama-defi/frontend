@@ -55,7 +55,7 @@ function ProjectDetail(props: any) {
     ).toFixed(2);
   }
 
-  if (percentageFunded === NaN) {
+  if (isNaN(percentageFunded)) {
     percentageFunded = 0;
   }
 
