@@ -64,10 +64,10 @@ const Row2 = ({ selectedAddress, details }: any) => {
             <Text fontWeight="bold">$MATIC</Text>
             <Text fontWeight="bold">{details["userFund"]}</Text>
           </Box>
-          <Box w="30%">
+          {/* <Box w="30%">
             <Text>REWARDS UPDATE</Text>
             <Text fontWeight="bold">6H 28M</Text>
-          </Box>
+          </Box> */}
           <Box w="30%">
             <Text>MY CLAIMABLE REWARDS</Text>
             <Text fontWeight="bold">$RAMA</Text>

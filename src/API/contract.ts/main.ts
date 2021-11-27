@@ -63,8 +63,8 @@ export const getFilmData = async (id: string) => {
     try {
         const res = await ramaContract.getProjectFundDetails(ethers.utils.formatBytes32String(id))
         projectFundDetails = {
-            amountFundedSoFar: res["fundedSoFar"].toString(),
-            targetFund: res["targetFund"].toString(),
+            amountFundedSoFar: ethers.utils.formatUnits(res["fundedSoFar"]),
+            targetFund: ethers.utils.formatUnits(res["targetFund"].toString()),
         }
     } catch (err) {
         console.log(err);
@@ -74,8 +74,8 @@ export const getFilmData = async (id: string) => {
         const res = await ramaContract.connect(signer).getFundOfUserOnAProject(ethers.utils.formatBytes32String(id))
 
         userFundDetails = {
-            userFund: res["userFund"].toString(),
-            claimableYield: res["claimableYield"].toString()
+            userFund: ethers.utils.formatUnits(res["userFund"]),
+            claimableYield: ethers.utils.formatUnits(res["claimableYield"])
         }
     } catch (err) {
         userFundDetails = {
@@ -104,11 +104,13 @@ export const fundProject = async (id: string) => {
         return;
     }
 
+
     const txn = await ramaContract.connect(signer).fundProject(ethers.utils.formatBytes32String(id), {
-        value
+        //@ts-ignore
+        value: ethers.utils.parseEther(value)
     })
 
-    await txn.wait()
+    // await txn.wait()
 
     return;
 }
