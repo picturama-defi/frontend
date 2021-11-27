@@ -7,6 +7,7 @@ const StakingDetails = ({
   imgSrc,
   selectedAddress,
   details: filmDetails,
+  ramaBalance,
 }: any) => {
   if (!filmDetails) {
     return <Loading color="yellow" emptyColor="black" />;
@@ -20,7 +21,11 @@ const StakingDetails = ({
       </Box>
       <Box flex="5">
         <Row1 />
-        <Row2 details={filmDetails} selectedAddress={selectedAddress} />
+        <Row2
+          ramaBalance={ramaBalance}
+          details={filmDetails}
+          selectedAddress={selectedAddress}
+        />
         <Row3 details={filmDetails} />
       </Box>
     </Flex>
@@ -54,7 +59,7 @@ const Row1 = () => {
   );
 };
 
-const Row2 = ({ selectedAddress, details }: any) => {
+const Row2 = ({ selectedAddress, details, ramaBalance }: any) => {
   return (
     <Flex pt="5" pb="5" borderTop="1px solid black">
       {selectedAddress ? (
@@ -65,8 +70,11 @@ const Row2 = ({ selectedAddress, details }: any) => {
             <Text fontWeight="bold">{details["userFund"]}</Text>
           </Box>
           <Box w="30%">
-            <Text>REWARDS UPDATE</Text>
-            <Text fontWeight="bold">6H 28M</Text>
+            <Text fontWeight="bold">$RAMA BALANCE</Text>
+            <Text>
+              <br />
+            </Text>
+            <Text fontWeight="bold">{ramaBalance}</Text>
           </Box>
           <Box w="30%">
             <Text>MY CLAIMABLE REWARDS</Text>
@@ -90,6 +98,10 @@ const Row3 = ({ details, fundProject }: any) => {
       (details["amountFundedSoFar"] / details["targetFund"]) *
       100
     ).toFixed(2);
+  }
+
+  if (isNaN(percentageFunded)) {
+    percentageFunded = 0;
   }
 
   return (

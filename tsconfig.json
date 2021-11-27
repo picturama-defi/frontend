@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/API/contract"  ],
   "exclude": [
     "node_modules"
   ]
