@@ -40,7 +40,7 @@ const Row1 = () => {
           STAKE
         </Text>
         <Text position="relative" top="0" fontWeight="bold">
-          $MATIC
+          $ETH
         </Text>
         <Text position="relative" top="0" fontWeight="bold">
           1
@@ -66,7 +66,7 @@ const Row2 = ({ selectedAddress, details, ramaBalance }: any) => {
         <>
           <Box w="30%">
             <Text>MY STAKE</Text>
-            <Text fontWeight="bold">$MATIC</Text>
+            <Text fontWeight="bold">$ETH</Text>
             <Text fontWeight="bold">{details["userFund"]}</Text>
           </Box>
           <Box w="30%">
@@ -108,7 +108,7 @@ const Row3 = ({ details, fundProject }: any) => {
     <HStack pt="5" pb="5" borderTop="1px solid black">
       <Box w="30%">
         <Box>TVL</Box>
-        <Text fontWeight="bold">$MATIC</Text>
+        <Text fontWeight="bold">$ETH</Text>
         <Text fontWeight="bold">Target: {details["targetFund"]}</Text>
         <Box>Funded so far: {details["amountFundedSoFar"]}</Box>
       </Box>

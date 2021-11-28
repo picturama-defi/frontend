@@ -121,7 +121,7 @@ const VideoOverlay = (props: any) => {
                 fontSize="15px"
                 p="2"
               >
-                {parse(details?.description)}
+                {parse(details?.description.split("").slice(0, 300).join(""))}
               </Box>
               <Button
                 onClick={onProjectClick}

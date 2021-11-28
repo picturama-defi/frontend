@@ -63,7 +63,15 @@ function Project(props: any) {
               alt={title}
             ></img>
           </Box>
-          <Box pl="5" position="relative" width="50%" color="black">
+          <Box
+            pl="5"
+            position="relative"
+            width="50%"
+            color="black"
+            overflow="hidden"
+            textOverflow="ellipsis"
+            maxHeight="60"
+          >
             {percentageFunded && (
               <Text>{`${percentageFunded.toFixed(2)}% funded`}</Text>
             )}
