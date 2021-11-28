@@ -46,7 +46,7 @@ function Project(props: any) {
   } = props;
 
   return (
-    <Link href={`/project-details/${_id}/`} passHref>
+    <Link href={`/project-detail?id=${_id}`} passHref>
       <Box
         cursor="pointer"
         bg="brand.yellow"

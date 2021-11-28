@@ -77,7 +77,7 @@ const VideoOverlay = (props: any) => {
   };
 
   const onProjectClick = () => {
-    router.push(`/project-details/${details._id}`);
+    router.push(`/project-details?id=${details._id}`);
   };
 
   return (
