@@ -27,6 +27,7 @@ const ConnectWallet = (props: any) => {
   }, [setSelectedAddress]);
 
   useEffect(() => {
+    console.log(window.ethereum.chainId);
     if (window.ethereum.chainId !== CORRECT_CHAIN) {
       toast({
         title: "Wrong chain selected",
