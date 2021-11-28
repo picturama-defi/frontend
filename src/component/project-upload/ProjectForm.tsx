@@ -74,8 +74,9 @@ const ProjectForm = () => {
           {errors.description && <FieldRequired />}
         </FormControl>
         <FormControl pt="5" id="script">
-          <FormLabel>Upload Script</FormLabel>
+          <FormLabel>Upload any Related files (.zip format)</FormLabel>
           <Input
+            accept=".zip"
             variant="brand"
             padding="1"
             type="file"

@@ -1,7 +1,11 @@
 import { Box, Text, Flex, Button } from "@chakra-ui/react";
 import parse from "html-react-parser";
 
-function Description({ description }: any) {
+function Description({ description, script }: any) {
+  const getBase64fromIPFSURL = async () => {
+    let base64URL = await fetch(script);
+    window.open(await base64URL.text(), "_blank");
+  };
   return (
     <>
       <Box color="brand.yellow" p="20">
@@ -35,7 +39,7 @@ function Description({ description }: any) {
         <Text>{parse(description)}</Text>
         <Flex pt="10">
           <Button variant="brand3">PROJECT WEBSITE</Button>
-          <Button ml="5" variant="brand3">
+          <Button ml="5" variant="brand3" onClick={getBase64fromIPFSURL}>
             DOWNLOAD SCRIPT
           </Button>
           <Button ml="5" variant="brand3">

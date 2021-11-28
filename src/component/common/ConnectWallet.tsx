@@ -30,7 +30,7 @@ const ConnectWallet = (props: any) => {
     console.log(window.ethereum.chainId);
     if (window.ethereum.chainId !== CORRECT_CHAIN) {
       toast({
-        title: "Wrong chain selected",
+        title: "Please select Rinkeby testnet.",
         status: "warning",
         duration: null,
         isClosable: false,

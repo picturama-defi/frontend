@@ -84,7 +84,10 @@ function ProjectDetail(props: any) {
           />
         </>
       )}
-      <Description description={details?.description} />
+      <Description
+        description={details?.description}
+        script={details?.script}
+      />
       <Team team={details?.team} />
       {console.log("The film details: ", details)}
       {isAdmin && !details?.isFunded && (
