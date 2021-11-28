@@ -48,6 +48,7 @@ function Projects() {
           getListedFilms().then(async (res) => {
             const userFundedFilms = await getUserFundedFilmIds();
             setProjectsList(
+              //@ts-ignore
               res.filter((film: string) => userFundedFilms.includes(film._id))
             );
           });
