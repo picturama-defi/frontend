@@ -86,7 +86,8 @@ function ProjectDetail(props: any) {
       )}
       <Description description={details?.description} />
       <Team team={details?.team} />
-      {isAdmin && (
+      {console.log("The film details: ", details)}
+      {isAdmin && !details?.isFunded && (
         <Center pt="0" pb="20">
           <ApproveButton setLoading={setLoading} id={id} />
         </Center>
