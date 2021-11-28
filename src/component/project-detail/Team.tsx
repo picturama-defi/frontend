@@ -39,7 +39,11 @@ const MemberTile = (props: any) => {
         {detail.place}
       </Text>
       <Text mt="3">{detail.about}</Text>
-      <a href={detail.linkedin} target="_blank" rel="noopener noreferrer">
+      <a
+        href={"https://" + detail.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Text
           p="2"
           pl="0"
