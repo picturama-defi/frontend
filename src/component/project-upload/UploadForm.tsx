@@ -12,6 +12,7 @@ import Preview from "./Preview";
 
 import { addFilm } from "../../API/main";
 import { addToIPFS } from "../../API/ipfs";
+import { getEthToUsdRate } from "../../API/contract/main";
 
 import { convertToB64 } from "../../helper";
 import { useRouter } from "next/router";
@@ -35,7 +36,12 @@ const UploadForm = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const [ethToUsd, setEthToUsd] = useState(null);
+
   useEffect(() => {
+    getEthToUsdRate().then((res) => {
+      console.log(res);
+    });
     if (!selectedAddress) {
       router.push("/projects");
     }
