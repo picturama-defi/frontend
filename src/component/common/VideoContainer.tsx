@@ -23,7 +23,7 @@ const VideoContainer = (props: any) => {
       <style>{style}</style>
       <Box className="video-container" width="100%">
         <iframe
-          src={`${vimeoLink}&title=0&byline=0&portrait=0&controls=0`}
+          src={`${vimeoLink}&title=0&byline=0&portrait=0line=0&portrait=0&controls=0`}
           allow="autoplay; fullscreen; picture-in-picture"
           width="100%"
           height="100%"
@@ -159,6 +159,10 @@ const style = `
       color: black;
       cursor: pointer;
       background-color: #EA3EF7;
+    }
+
+    .vp-controls {
+      display:none !important;
     }
 `;
 

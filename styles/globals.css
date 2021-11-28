@@ -27,3 +27,7 @@ a {
   max-height: 50vh !important;
   min-height: 30vh !important;
 }
+
+.vp-controls {
+  display:none !important;
+}
