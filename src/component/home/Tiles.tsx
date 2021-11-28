@@ -1,5 +1,5 @@
 import { Box, Text, Center, VStack, Button } from "@chakra-ui/react";
-
+import { TriangleDownIcon } from "@chakra-ui/icons";
 function Tiles() {
   return (
     <>
@@ -27,8 +27,8 @@ function TileParent(props: any) {
 
 const Tile1 = () => {
   return (
-    <Text className="big-writing" fontWeight="bold" fontSize="50px">
-      STATE WHY
+    <Text fontWeight="bold" fontSize="50px" padding="20" textAlign="center">
+      Empowering independent film funding with DeFi
     </Text>
   );
 };
@@ -37,14 +37,9 @@ const Tile2 = () => {
   return (
     <>
       <VStack width="50%">
-        <Text>Road map</Text>
-        <Text
-          textAlign="center"
-          className="big-writing"
-          fontWeight="bold"
-          fontSize="50px"
-        >
-          CURRENTLY WE HAVE 6 FILMS
+        <Text className="big-writing">Road map</Text>
+        <Text textAlign="center" fontWeight="bold" fontSize="20px">
+          <TriangleDownIcon /> On boarding initial projects to recieve funding
         </Text>
       </VStack>
     </>
@@ -57,14 +52,24 @@ const Tile3 = () => {
       <VStack>
         <Text
           textAlign="center"
-          className="big-writing"
           fontWeight="bold"
-          fontSize="50px"
+          fontSize="30px"
           width="80%"
+          pb="50"
         >
-          SOMETHING TO SUPPORT THE ARGUMENT
+          Take the “decision making” out of the hands of the gargantuan entities
+          who decide which stories will be told in the first place, and put that
+          decision making power in the hands of citizens across the globe
         </Text>
-        <Button variant="brand2">LAUNCH DISCORD</Button>
+        <Button
+          onClick={() => {
+            window.open("https://discord.gg/cPDuEWVn", "_blank");
+          }}
+          marginTop="20"
+          variant="brand2"
+        >
+          LAUNCH DISCORD
+        </Button>
       </VStack>
     </>
   );
