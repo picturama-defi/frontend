@@ -34,7 +34,7 @@ const FieldRequired = () => (
   <Text color="brand.pink">This field is required</Text>
 );
 
-const ProjectForm = () => {
+const ProjectForm = ({ ethToUsd }: any) => {
   const {
     register,
     unregister,
@@ -109,6 +109,7 @@ const ProjectForm = () => {
             />
             <InputRightAddon children="ETH" />
           </InputGroup>
+          <Text mt="2">{ethToUsd}</Text>
           {errors.targetFund && (
             <Text color="brand.pink">This field is required</Text>
           )}

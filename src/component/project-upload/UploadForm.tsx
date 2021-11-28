@@ -36,11 +36,12 @@ const UploadForm = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [ethToUsd, setEthToUsd] = useState(null);
+  const [ethToUsd, setEthToUsd] = useState(1);
 
   useEffect(() => {
-    getEthToUsdRate().then((res) => {
-      console.log(res);
+    //@ts-ignore
+    getEthToUsdRate().then((res: number) => {
+      setEthToUsd(res);
     });
     if (!selectedAddress) {
       router.push("/projects");
@@ -118,7 +119,7 @@ const UploadForm = () => {
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <Header />
         <Stack bg="brand.yellow" padding="20" pt="5">
-          {formStep === 0 && <ProjectForm />}
+          {formStep === 0 && <ProjectForm ethToUsd={ethToUsd} />}
           {formStep === 1 && (
             <MembersForm
               teamMemberPics={teamMemberPics}

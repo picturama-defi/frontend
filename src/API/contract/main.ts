@@ -162,7 +162,7 @@ export const getEthToUsdRate = async () => {
     try {
         const res = await ramaContract
             .getLatestPrice();
-        console.log(res)
+        return (res.toNumber() / (10 ** 8))
     } catch (err) {
         console.log(err)
         return null;
