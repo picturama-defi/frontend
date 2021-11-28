@@ -13,7 +13,7 @@ import { useEffect, useCallback } from "react";
 import {
   getFilmData,
   getRamaBalance,
-  getRawFilmData,
+  getFundOfUserOnAProject,
 } from "../../API/contract/main";
 
 function ProjectDetail(props: any) {
@@ -53,17 +53,15 @@ function ProjectDetail(props: any) {
   }, [id, fetchFilm]);
 
   useEffect(() => {
-    if (!projectsList[0]) {
-      return;
-    }
-    getRawFilmData(projectsList[0]._id).then((res: any) => {
+    getFundOfUserOnAProject(id).then((res: any) => {
       if (!res) {
         return;
       }
-      if (res["isFundedByUser"]) setShowStakeButton(false);
+      console.log("API result: ", res);
+      if (res["isUserFunded"]) setShowStakeButton(false);
       else setShowStakeButton(true);
     });
-  }, [projectsList]);
+  });
 
   if (!details || loading) {
     return <Loading emptyColor="black" color="yellow" />;

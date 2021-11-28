@@ -5,6 +5,7 @@ import RamaAbi from "./ramaTokenArtifact.json";
 import { ethers } from "ethers";
 
 export const getRawFilmData = async (id: string) => {
+  console.log("Calling getRawFilmData");
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const ramaContract = new ethers.Contract(CONTRACT_ADDRESS, Abi.abi, provider);
@@ -15,7 +16,7 @@ export const getRawFilmData = async (id: string) => {
     const res = await ramaContract.getProjectFundDetails(
       ethers.utils.formatBytes32String(id)
     );
-    console.log(res);
+    console.log("The res", res);
     projectFundDetails = {
       amountFundedSoFar: res["fundedSoFar"].toString(),
       targetFund: res["targetFund"].toString(),
@@ -84,6 +85,38 @@ export const getFilmData = async (id: string) => {
 
   return {
     ...projectFundDetails,
+    ...userFundDetails,
+  };
+};
+
+export const getFundOfUserOnAProject = async (id: any) => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = await provider.getSigner();
+
+  const ramaContract = new ethers.Contract(CONTRACT_ADDRESS, Abi.abi, provider);
+
+  let userFundDetails;
+
+  try {
+    const res = await ramaContract
+      .connect(signer)
+      .getFundOfUserOnAProject(ethers.utils.formatBytes32String(id));
+    console.log(res["claimableYield"]);
+    userFundDetails = {
+      userFund: ethers.utils.formatUnits(res["userFund"]),
+      claimableYield: ethers.utils.formatUnits(res["claimableYield"]),
+      isUserFunded: true,
+    };
+  } catch (err) {
+    userFundDetails = {
+      userFund: 0,
+      claimableYield: 0,
+      isError: true,
+      isUserFunded: false,
+    };
+  }
+
+  return {
     ...userFundDetails,
   };
 };
