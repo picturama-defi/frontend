@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/AppContext";
 import { useToast } from "@chakra-ui/react";
 import { CORRECT_CHAIN } from "../../config";
-import router from "next/router";
+import { useRouter } from "next/router";
 
 declare global {
   interface Window {
@@ -15,6 +15,7 @@ const ConnectWallet = (props: any) => {
   const { variant } = props;
   const [selectedAddress, setSelectedAddress]: any = useAppContext();
   const toast = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     window.ethereum.on("accountsChanged", (res: any) => {
@@ -25,7 +26,7 @@ const ConnectWallet = (props: any) => {
       router.reload();
     });
     setSelectedAddress(window.ethereum.selectedAddress);
-  }, [setSelectedAddress]);
+  }, [setSelectedAddress, router]);
 
   useEffect(() => {
     console.log(window.ethereum.chainId);
