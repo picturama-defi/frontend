@@ -45,7 +45,7 @@ const ProjectForm = ({ ethToUsd }: any) => {
     getValues,
   } = useFormContext();
 
-  const [convertedFund, setConvertedFund] = useState();
+  const [convertedFund, setConvertedFund] = useState(null);
 
   return (
     <div>
@@ -116,9 +116,11 @@ const ProjectForm = ({ ethToUsd }: any) => {
             />
             <InputRightAddon children="ETH" />
           </InputGroup>
-          <Text pt="3" fontWeight="bold">
-            $ {convertedFund}
-          </Text>
+          {convertedFund && (
+            <Text pt="3" fontWeight="bold">
+              $ {convertedFund}
+            </Text>
+          )}
 
           {errors.targetFund && (
             <Text color="brand.pink">This field is required</Text>
