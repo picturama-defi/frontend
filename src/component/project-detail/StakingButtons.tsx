@@ -11,21 +11,16 @@ function StakingButtons({
 }: any) {
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const [showStakeModal, setShowStakeModal] = useState(false);
+  const [showClaimModal, setShowClaimModal] = useState(false);
+
   const [stakeAmount, setStakeAmount] = useState(0);
 
   const onConfirmWithdraw = async () => {
     setLoading(true);
-    await withdraw(id);
+    const res = await withdraw(id);
+    if (!res) alert("Transaction failed!");
     setLoading(false);
     fetchFilm();
-  };
-
-  const closeWithDrawModal = () => {
-    setShowWithdrawModal(false);
-  };
-
-  const handleWithdrawClick = async () => {
-    setShowWithdrawModal(true);
   };
 
   const onConfirmStake = async () => {
@@ -36,9 +31,28 @@ function StakingButtons({
     fetchFilm();
   };
 
+  const onConfirmClaim = async () => {
+    setLoading(true);
+    const res = await claim(id);
+    if (!res) alert("Transaction failed!");
+    setLoading(false);
+    fetchFilm();
+  };
+  const closeWithDrawModal = () => {
+    setShowWithdrawModal(false);
+  };
+
   const closeStakeModal = () => {
     setStakeAmount(0);
     setShowStakeModal(false);
+  };
+
+  const closeClaimModal = () => {
+    setShowClaimModal(false);
+  };
+
+  const handleWithdrawClick = async () => {
+    setShowWithdrawModal(true);
   };
 
   const handleStakeClick = async () => {
@@ -46,18 +60,17 @@ function StakingButtons({
   };
 
   const handleClaimClick = async () => {
-    setLoading(true);
-    await claim(id);
-    setLoading(false);
-    fetchFilm();
+    setShowClaimModal(true);
   };
 
   return (
     <>
       <Flex justifyContent="space-around" p="5" flexDirection="row">
-        <Button onClick={handleStakeClick} width="25%" variant="brand2">
-          STAKE
-        </Button>
+        {!showWithdrawClaimBtn && (
+          <Button onClick={handleStakeClick} width="25%" variant="brand2">
+            STAKE
+          </Button>
+        )}
         {showWithdrawClaimBtn && (
           <>
             <Button
@@ -100,6 +113,17 @@ function StakingButtons({
             withInput={true}
             stakeAmount={stakeAmount}
             setStakeAmount={setStakeAmount}
+          />
+        )}
+        {showClaimModal && (
+          <BasicModal
+            onOpen={showClaimModal}
+            onClose={closeClaimModal}
+            onConfirm={onConfirmClaim}
+            title={"Are you sure to claim your rewards ?"}
+            description={
+              "Claiming your rewards will lock your staked ETH in film funds and sent the RAMA accumilated to your wallet. You will no longer recieve APY returns once RAMA is claimed."
+            }
           />
         )}
       </Flex>

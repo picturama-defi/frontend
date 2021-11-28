@@ -115,13 +115,17 @@ export const claim = async (id: string) => {
   const signer = provider.getSigner();
   const ramaContract = new ethers.Contract(CONTRACT_ADDRESS, Abi.abi, provider);
 
-  const txn = await ramaContract
-    .connect(signer)
-    .claimProjectRewards(ethers.utils.formatBytes32String(id));
+  try {
+    const txn = await ramaContract
+      .connect(signer)
+      .claimProjectRewards(ethers.utils.formatBytes32String(id));
 
-  await txn.wait();
+    await txn.wait();
+  } catch (err) {
+    return false;
+  }
 
-  return;
+  return true;
 };
 
 export const getRamaBalance = async () => {
@@ -141,9 +145,13 @@ export const withdraw = async (id: any) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const ramaContract = new ethers.Contract(CONTRACT_ADDRESS, Abi.abi, provider);
-  const txn = await ramaContract
-    .connect(signer)
-    .withdrawFromProject(ethers.utils.formatBytes32String(id));
-  await txn.wait();
-  return;
+  try {
+    const txn = await ramaContract
+      .connect(signer)
+      .withdrawFromProject(ethers.utils.formatBytes32String(id));
+    await txn.wait();
+  } catch (err) {
+    return false;
+  }
+  return true;
 };
