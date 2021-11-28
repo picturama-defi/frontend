@@ -5,9 +5,7 @@ import Link from "next/link";
 import Loading from "../common/Loading";
 
 function ProjectsList(props: any) {
-  const { descriptionBoxHeight, projectsList } = props;
-
-  const isLoading = projectsList.length === 0;
+  const { descriptionBoxHeight, projectsList, isLoading } = props;
 
   if (isLoading) {
     return <Loading color="yellow" isLoading={isLoading} />;
@@ -23,9 +21,13 @@ function ProjectsList(props: any) {
         flex="1"
         bg="brand.yellow"
       >
-        {projectsList.map((project: any) => (
-          <Project details={project} key={project.title} />
-        ))}
+        {projectsList.length > 0 ? (
+          projectsList.map((project: any) => (
+            <Project details={project} key={project.title} />
+          ))
+        ) : (
+          <Center>No projects to show</Center>
+        )}
       </Box>
     </>
   );

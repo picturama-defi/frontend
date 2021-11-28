@@ -8,7 +8,7 @@ import {
   VStack,
   IconButton,
 } from "@chakra-ui/react";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { ArrowLeftIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import ConnectWallet from "../common/ConnectWallet";
 import LogoWithTitle from "../common/LogoWithTitle";
@@ -42,21 +42,28 @@ const Header = (props: any) => {
             </Button>
           </Center>
         </Flex>
-        <Flex>
-          <IconButton
-            ml="20"
-            mt="20"
-            onClick={() => router.back()}
-            aria-label="Search database"
-            icon={<ChevronLeftIcon />}
-          />
-          <Center width="90%">
+        <Flex width="100%" justifyContent="space-evenly">
+          <Center>
             <VStack>
               <Text fontWeight="bold">PROJECT</Text>
               <Heading size="2xl">{details?.title.toUpperCase()}</Heading>
             </VStack>
           </Center>
         </Flex>
+        <Box>
+          <Button
+            position="absolute"
+            top="10"
+            ml="20"
+            mt="20"
+            onClick={() => router.back()}
+            leftIcon={<ArrowLeftIcon />}
+            colorScheme="teal"
+            variant="brand"
+          >
+            Back
+          </Button>
+        </Box>
       </Box>
     </>
   );

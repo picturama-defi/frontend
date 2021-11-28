@@ -2,6 +2,8 @@ import { Flex, Button, Center, Box, Heading } from "@chakra-ui/react";
 import LogoWithTitle from "../common/LogoWithTitle";
 import { useRouter } from "next/dist/client/router";
 
+import { ArrowLeftIcon } from "@chakra-ui/icons";
+
 import ConnectWallet from "../common/ConnectWallet";
 const Header = () => {
   const router = useRouter();
@@ -36,6 +38,20 @@ const Header = () => {
             UPLOAD PROJECT
           </Box>
         </Center>
+        <Box>
+          <Button
+            position="absolute"
+            top="10"
+            ml="20"
+            mt="20"
+            onClick={() => router.back()}
+            leftIcon={<ArrowLeftIcon />}
+            colorScheme="teal"
+            variant="brand"
+          >
+            Back
+          </Button>
+        </Box>
       </Box>
     </>
   );

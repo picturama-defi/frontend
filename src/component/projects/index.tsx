@@ -16,6 +16,7 @@ function Projects() {
   const [projectsList, setProjectsList]: any = useState(() => []);
   const [selectedAddress]: any = useAppContext();
   const [percentageFundedFeatured, setPercentageFundedFeatured] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleTabSelect = (tabToChangeTo: string) => {
     setSelectedTab(tabToChangeTo);
@@ -37,10 +38,12 @@ function Projects() {
   }, [projectsList]);
 
   useEffect(() => {
+    setIsLoading(true);
     switch (selectedTab) {
       case "All Listed Projects":
         getListedFilms().then((res) => {
           setProjectsList(res);
+          setIsLoading(false);
         });
         break;
       case "Invested Projects":
@@ -51,17 +54,20 @@ function Projects() {
               //@ts-ignore
               res.filter((film: string) => userFundedFilms.includes(film._id))
             );
+            setIsLoading(false);
           });
         }
         break;
       case "All Projects":
         getNonFundedFilms().then((res) => {
           setProjectsList(res);
+          setIsLoading(false);
         });
         break;
       default:
         getFilms().then((res) => {
           setProjectsList(res);
+          setIsLoading(false);
         });
     }
   }, [selectedTab]);
@@ -120,6 +126,7 @@ function Projects() {
           selectedTab={selectedTab}
           descriptionBoxHeight={descriptionBoxHeight}
           projectsList={projectsList}
+          isLoading={isLoading}
         />
       </Box>
     </>
