@@ -104,9 +104,9 @@ const ProjectForm = () => {
               variant="brand"
               type="number"
               {...register("targetFund", { required: true })}
-              placeholder="Target Fund (MATIC)"
+              placeholder="Target Fund (ETH)"
             />
-            <InputRightAddon children="MATIC" />
+            <InputRightAddon children="ETH" />
           </InputGroup>
           {errors.targetFund && (
             <Text color="brand.pink">This field is required</Text>
