@@ -19,10 +19,10 @@ const ConnectWallet = (props: any) => {
   useEffect(() => {
     window.ethereum.on("accountsChanged", (res: any) => {
       setSelectedAddress(res[0]);
-      router.reload();
+      router.replace(router.asPath);
     });
     window.ethereum.on("chainChanged", () => {
-      router.reload();
+      router.replace(router.asPath);
     });
     setSelectedAddress(window.ethereum.selectedAddress);
   }, [setSelectedAddress]);
