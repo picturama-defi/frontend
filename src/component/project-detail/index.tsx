@@ -10,7 +10,11 @@ import ApproveButton from "../common/ApproveButton";
 import { extractVimeoId } from "../../helper";
 import { useState } from "react";
 import { useEffect, useCallback } from "react";
-import { getFilmData, getRamaBalance } from "../../API/contract/main";
+import {
+  getFilmData,
+  getRamaBalance,
+  getRawFilmData,
+} from "../../API/contract/main";
 
 function ProjectDetail(props: any) {
   const { details, isAdmin, id, selectedAddress } = props;
@@ -19,6 +23,11 @@ function ProjectDetail(props: any) {
 
   const [loading, setLoading] = useState(false);
   const [showWithdrawClaimBtn, setShowWithdrawClainBtn] = useState(false);
+
+  const [showStakeButton, setShowStakeButton] = useState(true);
+
+  const [projectsList, setProjectsList]: any = useState(() => []);
+
   const fetchFilm = useCallback(() => {
     setLoading(true);
     getFilmData(id).then((res: any) => {
@@ -42,6 +51,19 @@ function ProjectDetail(props: any) {
     }
     fetchFilm();
   }, [id, fetchFilm]);
+
+  useEffect(() => {
+    if (!projectsList[0]) {
+      return;
+    }
+    getRawFilmData(projectsList[0]._id).then((res: any) => {
+      if (!res) {
+        return;
+      }
+      if (res["isFundedByUser"]) setShowStakeButton(false);
+      else setShowStakeButton(true);
+    });
+  }, [projectsList]);
 
   if (!details || loading) {
     return <Loading emptyColor="black" color="yellow" />;
@@ -80,7 +102,10 @@ function ProjectDetail(props: any) {
             setLoading={setLoading}
             fetchFilm={fetchFilm}
             ramaBalance={ramaBalance}
+            showStakeButton={showStakeButton}
             showWithdrawClaimBtn={showWithdrawClaimBtn}
+            stakingDetails={stakingDetails}
+            setShowWithdrawClainBtn={setShowWithdrawClainBtn}
           />
         </>
       )}
@@ -89,7 +114,7 @@ function ProjectDetail(props: any) {
         script={details?.script}
       />
       <Team team={details?.team} />
-      {console.log("The film details: ", details)}
+      {console.log("The staking details: ", stakingDetails)}
       {isAdmin && !details?.isFunded && (
         <Center pt="0" pb="20">
           <ApproveButton setLoading={setLoading} id={id} />

@@ -18,6 +18,7 @@ function Projects() {
   const [percentageFundedFeatured, setPercentageFundedFeatured] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [showStakeButton, setShowStakeButton] = useState(true);
   const handleTabSelect = (tabToChangeTo: string) => {
     setSelectedTab(tabToChangeTo);
   };
@@ -30,7 +31,8 @@ function Projects() {
       if (!res) {
         return;
       }
-
+      if (res["isFundedByUser"]) setShowStakeButton(false);
+      else setShowStakeButton(true);
       const percentage = (res["amountFundedSoFar"] / res["targetFund"]) * 100;
 
       setPercentageFundedFeatured(percentage);

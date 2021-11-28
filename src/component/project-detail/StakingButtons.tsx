@@ -8,6 +8,9 @@ function StakingButtons({
   setLoading,
   fetchFilm,
   showWithdrawClaimBtn,
+  setShowWithdrawClainBtn,
+  stakingDetails,
+  showStakeButton,
 }: any) {
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const [showStakeModal, setShowStakeModal] = useState(false);
@@ -19,6 +22,7 @@ function StakingButtons({
     setLoading(true);
     const res = await withdraw(id);
     if (!res) alert("Transaction failed!");
+
     setLoading(false);
     fetchFilm();
   };
@@ -27,6 +31,7 @@ function StakingButtons({
     setLoading(true);
     const res = await fundProject(id, stakeAmount);
     if (!res) alert("Transaction failed!");
+
     setLoading(false);
     fetchFilm();
   };
@@ -35,6 +40,7 @@ function StakingButtons({
     setLoading(true);
     const res = await claim(id);
     if (!res) alert("Transaction failed!");
+
     setLoading(false);
     fetchFilm();
   };
@@ -65,13 +71,15 @@ function StakingButtons({
 
   return (
     <>
+      {console.log("staking details in staking buttons", stakingDetails)}
+      {console.log("SHow stake btn: ", showStakeButton)}
       <Flex justifyContent="space-around" p="5" flexDirection="row">
-        {!showWithdrawClaimBtn && (
+        {showStakeButton && (
           <Button onClick={handleStakeClick} width="25%" variant="brand2">
             STAKE
           </Button>
         )}
-        {showWithdrawClaimBtn && (
+        {parseFloat(stakingDetails?.claimableYield) != 0.0 && (
           <>
             <Button
               onClick={handleWithdrawClick}

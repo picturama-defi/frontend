@@ -10,6 +10,8 @@ function StakingInfo(props: any) {
     fetchFilm,
     ramaBalance,
     showWithdrawClaimBtn,
+    stakingDetails,
+    showStakeButton,
   } = props;
 
   return (
@@ -22,6 +24,8 @@ function StakingInfo(props: any) {
             setLoading={setLoading}
             id={id}
             showWithdrawClaimBtn={showWithdrawClaimBtn}
+            stakingDetails={stakingDetails}
+            showStakeButton={showStakeButton}
           />
         )}
       </Box>
