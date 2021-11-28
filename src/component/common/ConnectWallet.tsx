@@ -26,7 +26,7 @@ const ConnectWallet = (props: any) => {
       router.reload();
     });
     setSelectedAddress(window.ethereum.selectedAddress);
-  }, [setSelectedAddress, router]);
+  });
 
   useEffect(() => {
     console.log(window.ethereum.chainId);
