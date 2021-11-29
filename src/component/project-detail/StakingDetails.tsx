@@ -54,7 +54,11 @@ const Row1 = () => {
       </Box>
       <Box w="30%">
         <Text>EST.APY</Text>
-        <Text fontWeight="bold">37.3%</Text>
+        <Text fontSize="15" fontWeight="bold">
+          37.5%
+        </Text>
+        <Text>+</Text>
+        <Text fontWeight="bold">10% for early funders</Text>
       </Box>
     </Flex>
   );
