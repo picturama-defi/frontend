@@ -84,7 +84,7 @@ const Row2 = ({ selectedAddress, details, ramaBalance }: any) => {
           </Box>
         </>
       ) : (
-        <Text>Connect wallet to start staking</Text>
+        <Text>Connect wallet to add / fund project</Text>
       )}
     </Flex>
   );
