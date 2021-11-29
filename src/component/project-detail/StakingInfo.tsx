@@ -12,12 +12,17 @@ function StakingInfo(props: any) {
     showWithdrawClaimBtn,
     stakingDetails,
     showStakeButton,
+    ethToUsd,
   } = props;
 
   return (
     <>
       <Box bg="brand.yellow" padding="8%" pt="10">
-        <StakingDetails ramaBalance={ramaBalance} {...props} />
+        <StakingDetails
+          ethToUsd={ethToUsd}
+          ramaBalance={ramaBalance}
+          {...props}
+        />
         {selectedAddress && (
           <StakingButtons
             fetchFilm={fetchFilm}

@@ -8,6 +8,7 @@ const StakingDetails = ({
   selectedAddress,
   details: filmDetails,
   ramaBalance,
+  ethToUsd,
 }: any) => {
   if (!filmDetails) {
     return <Loading color="yellow" emptyColor="black" />;
@@ -20,13 +21,13 @@ const StakingDetails = ({
         <img alt="preview image of the project" src={imgSrc}></img>
       </Box>
       <Box flex="5">
-        <Row1 />
+        <Row1 ethToUsd />
         <Row2
           ramaBalance={ramaBalance}
           details={filmDetails}
           selectedAddress={selectedAddress}
         />
-        <Row3 details={filmDetails} />
+        <Row3 ethToUsd={ethToUsd} details={filmDetails} />
       </Box>
     </Flex>
   );
@@ -89,7 +90,7 @@ const Row2 = ({ selectedAddress, details, ramaBalance }: any) => {
   );
 };
 
-const Row3 = ({ details, fundProject }: any) => {
+const Row3 = ({ details, fundProject, ethToUsd }: any) => {
   let percentageFunded = 0;
 
   if (details) {
@@ -107,10 +108,21 @@ const Row3 = ({ details, fundProject }: any) => {
   return (
     <HStack pt="5" pb="5" borderTop="1px solid black">
       <Box w="30%">
-        <Box>TVL</Box>
-        <Text fontWeight="bold">$ETH</Text>
-        <Text fontWeight="bold">Target: {details["targetFund"]}</Text>
-        <Box>Funded so far: {details["amountFundedSoFar"]}</Box>
+        <Box>TVL $ETH</Box>
+        <Text fontWeight="bold">
+          Target:{" "}
+          <Box>
+            {details["targetFund"]} ($
+            {(ethToUsd * details["targetFund"]).toFixed(2)})
+          </Box>
+        </Text>
+        <Box mt="2">
+          <Box>Funded so far</Box>
+          <Box>
+            {details["amountFundedSoFar"]} ($
+            {(ethToUsd * details["amountFundedSoFar"]).toFixed(2)})
+          </Box>
+        </Box>
       </Box>
       <Box w="70%">
         <Box

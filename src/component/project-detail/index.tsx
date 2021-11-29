@@ -15,6 +15,7 @@ import {
   getRamaBalance,
   getFundOfUserOnAProject,
 } from "../../API/contract/main";
+import { getEthToUsdRate } from "../../API/contract/main";
 
 function ProjectDetail(props: any) {
   const { details, isAdmin, id, selectedAddress } = props;
@@ -27,9 +28,13 @@ function ProjectDetail(props: any) {
   const [showStakeButton, setShowStakeButton] = useState(true);
 
   const [projectsList, setProjectsList]: any = useState(() => []);
+  const [ethToUsd, setEthToUsd] = useState();
 
   const fetchFilm = useCallback(() => {
     setLoading(true);
+    getEthToUsdRate().then((rate: any) => {
+      setEthToUsd(rate);
+    });
     getFilmData(id).then((res: any) => {
       getRamaBalance().then((res: any) => {
         setRamaBalance(res);
@@ -104,6 +109,7 @@ function ProjectDetail(props: any) {
             showWithdrawClaimBtn={showWithdrawClaimBtn}
             stakingDetails={stakingDetails}
             setShowWithdrawClainBtn={setShowWithdrawClainBtn}
+            ethToUsd={ethToUsd}
           />
         </>
       )}
