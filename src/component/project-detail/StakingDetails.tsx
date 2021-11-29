@@ -21,7 +21,7 @@ const StakingDetails = ({
         <img alt="preview image of the project" src={imgSrc}></img>
       </Box>
       <Box flex="5">
-        <Row1 ethToUsd />
+        <Row1 />
         <Row2
           ramaBalance={ramaBalance}
           details={filmDetails}
