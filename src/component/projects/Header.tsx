@@ -32,7 +32,7 @@ const Header = (props: any) => {
               </Button>
             ) : (
               <Text fontSize="15" mr="3">
-                Connect to add /fund a project
+                Connect to add / fund a project
               </Text>
             )}
             <ConnectWallet variant="brand2" />
