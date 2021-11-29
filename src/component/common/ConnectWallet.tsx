@@ -25,11 +25,12 @@ const ConnectWallet = (props: any) => {
     window.ethereum.on("chainChanged", () => {
       router.reload();
     });
-    setSelectedAddress(window.ethereum.selectedAddress);
+    if (window.ethereum.selectedAddress) {
+      setSelectedAddress(window.ethereum.selectedAddress);
+    }
   });
 
   useEffect(() => {
-    console.log(window.ethereum.chainId);
     if (window.ethereum.chainId !== CORRECT_CHAIN) {
       toast({
         title: "Please select Rinkeby testnet.",
@@ -50,10 +51,6 @@ const ConnectWallet = (props: any) => {
   };
 
   const connect = () => {
-    if (window.ethereum.selectedAddress) {
-      setSelectedAddress(window.ethereum.selectedAddress);
-      return;
-    }
     window.ethereum
       .request({
         method: "eth_requestAccounts",
