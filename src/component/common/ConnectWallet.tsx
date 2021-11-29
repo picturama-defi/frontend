@@ -50,6 +50,10 @@ const ConnectWallet = (props: any) => {
   };
 
   const connect = () => {
+    if (window.ethereum.selectedAddress) {
+      setSelectedAddress(window.ethereum.selectedAddress);
+      return;
+    }
     window.ethereum
       .request({
         method: "eth_requestAccounts",
